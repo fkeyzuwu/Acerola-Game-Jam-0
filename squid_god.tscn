@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bl2hrjw11r12m"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t6012"]
+radius = 23.069
+height = 100.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_otid8"]
+albedo_color = Color(0.498039, 0.105882, 0.117647, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_27bvi"]
+material = SubResource("StandardMaterial3D_otid8")
+radius = 23.069
+height = 100.0
+
+[node name="SquidGod" type="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_t6012")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_27bvi")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+visible = false
+light_color = Color(1, 0.996078, 0.698039, 1)
+light_energy = 16.0
+light_volumetric_fog_energy = 0.1
+omni_range = 154.635

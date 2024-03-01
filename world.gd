@@ -1,6 +1,7 @@
 extends Node3D
 
-@export var event: EventAsset
-
 func _ready() -> void:
-	FMODRuntime.play_one_shot(event)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("quit"): get_tree().quit()
