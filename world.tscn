@@ -49,6 +49,7 @@ material = SubResource("StandardMaterial3D_csk7k")
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 collision_layer = 0
 collision_mask = 0
+submerged_y_value = -300.0
 
 [node name="Player" parent="." instance=ExtResource("2_ooj0t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -120.526, 184.267)

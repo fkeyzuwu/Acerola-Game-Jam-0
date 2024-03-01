@@ -1,11 +1,15 @@
 class_name Player extends CharacterBody3D
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+var base_speed := 5.0
+@onready var speed := base_speed
+var jump_velocity := 4.5
+var mobile := true
 
 @export_group("Camera Settings")
-@export var yaw_sensitivity := 600.0
-@export var pitch_sensitivity := 600.0
+@export var base_yaw_sensitivity := 600.0
+@export var base_pitch_sensitivity := 600.0
+@onready var yaw_sensitivity := base_yaw_sensitivity
+@onready var pitch_sensitivity := base_pitch_sensitivity
 @export_range(-90.0, -80.0, 1.0, "degrees") var min_pitch = -85.0
 @export_range(80.0, 90.0, 1.0, "degrees") var max_pitch := 85.0
 @export_range(60.0, 100.0) var normal_fov := 75.0
@@ -30,17 +34,33 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		velocity.y = jump_velocity
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "forwards", "backwards")
 	var direction := (orientation.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
 
 	move_and_slide()
+
+func stop_mobility() -> void:
+	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel()
+	tween.tween_property(self, "speed", 0.0, 3.0)
+	tween.tween_property(self, "yaw_sensitivity", 10000.0, 2.0)
+	tween.tween_property(self, "pitch_sensitivity", 10000.0, 2.0)
+	
+	mobile = false
+	
+func resume_mobility() -> void:
+	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel()
+	tween.tween_property(self, "speed", base_speed, 0.5)
+	tween.tween_property(self, "yaw_sensitivity", base_yaw_sensitivity, 0.5)
+	tween.tween_property(self, "pitch_sensitivity", base_pitch_sensitivity, 0.5)
+	
+	mobile = true
