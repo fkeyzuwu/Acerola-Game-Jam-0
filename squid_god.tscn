@@ -13,6 +13,7 @@ radius = 23.069
 height = 100.0
 
 [node name="SquidGod" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.7374, 20.5883)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_t6012")
@@ -21,8 +22,7 @@ shape = SubResource("CapsuleShape3D_t6012")
 mesh = SubResource("CapsuleMesh_27bvi")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-visible = false
-light_color = Color(1, 0.996078, 0.698039, 1)
-light_energy = 16.0
-light_volumetric_fog_energy = 0.1
-omni_range = 154.635
+light_color = Color(0.984314, 0.964706, 0.658824, 1)
+light_energy = 0.516
+omni_range = 235.371
+omni_attenuation = 0.378932

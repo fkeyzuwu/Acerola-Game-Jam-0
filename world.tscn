@@ -46,17 +46,6 @@ size = Vector3(300, 250, 400)
 material = SubResource("StandardMaterial3D_csk7k")
 
 [node name="SquidGod" parent="." instance=ExtResource("2_d3t13")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.7374, 20.5883)
-
-[node name="OmniLight3D" parent="SquidGod" index="2"]
-visible = true
-light_color = Color(0.984314, 0.964706, 0.658824, 1)
-light_energy = 0.516
-light_volumetric_fog_energy = 1.0
-omni_range = 235.371
-omni_attenuation = 0.378932
 
 [node name="Player" parent="." instance=ExtResource("2_ooj0t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -120.526, 184.267)
-
-[editable path="SquidGod"]
