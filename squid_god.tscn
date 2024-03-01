@@ -1,4 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bl2hrjw11r12m"]
+[gd_scene load_steps=9 format=3 uid="uid://bl2hrjw11r12m"]
+
+[ext_resource type="Script" path="res://squid_god.gd" id="1_tjxct"]
+[ext_resource type="Script" path="res://eye.gd" id="2_6yo0e"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t6012"]
 radius = 23.069
@@ -12,8 +15,45 @@ material = SubResource("StandardMaterial3D_otid8")
 radius = 23.069
 height = 100.0
 
+[sub_resource type="Animation" id="Animation_c175k"]
+resource_name = "submerge"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.225313, 0.225313),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -300, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h3lq0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_chalm"]
+_data = {
+"RESET": SubResource("Animation_h3lq0"),
+"submerge": SubResource("Animation_c175k")
+}
+
 [node name="SquidGod" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.7374, 20.5883)
+script = ExtResource("1_tjxct")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_t6012")
@@ -26,3 +66,19 @@ light_color = Color(0.984314, 0.964706, 0.658824, 1)
 light_energy = 0.516
 omni_range = 235.371
 omni_attenuation = 0.378932
+
+[node name="Eye" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.3929, -24.8732)
+script = ExtResource("2_6yo0e")
+
+[node name="Eye Light" type="SpotLight3D" parent="Eye"]
+light_color = Color(1, 1, 0.792157, 1)
+light_energy = 6.303
+light_volumetric_fog_energy = 0.677
+spot_range = 111.955
+spot_angle = 6.56
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_chalm")
+}
