@@ -1,3 +1,15 @@
-[gd_scene format=3 uid="uid://dv0obunuqq8ai"]
+[gd_scene load_steps=3 format=3 uid="uid://dv0obunuqq8ai"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_owgt8"]
+
+[sub_resource type="EventAsset" id="EventAsset_a8m5n"]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Test"
+guid = "{2cc4e599-eff5-4571-a1a8-d328c992ce0e}"
+name = "Test"
 
 [node name="World" type="Node3D"]
+script = ExtResource("1_owgt8")
+event = SubResource("EventAsset_a8m5n")

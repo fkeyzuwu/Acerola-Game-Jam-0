@@ -1,0 +1,79 @@
+[gd_resource type="ProjectCache" load_steps=6 format=3 uid="uid://d0couftk3xr8f"]
+
+[sub_resource type="BankAsset" id="BankAsset_babme"]
+file_path = "res://audio_banks/Desktop/Master.bank"
+modified_time = 1709301162
+path = "bank:/Master"
+guid = "{81406378-8e91-4085-b1e1-5d919f1355aa}"
+name = "Master"
+
+[sub_resource type="BankAsset" id="BankAsset_qnq3r"]
+file_path = "res://audio_banks/Desktop/Master.strings.bank"
+modified_time = 1709301162
+path = "bank:/Master.strings"
+guid = "{195d43ac-ffea-0cc7-37a8-d76f6ee05332}"
+name = "Master.strings"
+
+[sub_resource type="BusAsset" id="BusAsset_0sw3j"]
+path = "bus:/Reverb"
+guid = "{aa99be5e-b0bc-4c80-bfd2-4616f5c3b0ea}"
+name = "Reverb"
+
+[sub_resource type="BusAsset" id="BusAsset_naix8"]
+path = "bus:/"
+guid = "{accecd80-e757-446e-9a58-677fe87215e2}"
+name = "Master"
+
+[sub_resource type="EventAsset" id="EventAsset_a8m5n"]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Test"
+guid = "{2cc4e599-eff5-4571-a1a8-d328c992ce0e}"
+name = "Test"
+
+[resource]
+banks = {
+"{195d43ac-ffea-0cc7-37a8-d76f6ee05332}": SubResource("BankAsset_qnq3r"),
+"{81406378-8e91-4085-b1e1-5d919f1355aa}": SubResource("BankAsset_babme")
+}
+events = {
+"{2cc4e599-eff5-4571-a1a8-d328c992ce0e}": SubResource("EventAsset_a8m5n")
+}
+busses = {
+"{aa99be5e-b0bc-4c80-bfd2-4616f5c3b0ea}": SubResource("BusAsset_0sw3j"),
+"{accecd80-e757-446e-9a58-677fe87215e2}": SubResource("BusAsset_naix8")
+}
+bank_tree = [{
+"children": [],
+"item_type": 3,
+"node_name": "Master",
+"path": "bank:/Master",
+"resource": SubResource("BankAsset_babme")
+}, {
+"children": [],
+"item_type": 3,
+"node_name": "Master.strings",
+"path": "bank:/Master.strings",
+"resource": SubResource("BankAsset_qnq3r")
+}]
+event_tree = [{
+"children": [],
+"item_type": 1,
+"node_name": "Test",
+"path": "event:/Test",
+"resource": SubResource("EventAsset_a8m5n")
+}]
+bus_tree = [{
+"children": [{
+"children": [],
+"item_type": 4,
+"node_name": "Reverb",
+"path": "bus:/Reverb",
+"resource": SubResource("BusAsset_0sw3j")
+}],
+"item_type": 4,
+"node_name": "bus:",
+"path": "bus:/",
+"resource": SubResource("BusAsset_naix8")
+}]
