@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dv0obunuqq8ai"]
+[gd_scene load_steps=9 format=3 uid="uid://dv0obunuqq8ai"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_owgt8"]
 [ext_resource type="PackedScene" uid="uid://bl2hrjw11r12m" path="res://squid_god.tscn" id="2_d3t13"]
 [ext_resource type="PackedScene" uid="uid://d3kj5bx5as45p" path="res://player.tscn" id="2_ooj0t"]
+[ext_resource type="Script" path="res://Label.gd" id="4_lxawv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ngxkf"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -49,7 +50,12 @@ material = SubResource("StandardMaterial3D_csk7k")
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 collision_layer = 0
 collision_mask = 0
-submerged_y_value = -300.0
 
 [node name="Player" parent="." instance=ExtResource("2_ooj0t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -120.526, 184.267)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 93.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+script = ExtResource("4_lxawv")

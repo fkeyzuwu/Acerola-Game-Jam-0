@@ -39,6 +39,7 @@ func enter_state(_state: SquidState) -> void:
 			emerge_tween.tween_property(self, "global_position:y", player.global_position.y, 4.0)
 			await emerge_tween.finished
 			await get_tree().create_timer(2.0).timeout
+			enter_state(SquidState.Messaging)
 		SquidState.Messaging:
 			await get_tree().create_timer(2.0).timeout
 			# do whatever sigil message shit, then go back to submerge
