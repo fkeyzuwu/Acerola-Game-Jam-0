@@ -15,12 +15,10 @@ uniform float rotate0 : hint_range (0.0, 1.0) = 0.0;
 uniform float rotate1 : hint_range (0.0, 1.0) = 0.0;
 uniform float blur : hint_range (0.0, 0.2) = 0.0;
 
-uniform vec4 black : source_color = vec4(0.0, 0.0, 0.0, 1.0);
-
 const float SIZE = 5.0;
 const float SHRINK = (10.0 - SIZE);
 const vec2 CENTER = vec2(0.5, 0.5);
-const vec4 BACK_COLOR = vec4(0.0, 0.0, 0.0, 0.0);
+const vec4 BACK_COLOR = vec4(0.0, 0.0, 0.0, 0.1);
 
 float calc_polar_x(float y, float angle, int m, float twirl, float rotate) 
 {
@@ -48,8 +46,4 @@ void fragment()
 	float v1 = calc_v(polar_uv, p1, s1);
 	COLOR = mix(BACK_COLOR, color, clamp(v0 + v1, 0.0, 1.0));
 	COLOR.a = make_back(UV);
-	if(COLOR.r < black.r + 0.05 && COLOR.g < black.g + 0.05 && COLOR.g < black.g + 0.1)
-	{
-		COLOR.a = 0.0;
-	}
 }

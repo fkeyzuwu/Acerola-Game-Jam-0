@@ -5,19 +5,18 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0ydsl"]
 shader = ExtResource("1_6st5x")
-shader_parameter/color = Color(0.980392, 0.956863, 0.866667, 0.0352941)
-shader_parameter/p0 = Vector2(-0.13, 0.85)
-shader_parameter/p1 = Vector2(-0.6, 0.81)
-shader_parameter/s0 = 0.75
-shader_parameter/s1 = 0.75
-shader_parameter/m0 = 1
-shader_parameter/m1 = 1
-shader_parameter/twirl0 = 10.0
-shader_parameter/twirl1 = 10.0
-shader_parameter/rotate0 = 1.0
-shader_parameter/rotate1 = 1.0
+shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
+shader_parameter/p0 = Vector2(0.2, 0.5)
+shader_parameter/p1 = Vector2(-0.205, 1.08)
+shader_parameter/s0 = 2.196
+shader_parameter/s1 = 2.005
+shader_parameter/m0 = 5
+shader_parameter/m1 = 5
+shader_parameter/twirl0 = -2.848
+shader_parameter/twirl1 = -5.636
+shader_parameter/rotate0 = 0.0
+shader_parameter/rotate1 = 0.073
 shader_parameter/blur = 0.0
-shader_parameter/black = Color(0, 0, 0, 1)
 
 [node name="Sigil" type="ColorRect"]
 material = SubResource("ShaderMaterial_0ydsl")
@@ -26,6 +25,7 @@ offset_right = 256.0
 offset_bottom = 256.0
 color = Color(1, 1, 1, 0)
 script = ExtResource("2_ehaje")
+current_sigil_index = 2
 tween_duration = 4.429
 sigils = Array[Dictionary]([{
 "m0": 1,
@@ -49,4 +49,15 @@ sigils = Array[Dictionary]([{
 "s1": 0.868,
 "twirl0": -0.787,
 "twirl1": -4.272
+}, {
+"m0": 5,
+"m1": 5,
+"p0": Vector2(0.2, 0.5),
+"p1": Vector2(-0.205, 1.08),
+"rotate0": 0.0,
+"rotate1": 0.073,
+"s0": 2.196,
+"s1": 2.005,
+"twirl0": -2.848,
+"twirl1": -5.636
 }])

@@ -22,12 +22,13 @@ viewport_path = NodePath("ActualSigil/SubViewportContainer/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hbkj2"]
 resource_local_to_scene = true
+transparency = 1
+blend_mode = 1
 albedo_texture = SubResource("ViewportTexture_n12t4")
 
 [sub_resource type="QuadMesh" id="QuadMesh_u0ppn"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_hbkj2")
-size = Vector2(0.5, 0.5)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
@@ -59,6 +60,7 @@ offset_right = 256.0
 offset_bottom = 256.0
 
 [node name="SubViewport" type="SubViewport" parent="ActualSigil/SubViewportContainer"]
+transparent_bg = true
 handle_input_locally = false
 size = Vector2i(256, 256)
 size_2d_override = Vector2i(256, 256)
