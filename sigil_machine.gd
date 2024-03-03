@@ -3,7 +3,7 @@ class_name SigilMachine extends StaticBody3D
 
 @onready var light_tween: Tween
 @export_range(0.1, 1.0) var light_up_duration := 0.3
-@onready var sigil: Sigil = $ActualSigil/SubViewportContainer/SubViewport/Sigil
+@onready var sigil: Sigil = $SubViewportContainer/SubViewport/Sigil
 
 func _ready() -> void:
 	deactivate()
