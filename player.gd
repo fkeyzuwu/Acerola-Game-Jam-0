@@ -5,6 +5,8 @@ var base_speed := 5.0
 var jump_velocity := 4.5
 var mobile := true
 
+var inside_sigil_machine_ui := false
+
 @export_group("Camera Settings")
 @export var base_yaw_sensitivity := 600.0
 @export var base_pitch_sensitivity := 600.0
@@ -16,6 +18,7 @@ var mobile := true
 
 @onready var orientation: Node3D = $Orientation
 @onready var camera: Camera3D = $Camera3D
+@onready var raycast: RayCast3D = $Camera3D/RayCast3D
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -26,8 +29,16 @@ func _input(event: InputEvent) -> void:
 		orientation.rotation.x -= (event.relative.y / pitch_sensitivity)
 		orientation.rotation_degrees.x = clamp(orientation.rotation_degrees.x, min_pitch, max_pitch)
 		camera.rotation = Vector3(orientation.rotation.x, orientation.rotation.y, camera.rotation.z)
+	elif event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT and raycast.is_colliding():
+		var interactable = raycast.get_collider()
+		if interactable is SigilMachine:
+			interactable.show_ui() #also
+			inside_sigil_machine_ui = true
 
 func _physics_process(delta: float) -> void:
+	move(delta)
+
+func move(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta

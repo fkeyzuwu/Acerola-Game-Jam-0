@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://vk0kmryvkn2m"]
+
+[ext_resource type="Shader" path="res://sigil.gdshader" id="1_6st5x"]
+[ext_resource type="Script" path="res://sigil.gd" id="2_ehaje"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ydsl"]
+shader = ExtResource("1_6st5x")
+shader_parameter/color = Color(0.980392, 0.956863, 0.866667, 0.0352941)
+shader_parameter/p0 = Vector2(-0.13, 0.85)
+shader_parameter/p1 = Vector2(-0.6, 0.81)
+shader_parameter/s0 = 0.75
+shader_parameter/s1 = 0.75
+shader_parameter/m0 = 1
+shader_parameter/m1 = 1
+shader_parameter/twirl0 = 10.0
+shader_parameter/twirl1 = 10.0
+shader_parameter/rotate0 = 1.0
+shader_parameter/rotate1 = 1.0
+shader_parameter/blur = 0.0
+shader_parameter/black = Color(0, 0, 0, 1)
+
+[node name="Sigil" type="ColorRect"]
+material = SubResource("ShaderMaterial_0ydsl")
+custom_minimum_size = Vector2(256, 256)
+offset_right = 256.0
+offset_bottom = 256.0
+color = Color(1, 1, 1, 0)
+script = ExtResource("2_ehaje")
+tween_duration = 4.429
+sigils = Array[Dictionary]([{
+"m0": 1,
+"m1": 1,
+"p0": Vector2(-0.13, 0.85),
+"p1": Vector2(-0.6, 0.81),
+"rotate0": 1.0,
+"rotate1": 1.0,
+"s0": 0.75,
+"s1": 0.75,
+"twirl0": 10.0,
+"twirl1": 10.0
+}, {
+"m0": 3,
+"m1": 3,
+"p0": Vector2(0.44, 1.285),
+"p1": Vector2(-0.31, 0.465),
+"rotate0": 1.0,
+"rotate1": 1.0,
+"s0": 1.158,
+"s1": 0.868,
+"twirl0": -0.787,
+"twirl1": -4.272
+}])

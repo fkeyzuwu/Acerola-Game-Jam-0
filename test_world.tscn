@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb0b585q723v3"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_uecf8"]
+[ext_resource type="PackedScene" uid="uid://d3kj5bx5as45p" path="res://player.tscn" id="2_r130x"]
+[ext_resource type="PackedScene" uid="uid://caiiwbrumlsfi" path="res://sigil_machine.tscn" id="3_dbado"]
+
+[node name="TestWorld" type="Node3D"]
+script = ExtResource("1_uecf8")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6024, 0)
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+size = Vector3(10, 1, 10)
+
+[node name="Player" parent="." instance=ExtResource("2_r130x")]
+
+[node name="SigilMachine" parent="." instance=ExtResource("3_dbado")]
