@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://caiiwbrumlsfi"]
+[gd_scene load_steps=12 format=3 uid="uid://caiiwbrumlsfi"]
 
 [ext_resource type="Script" path="res://sigil_machine.gd" id="1_wustg"]
-[ext_resource type="PackedScene" uid="uid://dwt2o73qcpaqo" path="res://sigil_stone.tscn" id="2_4p0ol"]
+[ext_resource type="PackedScene" uid="uid://dh2k5c58m4q2n" path="res://sigil_stone.tscn" id="2_4p0ol"]
 [ext_resource type="PackedScene" uid="uid://vk0kmryvkn2m" path="res://sigil.tscn" id="2_e2wqf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dn8my"]
@@ -12,13 +12,6 @@ albedo_color = Color(0.831373, 0.619608, 0.968627, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_5jfac"]
 material = SubResource("StandardMaterial3D_h384g")
-
-[sub_resource type="Curve3D" id="Curve3D_w438b"]
-_data = {
-"points": PackedVector3Array(-0.0345388, 0.000899553, 0.0256309, 0.0345388, -0.000899553, -0.0256309, 0.40917, 0.000401974, 0.41028, -0.0207263, 0.00842571, 0.268995, 0.0207263, -0.00842571, -0.268995, 0.568807, 0.00569057, -0.00208151, 0.0504994, 0.00351357, 0.0464215, -0.0504994, -0.00351357, -0.0464215, 0.331087, -0.00287509, -0.469726, 0.154692, -0.0272012, -0.0061295, -0.154692, 0.0272012, 0.0061295, 0.0159288, -0.00570059, -0.580738, 0.11778, -3.74317e-05, -0.0567998, -0.11778, 3.74317e-05, 0.0567998, -0.291733, 0.00193334, -0.507801, 0.0280287, 0.0466816, -0.207508, -0.0280287, -0.0466816, 0.207508, -0.570684, 0.0039413, -0.0187851, -0.0914128, 0.0356987, -0.090668, 0.0914128, -0.0356987, 0.090668, -0.365721, -0.0118442, 0.430702),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 7
 
 [sub_resource type="SphereMesh" id="SphereMesh_4lxl5"]
 height = 0.3
@@ -56,15 +49,6 @@ shape = SubResource("BoxShape3D_dn8my")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_5jfac")
 
-[node name="StonePath" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
-curve = SubResource("Curve3D_w438b")
-
-[node name="StonePathFollow" type="PathFollow3D" parent="StonePath"]
-transform = Transform3D(0.595923, 0.0167917, -0.802861, -9.31317e-10, 0.999772, 0.0209103, 0.803034, -0.0124609, 0.595795, 0.40917, 0.000401974, 0.41028)
-
-[node name="SigilStone" parent="StonePath/StonePathFollow" instance=ExtResource("2_4p0ol")]
-
 [node name="SigilTabletBackground" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
 mesh = SubResource("SphereMesh_4lxl5")
@@ -74,6 +58,10 @@ skeleton = NodePath("../MeshInstance3D")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.15, 0)
 mesh = SubResource("QuadMesh_u0ppn")
 skeleton = NodePath("../../MeshInstance3D")
+
+[node name="SigilStones" type="Node3D" parent="SigilTabletBackground"]
+
+[node name="SigilStone" parent="SigilTabletBackground/SigilStones" instance=ExtResource("2_4p0ol")]
 
 [node name="PlayerDetectionArea" type="Area3D" parent="."]
 collision_layer = 0

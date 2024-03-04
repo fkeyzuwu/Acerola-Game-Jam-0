@@ -1,8 +1,6 @@
 [gd_resource type="ProjectCache" load_steps=6 format=3 uid="uid://d0couftk3xr8f"]
 
 [sub_resource type="BankAsset" id="BankAsset_babme"]
-resource_local_to_scene = false
-resource_name = ""
 file_path = "res://audio_banks/Desktop/Master.bank"
 modified_time = 1709301162
 path = "bank:/Master"
@@ -10,8 +8,6 @@ guid = "{81406378-8e91-4085-b1e1-5d919f1355aa}"
 name = "Master"
 
 [sub_resource type="BankAsset" id="BankAsset_qnq3r"]
-resource_local_to_scene = false
-resource_name = ""
 file_path = "res://audio_banks/Desktop/Master.strings.bank"
 modified_time = 1709301162
 path = "bank:/Master.strings"
@@ -19,22 +15,16 @@ guid = "{195d43ac-ffea-0cc7-37a8-d76f6ee05332}"
 name = "Master.strings"
 
 [sub_resource type="BusAsset" id="BusAsset_0sw3j"]
-resource_local_to_scene = false
-resource_name = ""
 path = "bus:/Reverb"
 guid = "{aa99be5e-b0bc-4c80-bfd2-4616f5c3b0ea}"
 name = "Reverb"
 
 [sub_resource type="BusAsset" id="BusAsset_naix8"]
-resource_local_to_scene = false
-resource_name = ""
 path = "bus:/"
 guid = "{accecd80-e757-446e-9a58-677fe87215e2}"
 name = "Master"
 
 [sub_resource type="EventAsset" id="EventAsset_a8m5n"]
-resource_local_to_scene = false
-resource_name = ""
 is_oneshot = true
 min_distance = 1.0
 max_distance = 20.0
