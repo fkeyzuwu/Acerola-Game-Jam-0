@@ -8,12 +8,6 @@ class_name SigilMachine extends StaticBody3D
 func _ready() -> void:
 	deactivate()
 
-func show_ui() -> void:
-	print("go inside sigil machine UI")
-	
-func hide_ui() -> void:
-	pass
-
 func solved() -> void:
 	if light_tween: light_tween.kill()
 	light_tween = create_tween().set_trans(Tween.TRANS_SINE)

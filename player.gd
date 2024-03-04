@@ -5,7 +5,8 @@ var base_speed := 5.0
 var jump_velocity := 4.5
 var mobile := true
 
-var inside_sigil_machine_ui := false
+var current_sigil_machine: SigilMachine = null
+var current_sigil_stone: SigilStone = null
 
 @export_group("Camera Settings")
 @export var base_yaw_sensitivity := 600.0
@@ -29,11 +30,23 @@ func _input(event: InputEvent) -> void:
 		orientation.rotation.x -= (event.relative.y / pitch_sensitivity)
 		orientation.rotation_degrees.x = clamp(orientation.rotation_degrees.x, min_pitch, max_pitch)
 		camera.rotation = Vector3(orientation.rotation.x, orientation.rotation.y, camera.rotation.z)
-	elif event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT and raycast.is_colliding():
-		var interactable = raycast.get_collider()
-		if interactable is SigilMachine:
-			interactable.show_ui() #also
-			inside_sigil_machine_ui = true
+	elif event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+			if current_sigil_machine == null and raycast.is_colliding():
+				var sigil_machine = raycast.get_collider()
+				if sigil_machine is SigilMachine:
+					current_sigil_machine = sigil_machine
+					# tween camera to focus current sigil machine
+				else:
+					push_error("something that isn't sigil machine is on its collision layer")
+			elif current_sigil_machine != null:
+				current_sigil_stone = try_get_sigil_stone()
+		elif event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
+			current_sigil_stone = null
+		elif event.button_index == MOUSE_BUTTON_RIGHT and current_sigil_machine != null:
+			# tween camera to back to normal head position
+			current_sigil_machine = null
+			
 
 func _physics_process(delta: float) -> void:
 	move(delta)
@@ -51,7 +64,7 @@ func move(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "forwards", "backwards")
 	var direction := (orientation.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
+	if direction and current_sigil_machine == null:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
 	else:
@@ -75,3 +88,16 @@ func resume_mobility() -> void:
 	tween.tween_property(self, "pitch_sensitivity", base_pitch_sensitivity, 0.5)
 	
 	mobile = true
+
+func try_get_sigil_stone() -> SigilStone:
+	var mouse_pos = get_viewport().get_mouse_position()
+	var ray_start = camera.project_ray_origin(mouse_pos)
+	var ray_end = ray_start + camera.project_ray_normal(mouse_pos) * 100.0
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(ray_start, ray_end, 8)
+	query.collide_with_areas = true
+	var ray_info = space_state.intersect_ray(query)
+	if !ray_info.is_empty():
+		return ray_info.collider
+	else:
+		return null
