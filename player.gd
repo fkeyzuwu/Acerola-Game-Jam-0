@@ -50,6 +50,10 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	move(delta)
+	if current_sigil_stone:
+		var mouse_pos = get_viewport().get_mouse_position()
+		var ray_start = camera.project_ray_origin(mouse_pos)
+		var ray_end = ray_start + camera.project_ray_normal(mouse_pos) * 100.0
 
 func move(delta: float) -> void:
 	# Add the gravity.

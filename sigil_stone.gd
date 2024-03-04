@@ -1,3 +1,3 @@
-class_name SigilStone extends Node
+class_name SigilStone extends Area3D
 
 

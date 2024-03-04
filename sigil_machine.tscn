@@ -61,10 +61,9 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 
 curve = SubResource("Curve3D_w438b")
 
 [node name="StonePathFollow" type="PathFollow3D" parent="StonePath"]
-transform = Transform3D(0.595924, 0.0167917, -0.802861, -9.31318e-10, 0.999773, 0.0209103, 0.803035, -0.0124609, 0.595795, 0.40917, 0.000401974, 0.41028)
+transform = Transform3D(0.595923, 0.0167917, -0.802861, -9.31317e-10, 0.999772, 0.0209103, 0.803034, -0.0124609, 0.595795, 0.40917, 0.000401974, 0.41028)
 
 [node name="SigilStone" parent="StonePath/StonePathFollow" instance=ExtResource("2_4p0ol")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 
 [node name="SigilTabletBackground" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)

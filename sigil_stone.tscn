@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwt2o73qcpaqo"]
+[gd_scene load_steps=4 format=3 uid="uid://dwt2o73qcpaqo"]
+
+[ext_resource type="Script" path="res://sigil_stone.gd" id="1_umv2w"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2juct"]
 radius = 0.07
@@ -10,10 +12,10 @@ height = 0.07
 [node name="SigilStone" type="Area3D"]
 collision_layer = 8
 collision_mask = 0
+script = ExtResource("1_umv2w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_2juct")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("SphereMesh_kvlrl")
