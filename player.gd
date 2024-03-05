@@ -39,6 +39,8 @@ func _input(event: InputEvent) -> void:
 					Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 					var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel()
 					tween.tween_property(self, "global_position", current_sigil_machine.camera_position.global_position, 0.8)
+					#tween.tween_method(look_at, global_position, current_sigil_machine.sigil_stones.global_position, 0.8)
+					
 					print("set sigil machine input ray pickable to false")
 					# tween camera to focus current sigil machine
 				else:
