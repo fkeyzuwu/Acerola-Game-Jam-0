@@ -6,7 +6,6 @@ var jump_velocity := 4.5
 var mobile := true
 
 var current_sigil_machine: SigilMachine = null
-var current_sigil_stone: SigilStone = null
 
 @export_group("Camera Settings")
 @export var base_yaw_sensitivity := 600.0
@@ -36,24 +35,18 @@ func _input(event: InputEvent) -> void:
 				var sigil_machine = raycast.get_collider()
 				if sigil_machine is SigilMachine:
 					current_sigil_machine = sigil_machine
+					current_sigil_machine.input_ray_pickable = false
 					# tween camera to focus current sigil machine
 				else:
 					push_error("something that isn't sigil machine is on its collision layer")
-			elif current_sigil_machine != null:
-				current_sigil_stone = try_get_sigil_stone()
-		elif event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
-			current_sigil_stone = null
 		elif event.button_index == MOUSE_BUTTON_RIGHT and current_sigil_machine != null:
 			# tween camera to back to normal head position
+			current_sigil_machine.input_ray_pickable = true
 			current_sigil_machine = null
 			
 
 func _physics_process(delta: float) -> void:
 	move(delta)
-	if current_sigil_stone:
-		var mouse_pos = get_viewport().get_mouse_position()
-		var ray_start = camera.project_ray_origin(mouse_pos)
-		var ray_end = ray_start + camera.project_ray_normal(mouse_pos) * 100.0
 
 func move(delta: float) -> void:
 	# Add the gravity.
@@ -93,15 +86,15 @@ func resume_mobility() -> void:
 	
 	mobile = true
 
-func try_get_sigil_stone() -> SigilStone:
-	var mouse_pos = get_viewport().get_mouse_position()
-	var ray_start = camera.project_ray_origin(mouse_pos)
-	var ray_end = ray_start + camera.project_ray_normal(mouse_pos) * 100.0
-	var space_state = get_world_3d().direct_space_state
-	var query = PhysicsRayQueryParameters3D.create(ray_start, ray_end, 8)
-	query.collide_with_areas = true
-	var ray_info = space_state.intersect_ray(query)
-	if !ray_info.is_empty():
-		return ray_info.collider
-	else:
-		return null
+#func try_get_sigil_stone() -> SigilStone:
+	#var mouse_pos = get_viewport().get_mouse_position()
+	#var ray_start = camera.project_ray_origin(mouse_pos)
+	#var ray_end = ray_start + camera.project_ray_normal(mouse_pos) * 100.0
+	#var space_state = get_world_3d().direct_space_state
+	#var query = PhysicsRayQueryParameters3D.create(ray_start, ray_end, 8)
+	#query.collide_with_areas = true
+	#var ray_info = space_state.intersect_ray(query)
+	#if !ray_info.is_empty():
+		#return ray_info.collider
+	#else:
+		#return null

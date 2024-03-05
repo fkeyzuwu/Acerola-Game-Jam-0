@@ -19,3 +19,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.94179)
 
 [node name="SigilMachine" parent="." instance=ExtResource("3_dbado")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.165, -0.571971, -3.23)
+
+[editable path="Player"]

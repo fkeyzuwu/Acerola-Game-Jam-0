@@ -17,7 +17,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if current_stone_sigil:
-		pass
+		current_stone_sigil.rotate_y(PI * delta)
 
 func solved() -> void:
 	if light_tween: light_tween.kill()
