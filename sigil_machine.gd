@@ -27,8 +27,10 @@ func _process(delta: float) -> void:
         var mouse_pos_real_real = Vector2(mouse_pos_real.x, mouse_pos_real.y)
         var sigil_position = Vector2(sigil_stones.global_position.x, sigil_stones.global_position.y)
         var angle_center_to_mouse = sigil_position.direction_to(mouse_pos_real_real).angle() - PI / 2
-        prints("angle to mouse: ", rad_to_deg(angle_center_to_mouse))
-        current_stone_sigil.rotation.y = angle_center_to_mouse
+        angle_center_to_mouse = wrapf(angle_center_to_mouse, -PI, PI)
+        angle_center_to_mouse = rad_to_deg(angle_center_to_mouse)
+        prints("angle to mouse: ", angle_center_to_mouse)
+        current_stone_sigil.rotation_degrees.y = clampf(angle_center_to_mouse, -130.0, 130.0)
         if Input.is_action_just_released("mouse_left"):
             current_stone_sigil = null
 
