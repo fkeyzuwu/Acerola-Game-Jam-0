@@ -24,7 +24,7 @@ var current_sigil_machine: SigilMachine = null
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and current_sigil_machine == null:
 		orientation.rotation.y -= (event.relative.x / yaw_sensitivity)
 		orientation.rotation.x -= (event.relative.y / pitch_sensitivity)
 		orientation.rotation_degrees.x = clamp(orientation.rotation_degrees.x, min_pitch, max_pitch)
@@ -36,6 +36,7 @@ func _input(event: InputEvent) -> void:
 				if sigil_machine is SigilMachine:
 					current_sigil_machine = sigil_machine
 					current_sigil_machine.input_ray_pickable = false
+					Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 					print("set sigil machine input ray pickable to false")
 					# tween camera to focus current sigil machine
 				else:
@@ -44,6 +45,7 @@ func _input(event: InputEvent) -> void:
 			# tween camera to back to normal head position
 			current_sigil_machine.input_ray_pickable = true
 			current_sigil_machine = null
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			print("set back sigil machine input ray pickable to true")
 			
 

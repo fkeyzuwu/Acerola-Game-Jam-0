@@ -22,3 +22,7 @@ shape = SubResource("SphereShape3D_2juct")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SigilStoneArea"]
 mesh = SubResource("SphereMesh_kvlrl")
+
+[connection signal="input_event" from="SigilStoneArea" to="." method="_on_sigil_stone_area_input_event"]
+[connection signal="mouse_entered" from="SigilStoneArea" to="." method="_on_sigil_stone_area_mouse_entered"]
+[connection signal="mouse_exited" from="SigilStoneArea" to="." method="_on_sigil_stone_area_mouse_exited"]
