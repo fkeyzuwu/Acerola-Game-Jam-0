@@ -26,8 +26,6 @@ offset_bottom = 256.0
 color = Color(1, 1, 1, 0)
 script = ExtResource("2_ehaje")
 current_sigil_index = 2
-reveal_tween_duration = null
-hide_tween_duration = null
 sigils = Array[Dictionary]([{
 "m0": 1,
 "m1": 1,

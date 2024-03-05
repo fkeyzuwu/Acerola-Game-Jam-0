@@ -17,11 +17,6 @@ size = Vector3(10, 1, 10)
 
 [node name="Player" parent="." instance=ExtResource("2_r130x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.94179)
-base_yaw_sensitivity = null
-base_pitch_sensitivity = null
-min_pitch = null
-max_pitch = null
-normal_fov = null
 
 [node name="Crosshair" parent="Player" index="5"]
 texture = ExtResource("3_nspj1")

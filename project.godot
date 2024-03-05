@@ -22,6 +22,7 @@ FMODRuntime="*res://addons/FMOD/runtime/fmod_runtime_manager.gd"
 [display]
 
 mouse_cursor/custom_image="res://crosshair001.png"
+mouse_cursor/custom_image_hotspot=Vector2(64, 64)
 
 [fmod]
 

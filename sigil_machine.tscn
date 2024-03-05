@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://caiiwbrumlsfi"]
 
 [ext_resource type="Script" path="res://sigil_machine.gd" id="1_wustg"]
-[ext_resource type="PackedScene" uid="uid://dh2k5c58m4q2n" path="res://sigil_stone.tscn" id="2_4p0ol"]
+[ext_resource type="PackedScene" uid="uid://f5wxuvjfa2wu" path="res://sigil_stone.tscn" id="2_4p0ol"]
 [ext_resource type="PackedScene" uid="uid://vk0kmryvkn2m" path="res://sigil.tscn" id="2_e2wqf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dn8my"]
@@ -89,7 +89,6 @@ render_target_update_mode = 4
 [node name="Sigil" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_e2wqf")]
 mouse_filter = 2
 reveal_tween_duration = 3.5
-hide_tween_duration = 2.5
 
 [connection signal="body_entered" from="PlayerDetectionArea" to="." method="_on_player_detection_area_body_entered"]
 [connection signal="body_exited" from="PlayerDetectionArea" to="." method="_on_player_detection_area_body_exited"]

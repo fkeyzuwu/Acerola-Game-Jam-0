@@ -20,7 +20,6 @@ var current_sigil_machine: SigilMachine = null
 @onready var camera: Camera3D = $Camera3D
 @onready var raycast: RayCast3D = $Camera3D/RayCast3D
 @onready var crosshair: TextureRect = $Crosshair
-@onready var crosshair_dynamic: TextureRect = $CrosshairDynamic
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -48,6 +47,8 @@ func _input(event: InputEvent) -> void:
 					# tween camera to focus current sigil machine
 				else:
 					push_error("something that isn't sigil machine is on its collision layer")
+			elif current_sigil_machine:
+				current_sigil_machine.current_stone_sigil = try_get_sigil_stone()
 		elif event.button_index == MOUSE_BUTTON_RIGHT and current_sigil_machine != null:
 			# tween camera to back to normal head position\
 			current_sigil_machine.input_ray_pickable = true
@@ -98,3 +99,18 @@ func resume_mobility() -> void:
 	tween.tween_property(self, "pitch_sensitivity", base_pitch_sensitivity, 0.5)
 	
 	mobile = true
+
+func try_get_sigil_stone() -> SigilStone:
+	var space_state = get_world_3d().direct_space_state
+	var mouse_pos = get_viewport().get_mouse_position()
+	var raycast_origin = camera.project_ray_origin(mouse_pos)
+	var raycast_end = camera.project_position(mouse_pos, 1000)
+	var query = PhysicsRayQueryParameters3D.create(raycast_origin, raycast_end, 8)
+	query.collide_with_areas = true
+	var ray_info = space_state.intersect_ray(query)
+	if !ray_info.is_empty():
+		print(ray_info.collider.get_parent())
+		return ray_info.collider.get_parent()
+	else:
+		print("didnt find collider")
+		return null

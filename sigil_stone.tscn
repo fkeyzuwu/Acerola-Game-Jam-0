@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dh2k5c58m4q2n"]
+[gd_scene load_steps=4 format=3 uid="uid://f5wxuvjfa2wu"]
 
 [ext_resource type="Script" path="res://sigil_stone.gd" id="1_umv2w"]
 
@@ -22,7 +22,3 @@ shape = SubResource("SphereShape3D_2juct")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SigilStoneArea"]
 mesh = SubResource("SphereMesh_kvlrl")
-
-[connection signal="input_event" from="SigilStoneArea" to="." method="_on_sigil_stone_area_input_event"]
-[connection signal="mouse_entered" from="SigilStoneArea" to="." method="_on_sigil_stone_area_mouse_entered"]
-[connection signal="mouse_exited" from="SigilStoneArea" to="." method="_on_sigil_stone_area_mouse_exited"]

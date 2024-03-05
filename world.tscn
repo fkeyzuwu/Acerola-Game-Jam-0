@@ -53,11 +53,6 @@ collision_mask = 0
 
 [node name="Player" parent="." instance=ExtResource("2_ooj0t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -120.526, 184.267)
-base_yaw_sensitivity = null
-base_pitch_sensitivity = null
-min_pitch = null
-max_pitch = null
-normal_fov = null
 
 [node name="Label" type="Label" parent="."]
 offset_right = 93.0
