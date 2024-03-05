@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://vk0kmryvkn2m" path="res://sigil.tscn" id="2_e2wqf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dn8my"]
-size = Vector3(1.5, 2, 1.5)
+size = Vector3(1.5, 2, 1.005)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h384g"]
 albedo_color = Color(0.831373, 0.619608, 0.968627, 1)
@@ -41,9 +41,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.165, -0.157, -3.23)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_wustg")
+light_up_duration = null
+radius = null
 
 [node name="CameraPosition" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02739, 1.09009)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 1.1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

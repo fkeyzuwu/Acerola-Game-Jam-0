@@ -6,6 +6,8 @@ class_name SigilMachine extends StaticBody3D
 @onready var sigil: Sigil = $SubViewportContainer/SubViewport/Sigil
 @onready var sigil_stones: Node3D = $SigilTabletBackground/SigilStones
 
+@onready var camera_position: Node3D = $CameraPosition
+
 var current_stone_sigil: SigilStone = null
 @export var radius = 0.6
 
