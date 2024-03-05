@@ -82,3 +82,13 @@ func hide_sigil() -> void:
 	tween.tween_property(material, "shader_parameter/twirl1", base_sigil["twirl1"], hide_tween_duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(material, "shader_parameter/rotate0", base_sigil["rotate0"], hide_tween_duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(material, "shader_parameter/rotate1", base_sigil["rotate1"], hide_tween_duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+
+# Degree value is wrapped in -180 to 180 degrees.
+func set_shader_parameter(param_name: String, degree_value: float, min_degree: float, max_degree: float) -> void:
+	#var remapped_value = degree_value + 180 # from 0 to 360
+	var remapped_value: float
+	match param_name:
+		"twirl0":
+			remapped_value = remap(degree_value, min_degree, max_degree, -10, 10)
+			
+	material.set_shader_parameter(param_name, remapped_value)
