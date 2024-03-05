@@ -18,7 +18,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if current_stone_sigil:
-		current_stone_sigil.rotate_y(PI * delta)
+		var mouse_pos = get_viewport().get_mouse_position()
+		var angle = mouse_pos.angle_to(Vector2(current_stone_sigil.global_position.x, current_stone_sigil.global_position.z))
+		current_stone_sigil.rotation.y = angle
 		if Input.is_action_just_released("mouse_left"):
 			current_stone_sigil = null
 

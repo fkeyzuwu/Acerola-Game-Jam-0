@@ -41,8 +41,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.165, -0.157, -3.23)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_wustg")
-light_up_duration = null
-radius = null
 
 [node name="CameraPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47, 1.1)

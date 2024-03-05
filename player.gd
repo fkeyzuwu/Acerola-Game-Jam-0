@@ -19,6 +19,8 @@ var current_sigil_machine: SigilMachine = null
 @onready var orientation: Node3D = $Orientation
 @onready var camera: Camera3D = $Camera3D
 @onready var raycast: RayCast3D = $Camera3D/RayCast3D
+@onready var crosshair: TextureRect = $Crosshair
+@onready var crosshair_dynamic: TextureRect = $CrosshairDynamic
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -39,17 +41,20 @@ func _input(event: InputEvent) -> void:
 					Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 					var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel()
 					tween.tween_property(self, "global_position", current_sigil_machine.camera_position.global_position, 0.8)
-					#tween.tween_method(look_at, global_position, current_sigil_machine.sigil_stones.global_position, 0.8)
-					
+					tween.tween_property(camera, "rotation:y", camera.rotation.y - transform.basis.z.signed_angle_to(camera.transform.basis.z ,Vector3.UP), 0.8)
+					tween.tween_property(camera, "rotation:x", 0, 0.8)
+					crosshair.visible = false
 					print("set sigil machine input ray pickable to false")
 					# tween camera to focus current sigil machine
 				else:
 					push_error("something that isn't sigil machine is on its collision layer")
 		elif event.button_index == MOUSE_BUTTON_RIGHT and current_sigil_machine != null:
-			# tween camera to back to normal head position
+			# tween camera to back to normal head position\
 			current_sigil_machine.input_ray_pickable = true
 			current_sigil_machine = null
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			orientation.rotation = camera.rotation
+			crosshair.visible = true
 			print("set back sigil machine input ray pickable to true")
 			
 
