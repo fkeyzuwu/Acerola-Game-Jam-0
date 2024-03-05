@@ -48,7 +48,8 @@ func _input(event: InputEvent) -> void:
 				else:
 					push_error("something that isn't sigil machine is on its collision layer")
 			elif current_sigil_machine:
-				current_sigil_machine.current_stone_sigil = try_get_sigil_stone()
+				if !current_sigil_machine.sigil.animating:
+					current_sigil_machine.current_stone_sigil = try_get_sigil_stone()
 		elif event.button_index == MOUSE_BUTTON_RIGHT and current_sigil_machine != null:
 			# tween camera to back to normal head position\
 			current_sigil_machine.input_ray_pickable = true

@@ -14,7 +14,7 @@ var current_stone_sigil: SigilStone = null
 @onready var camera := get_viewport().get_camera_3d()
 
 func _ready() -> void:
-	deactivate()
+	deactivate(true)
 
 func _process(delta: float) -> void:
 	if current_stone_sigil:
@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 		current_stone_sigil.rotation_degrees.y = clampf(
 			angle_center_to_mouse, current_stone_sigil.min_degrees, current_stone_sigil.max_degrees)
 		sigil.set_shader_parameter(
-			"twirl0", current_stone_sigil.rotation_degrees.y, current_stone_sigil.min_degrees, current_stone_sigil.max_degrees)
+			current_stone_sigil.shader_parameter_name, current_stone_sigil.rotation_degrees.y, current_stone_sigil.min_degrees, current_stone_sigil.max_degrees)
 
 func solved() -> void:
 	if light_tween: light_tween.kill()
@@ -56,9 +56,10 @@ func activate() -> void:
 	light_tween.tween_property(mesh_instance.mesh.material, "albedo_color", Color.RED, light_up_duration)
 	sigil.reveal_sigil()
 
-func deactivate() -> void:
+func deactivate(init := false) -> void:
 	if light_tween: light_tween.kill()
 	light_tween = create_tween().set_trans(Tween.TRANS_SINE)
 	light_tween.tween_property(mesh_instance.mesh.material, "albedo_color", Color.PURPLE, light_up_duration)
-	sigil.hide_sigil()
+	if !init:
+		sigil.hide_sigil()
 
