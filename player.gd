@@ -36,6 +36,7 @@ func _input(event: InputEvent) -> void:
 				if sigil_machine is SigilMachine:
 					current_sigil_machine = sigil_machine
 					current_sigil_machine.input_ray_pickable = false
+					print("set sigil machine input ray pickable to false")
 					# tween camera to focus current sigil machine
 				else:
 					push_error("something that isn't sigil machine is on its collision layer")
@@ -43,6 +44,7 @@ func _input(event: InputEvent) -> void:
 			# tween camera to back to normal head position
 			current_sigil_machine.input_ray_pickable = true
 			current_sigil_machine = null
+			print("set back sigil machine input ray pickable to true")
 			
 
 func _physics_process(delta: float) -> void:
@@ -85,16 +87,3 @@ func resume_mobility() -> void:
 	tween.tween_property(self, "pitch_sensitivity", base_pitch_sensitivity, 0.5)
 	
 	mobile = true
-
-#func try_get_sigil_stone() -> SigilStone:
-	#var mouse_pos = get_viewport().get_mouse_position()
-	#var ray_start = camera.project_ray_origin(mouse_pos)
-	#var ray_end = ray_start + camera.project_ray_normal(mouse_pos) * 100.0
-	#var space_state = get_world_3d().direct_space_state
-	#var query = PhysicsRayQueryParameters3D.create(ray_start, ray_end, 8)
-	#query.collide_with_areas = true
-	#var ray_info = space_state.intersect_ray(query)
-	#if !ray_info.is_empty():
-		#return ray_info.collider
-	#else:
-		#return null
