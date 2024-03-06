@@ -16,6 +16,17 @@ var current_stone_sigil: SigilStone = null
 func _ready() -> void:
 	deactivate(true)
 
+func if_solved() -> bool:
+	for key in sigil.current_sigil:
+		if typeof(sigil.current_sigil[key]) == TYPE_FLOAT:
+			if !is_equal_approx(sigil.current_sigil[key], sigil.target_sigil[key]):
+				return false
+		elif typeof(sigil.current_sigil[key] == TYPE_VECTOR2):
+			if !sigil.current_sigil[key].is_equal_approx(sigil.target_sigil[key]):
+				return false
+	
+	return true
+
 func _process(delta: float) -> void:
 	if current_stone_sigil:
 		if Input.is_action_just_released("mouse_left"):
@@ -33,11 +44,13 @@ func _process(delta: float) -> void:
 		var angle_center_to_mouse = sigil_position.direction_to(mouse_pos_real_real).angle() - PI / 2
 		angle_center_to_mouse = wrapf(angle_center_to_mouse, -PI, PI)
 		angle_center_to_mouse = rad_to_deg(angle_center_to_mouse)
-		prints("angle to mouse: ", angle_center_to_mouse)
 		current_stone_sigil.rotation_degrees.y = clampf(
 			angle_center_to_mouse, current_stone_sigil.min_degrees, current_stone_sigil.max_degrees)
 		sigil.set_shader_parameter(
 			current_stone_sigil.shader_parameter_name, current_stone_sigil.rotation_degrees.y, current_stone_sigil.min_degrees, current_stone_sigil.max_degrees)
+		
+		if if_solved:
+			solved()
 
 func solved() -> void:
 	if light_tween: light_tween.kill()

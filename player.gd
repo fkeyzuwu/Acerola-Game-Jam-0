@@ -43,7 +43,6 @@ func _input(event: InputEvent) -> void:
 					tween.tween_property(camera, "rotation:y", camera.rotation.y - transform.basis.z.signed_angle_to(camera.transform.basis.z ,Vector3.UP), 0.8)
 					tween.tween_property(camera, "rotation:x", 0, 0.8)
 					crosshair.visible = false
-					print("set sigil machine input ray pickable to false")
 					# tween camera to focus current sigil machine
 				else:
 					push_error("something that isn't sigil machine is on its collision layer")
@@ -57,7 +56,6 @@ func _input(event: InputEvent) -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			orientation.rotation = camera.rotation
 			crosshair.visible = true
-			print("set back sigil machine input ray pickable to true")
 			
 
 func _physics_process(delta: float) -> void:

@@ -1,4 +1,3 @@
-@tool
 class_name Sigil extends ColorRect
 
 @export var current_sigil_index := 0
@@ -6,29 +5,6 @@ class_name Sigil extends ColorRect
 @export_range(1.0, 3.0) var hide_tween_duration := 2.5
 
 var animating := false
-
-@export var get_sigil: bool:
-	set(value):
-		var sigil := {}
-		sigil["p0"] = material.get_shader_parameter("p0")
-		sigil["p1"] = material.get_shader_parameter("p1")
-		sigil["s0"] = material.get_shader_parameter("s0")
-		sigil["s1"] = material.get_shader_parameter("s1")
-		sigil["m0"] = material.get_shader_parameter("m0")
-		sigil["m1"] = material.get_shader_parameter("m1")
-		sigil["twirl0"] = material.get_shader_parameter("twirl0")
-		sigil["twirl1"] = material.get_shader_parameter("twirl1")
-		sigil["rotate0"] = material.get_shader_parameter("rotate0")
-		sigil["rotate1"] = material.get_shader_parameter("rotate1")
-		sigils.append(sigil)
-	get:
-		return get_sigil
-
-@export var animate: bool:
-	set(value):
-		reveal_sigil()
-	get:
-		return animate
 
 const base_sigil := {
 	"p0": Vector2.ZERO,
@@ -43,18 +19,93 @@ const base_sigil := {
 	"rotate1" : 0.0
 }
 
-@export var sigils: Array[Dictionary]
+@export var use_random_sigil := true
+@export var premade_sigil: Dictionary
+@export var starting_permutation: Dictionary
 
-@onready var current_sigil := sigils[current_sigil_index].duplicate()
+var target_sigil: Dictionary
+var current_sigil: Dictionary
 
 var tween: Tween
 
 func _ready() -> void:
+	if use_random_sigil:
+		target_sigil = create_random_sigil()
+		current_sigil = get_starting_sigil_permutation(target_sigil)
+	else:
+		target_sigil = premade_sigil
+		current_sigil = starting_permutation		
+	
 	for key in base_sigil:
 		material.set_shader_parameter(key, base_sigil[key])
 	
 	material.set_shader_parameter("m0", current_sigil["m0"]) # Amount of thingies - dont animate cuz it jumps
 	material.set_shader_parameter("m1", current_sigil["m1"]) # Amount of thingies - dont animate cuz it jumps
+
+func get_starting_sigil_permutation(target: Dictionary) -> Dictionary:
+	var random_permutation := {}
+	random_permutation["m0"] = target["m0"]
+	random_permutation["m1"] = target["m1"]
+	
+	#check what actual sigil parameter the sigils stone are controlling
+	
+	if target["s0"] >= 1.875:
+		random_permutation["s0"] = randf_range(0.75, 1.875)
+	else:
+		random_permutation["s0"] = randf_range(1.875, 3.0)
+	
+	if target["s1"] >= 1.875:
+		random_permutation["s1"] = randf_range(0.75, 1.875)
+	else:
+		random_permutation["s1"] = randf_range(1.875, 3.0)
+	
+	if target["twirl0"] >= 0.0:
+		random_permutation["twirl0"] = randf_range(-10.0, 0)
+	else:
+		random_permutation["twirl0"] = randf_range(0, 10.0)
+	
+	if target["twirl1"] >= 0.0:
+		random_permutation["twirl1"] = randf_range(-10.0, 0)
+	else:
+		random_permutation["twirl1"] = randf_range(0, 10.0)
+		
+	if target["rotate0"] >= 0.5:
+		random_permutation["rotate0"] = randf_range(0.0, 0.5)
+	else:
+		random_permutation["rotate0"] = randf_range(0.5, 1.0)
+		
+	if target["rotate1"] >= 0.5:
+		random_permutation["rotate1"] = randf_range(0.0, 0.5)
+	else:
+		random_permutation["rotate1"] = randf_range(0.5, 1.0)
+	
+	return random_permutation
+
+func create_random_sigil() -> Dictionary:
+	var random_sigil := {}
+	
+	random_sigil["p0"] = Vector2(randf_range(-2.0, 2.0), randf_range(-2.0, 2.0))
+	random_sigil["p1"] = Vector2(randf_range(-2.0, 2.0), randf_range(-2.0, 2.0))
+	random_sigil["s0"] = randf_range(0.75, 3.0)
+	random_sigil["s1"] = randf_range(0.75, 3.0)
+	
+	random_sigil["m0"] = randi_range(1, 5)
+	random_sigil["m1"] = randi_range(1, 5)
+	
+	random_sigil["twirl0"] = randf_range(-10.0, 10.0)
+	random_sigil["twirl1"] = randf_range(-10.0, 10.0)
+	
+	random_sigil["rotate0"] = randf_range(0.0, 1.0)
+	random_sigil["rotate1"] = randf_range(0.0, 1.0)
+	
+	return random_sigil
+
+func are_sigils_equal() -> bool:
+	for key in current_sigil:
+		if !current_sigil[key].is_equal_approx(target_sigil[key]):
+			return false
+	
+	return true
 
 func reveal_sigil() -> void:
 	if tween: tween.kill()

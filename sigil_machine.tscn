@@ -65,6 +65,7 @@ skeleton = NodePath("../../MeshInstance3D")
 [node name="SigilStones" type="Node3D" parent="SigilTabletBackground"]
 
 [node name="SigilStone" parent="SigilTabletBackground/SigilStones" instance=ExtResource("2_4p0ol")]
+transform = Transform3D(-0.642788, 0, 0.766044, 0, 1, 0, -0.766044, 0, -0.642788, 0, 0, 0)
 min_degrees = -130.0
 max_degrees = 130.0
 shader_parameter_name = "twirl0"
