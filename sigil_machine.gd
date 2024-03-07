@@ -12,16 +12,18 @@ var current_stone_sigil: SigilStone = null
 @export var radius = 0.6
 
 @onready var camera := get_viewport().get_camera_3d()
+@onready var player := get_tree().get_first_node_in_group("player")
+@onready var player_detection_area: Area3D = $PlayerDetectionArea
 
 func _ready() -> void:
 	deactivate(true)
 
-func if_solved() -> bool:
+func is_solved() -> bool:
 	for key in sigil.current_sigil:
 		if typeof(sigil.current_sigil[key]) == TYPE_FLOAT:
 			if !is_equal_approx(sigil.current_sigil[key], sigil.target_sigil[key]):
 				return false
-		elif typeof(sigil.current_sigil[key] == TYPE_VECTOR2):
+		elif typeof(sigil.current_sigil[key]) == TYPE_VECTOR2:
 			if !sigil.current_sigil[key].is_equal_approx(sigil.target_sigil[key]):
 				return false
 	
@@ -49,10 +51,12 @@ func _process(delta: float) -> void:
 		sigil.set_shader_parameter(
 			current_stone_sigil.shader_parameter_name, current_stone_sigil.rotation_degrees.y, current_stone_sigil.min_degrees, current_stone_sigil.max_degrees)
 		
-		if if_solved:
+		if is_solved():
 			solved()
 
 func solved() -> void:
+	player.exit_sigil_machine()
+	player_detection_area.monitoring = false
 	if light_tween: light_tween.kill()
 	light_tween = create_tween().set_trans(Tween.TRANS_SINE)
 	light_tween.tween_property(mesh_instance.mesh.material, "albedo_color", Color.LIGHT_GREEN, light_up_duration)

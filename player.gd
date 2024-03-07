@@ -35,28 +35,31 @@ func _input(event: InputEvent) -> void:
 			if current_sigil_machine == null and raycast.is_colliding():
 				var sigil_machine = raycast.get_collider()
 				if sigil_machine is SigilMachine:
-					current_sigil_machine = sigil_machine
-					current_sigil_machine.input_ray_pickable = false
-					Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-					var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel()
-					tween.tween_property(self, "global_position", current_sigil_machine.camera_position.global_position, 0.8)
-					tween.tween_property(camera, "rotation:y", camera.rotation.y - transform.basis.z.signed_angle_to(camera.transform.basis.z ,Vector3.UP), 0.8)
-					tween.tween_property(camera, "rotation:x", 0, 0.8)
-					crosshair.visible = false
-					# tween camera to focus current sigil machine
+					enter_sigil_machine(sigil_machine)
 				else:
 					push_error("something that isn't sigil machine is on its collision layer")
 			elif current_sigil_machine:
 				if !current_sigil_machine.sigil.animating:
 					current_sigil_machine.current_stone_sigil = try_get_sigil_stone()
 		elif event.button_index == MOUSE_BUTTON_RIGHT and current_sigil_machine != null:
-			# tween camera to back to normal head position\
-			current_sigil_machine.input_ray_pickable = true
-			current_sigil_machine = null
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			orientation.rotation = camera.rotation
-			crosshair.visible = true
-			
+			exit_sigil_machine()
+
+func enter_sigil_machine(sigil_machine: SigilMachine) -> void:
+	current_sigil_machine = sigil_machine
+	current_sigil_machine.input_ray_pickable = false
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel()
+	tween.tween_property(self, "global_position", current_sigil_machine.camera_position.global_position, 0.8)
+	tween.tween_property(camera, "rotation:y", camera.rotation.y - transform.basis.z.signed_angle_to(camera.transform.basis.z ,Vector3.UP), 0.8)
+	tween.tween_property(camera, "rotation:x", 0, 0.8)
+	crosshair.visible = false
+	
+func exit_sigil_machine() -> void:
+	current_sigil_machine.input_ray_pickable = true
+	current_sigil_machine = null
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	orientation.rotation = camera.rotation
+	crosshair.visible = true
 
 func _physics_process(delta: float) -> void:
 	move(delta)
@@ -108,7 +111,6 @@ func try_get_sigil_stone() -> SigilStone:
 	query.collide_with_areas = true
 	var ray_info = space_state.intersect_ray(query)
 	if !ray_info.is_empty():
-		print(ray_info.collider.get_parent())
 		return ray_info.collider.get_parent()
 	else:
 		print("didnt find collider")

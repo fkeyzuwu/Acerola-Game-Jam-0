@@ -100,13 +100,6 @@ func create_random_sigil() -> Dictionary:
 	
 	return random_sigil
 
-func are_sigils_equal() -> bool:
-	for key in current_sigil:
-		if !current_sigil[key].is_equal_approx(target_sigil[key]):
-			return false
-	
-	return true
-
 func reveal_sigil() -> void:
 	if tween: tween.kill()
 	tween = create_tween().set_parallel()
