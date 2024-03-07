@@ -12,8 +12,10 @@ var current_stone_sigil: SigilStone = null
 @export var radius = 0.6
 
 @onready var camera := get_viewport().get_camera_3d()
-@onready var player := get_tree().get_first_node_in_group("player")
+@onready var player := get_tree().get_first_node_in_group("player") as Player
 @onready var player_detection_area: Area3D = $PlayerDetectionArea
+
+var locked := false
 
 func _ready() -> void:
 	deactivate(true)
@@ -55,17 +57,25 @@ func _process(delta: float) -> void:
 			solved()
 
 func solved() -> void:
-	player.exit_sigil_machine()
-	player_detection_area.monitoring = false
+	# Do solved animation
+	# Stop allowing player to interact with machine anymore
+	input_ray_pickable = false
+	locked = true
+	current_stone_sigil = null
+	await get_tree().create_timer(1.0).timeout
+	
+	if player.current_sigil_machine != null:
+		player.exit_sigil_machine()
+	
 	if light_tween: light_tween.kill()
 	light_tween = create_tween().set_trans(Tween.TRANS_SINE)
 	light_tween.tween_property(mesh_instance.mesh.material, "albedo_color", Color.LIGHT_GREEN, light_up_duration)
 
 func _on_player_detection_area_body_entered(_player: Player) -> void: #lightup
-	activate()
+	if !locked: activate()
 
 func _on_player_detection_area_body_exited(_player: Player) -> void: #lightdown
-	deactivate()
+	if !locked: deactivate()
 
 func activate() -> void:
 	if light_tween: light_tween.kill()

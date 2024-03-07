@@ -147,11 +147,11 @@ func set_shader_parameter(param_name: String, degree_value: float, min_degree: f
 		"p0x", "p0y", "p1x", "p1y":
 			remapped_value = remap(degree_value, min_degree, max_degree, pmin, pmax)
 		"s0", "s1":
-			remapped_value = remap(degree_value, min_degree, max_degree, 0.75, 3.0)
+			remapped_value = remap(degree_value, min_degree, max_degree, 3.0, 0.75)
 		"twirl0", "twirl1":
-			remapped_value = remap(degree_value, min_degree, max_degree, -10, 10)
+			remapped_value = remap(degree_value, min_degree, max_degree, 10, -10)
 		"rotate0", "rotate1":
-			remapped_value = remap(degree_value, min_degree, max_degree, 0.0, 1.0)
+			remapped_value = remap(degree_value, min_degree, max_degree, 1.0, 0.0)
 	
 	if param_name.ends_with("x"):
 		var param = param_name.substr(0,2)
@@ -161,3 +161,5 @@ func set_shader_parameter(param_name: String, degree_value: float, min_degree: f
 		material.set_shader_parameter(param, Vector2(material.get_shader_param(param).x, remapped_value))
 	else:
 		material.set_shader_parameter(param_name, remapped_value)
+		
+	current_sigil[param_name] = remapped_value

@@ -34,12 +34,12 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 			if current_sigil_machine == null and raycast.is_colliding():
 				var sigil_machine = raycast.get_collider()
-				if sigil_machine is SigilMachine:
+				if sigil_machine is SigilMachine and !sigil_machine.locked:
 					enter_sigil_machine(sigil_machine)
 				else:
 					push_error("something that isn't sigil machine is on its collision layer")
 			elif current_sigil_machine:
-				if !current_sigil_machine.sigil.animating:
+				if !current_sigil_machine.sigil.animating and !current_sigil_machine.locked:
 					current_sigil_machine.current_stone_sigil = try_get_sigil_stone()
 		elif event.button_index == MOUSE_BUTTON_RIGHT and current_sigil_machine != null:
 			exit_sigil_machine()
@@ -55,7 +55,7 @@ func enter_sigil_machine(sigil_machine: SigilMachine) -> void:
 	crosshair.visible = false
 	
 func exit_sigil_machine() -> void:
-	current_sigil_machine.input_ray_pickable = true
+	current_sigil_machine.input_ray_pickable = !current_sigil_machine.locked
 	current_sigil_machine = null
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	orientation.rotation = camera.rotation

@@ -68,7 +68,7 @@ skeleton = NodePath("../../MeshInstance3D")
 transform = Transform3D(-0.642788, 0, 0.766044, 0, 1, 0, -0.766044, 0, -0.642788, 0, 0, 0)
 min_degrees = -130.0
 max_degrees = 130.0
-shader_parameter_name = "twirl0"
+shader_parameter_name = "twirl1"
 
 [node name="PlayerDetectionArea" type="Area3D" parent="."]
 collision_layer = 0
