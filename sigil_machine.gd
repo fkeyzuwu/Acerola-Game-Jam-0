@@ -16,6 +16,7 @@ var current_stone_sigil: SigilStone = null
 @onready var player_detection_area: Area3D = $PlayerDetectionArea
 
 var locked := false
+var player_solving := false
 
 func _ready() -> void:
 	deactivate(true)
@@ -32,6 +33,14 @@ func is_solved() -> bool:
 	return true
 
 func _process(delta: float) -> void:
+	if player_solving:
+		for sigil_stone: SigilStone in sigil_stones.get_children():
+			sigil.set_shader_parameter(
+				sigil_stone.shader_parameter_name,
+				sigil_stone.rotation_degrees.y,
+				sigil_stone.min_degrees,
+				sigil_stone.max_degrees)
+	
 	if current_stone_sigil:
 		if Input.is_action_just_released("mouse_left"):
 			current_stone_sigil = null

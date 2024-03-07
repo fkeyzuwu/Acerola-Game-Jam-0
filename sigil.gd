@@ -116,7 +116,8 @@ func reveal_sigil() -> void:
 	tween.tween_property(material, "shader_parameter/rotate0", current_sigil["rotate0"], reveal_tween_duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(material, "shader_parameter/rotate1", current_sigil["rotate1"], reveal_tween_duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	
-	tween.tween_callback(func(): animating = false).set_delay(reveal_tween_duration)
+	await tween.finished
+	animating = false
 	
 func hide_sigil() -> void:
 	for key in current_sigil: #save latest state
@@ -137,7 +138,8 @@ func hide_sigil() -> void:
 	tween.tween_property(material, "shader_parameter/rotate0", base_sigil["rotate0"], hide_tween_duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(material, "shader_parameter/rotate1", base_sigil["rotate1"], hide_tween_duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 	
-	tween.tween_callback(func(): animating = false).set_delay(hide_tween_duration)
+	await tween.finished
+	animating = false
 
 # Degree value is wrapped in -180 to 180 degrees.
 func set_shader_parameter(param_name: String, degree_value: float, min_degree: float, max_degree: float, pmin = -2, pmax = 2) -> void:
@@ -155,11 +157,14 @@ func set_shader_parameter(param_name: String, degree_value: float, min_degree: f
 	
 	if param_name.ends_with("x"):
 		var param = param_name.substr(0,2)
-		material.set_shader_parameter(param, Vector2(remapped_value, material.get_shader_param(param).y))
+		var current_y =  material.get_shader_parameter(param).y
+		material.set_shader_parameter(param, Vector2(remapped_value, current_y))
+		current_sigil[param] = Vector2(remapped_value, current_y)
 	elif param_name.ends_with("y"):
 		var param = param_name.substr(0,2)
-		material.set_shader_parameter(param, Vector2(material.get_shader_param(param).x, remapped_value))
+		var current_x = material.get_shader_parameter(param).x
+		material.set_shader_parameter(param, Vector2(current_x, remapped_value))
+		current_sigil[param] = Vector2(current_x, remapped_value)
 	else:
 		material.set_shader_parameter(param_name, remapped_value)
-		
-	current_sigil[param_name] = remapped_value
+		current_sigil[param_name] = remapped_value

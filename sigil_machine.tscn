@@ -12,6 +12,7 @@ albedo_color = Color(0.831373, 0.619608, 0.968627, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_5jfac"]
 material = SubResource("StandardMaterial3D_h384g")
+size = Vector3(1, 0.62, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_4lxl5"]
 height = 0.3
@@ -65,9 +66,21 @@ skeleton = NodePath("../../MeshInstance3D")
 [node name="SigilStones" type="Node3D" parent="SigilTabletBackground"]
 
 [node name="SigilStone" parent="SigilTabletBackground/SigilStones" instance=ExtResource("2_4p0ol")]
-transform = Transform3D(-0.642788, 0, 0.766044, 0, 1, 0, -0.766044, 0, -0.642788, 0, 0, 0)
-min_degrees = -130.0
-max_degrees = 130.0
+transform = Transform3D(-0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, -0.984808, 0, 0, 0)
+min_degrees = -170.0
+max_degrees = -70.0
+shader_parameter_name = "rotate1"
+
+[node name="SigilStone2" parent="SigilTabletBackground/SigilStones" instance=ExtResource("2_4p0ol")]
+transform = Transform3D(0.642788, 0, 0.766044, 0, 1, 0, -0.766044, 0, 0.642788, 0, 0, 0)
+min_degrees = -50.0
+max_degrees = 50.0
+shader_parameter_name = "p0x"
+
+[node name="SigilStone3" parent="SigilTabletBackground/SigilStones" instance=ExtResource("2_4p0ol")]
+transform = Transform3D(-0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, -0.984808, 0, 0, 0)
+min_degrees = 70.0
+max_degrees = 170.0
 shader_parameter_name = "twirl1"
 
 [node name="PlayerDetectionArea" type="Area3D" parent="."]

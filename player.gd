@@ -36,8 +36,6 @@ func _input(event: InputEvent) -> void:
 				var sigil_machine = raycast.get_collider()
 				if sigil_machine is SigilMachine and !sigil_machine.locked:
 					enter_sigil_machine(sigil_machine)
-				else:
-					push_error("something that isn't sigil machine is on its collision layer")
 			elif current_sigil_machine:
 				if !current_sigil_machine.sigil.animating and !current_sigil_machine.locked:
 					current_sigil_machine.current_stone_sigil = try_get_sigil_stone()
@@ -53,6 +51,7 @@ func enter_sigil_machine(sigil_machine: SigilMachine) -> void:
 	tween.tween_property(camera, "rotation:y", camera.rotation.y - transform.basis.z.signed_angle_to(camera.transform.basis.z ,Vector3.UP), 0.8)
 	tween.tween_property(camera, "rotation:x", 0, 0.8)
 	crosshair.visible = false
+	current_sigil_machine.player_solving = true
 	
 func exit_sigil_machine() -> void:
 	current_sigil_machine.input_ray_pickable = !current_sigil_machine.locked
@@ -60,6 +59,7 @@ func exit_sigil_machine() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	orientation.rotation = camera.rotation
 	crosshair.visible = true
+	current_sigil_machine.player_solving = false
 
 func _physics_process(delta: float) -> void:
 	move(delta)
