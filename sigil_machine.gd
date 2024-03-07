@@ -18,18 +18,42 @@ var current_stone_sigil: SigilStone = null
 var locked := false
 var player_solving := false
 
+@export_range(0.01, 0.2) var sensitiveness := 0.1
+
 func _ready() -> void:
 	deactivate(true)
 
 func is_solved() -> bool:
 	for key in sigil.current_sigil:
-		if typeof(sigil.current_sigil[key]) == TYPE_FLOAT:
-			if !is_equal_approx(sigil.current_sigil[key], sigil.target_sigil[key]):
-				return false
-		elif typeof(sigil.current_sigil[key]) == TYPE_VECTOR2:
-			if !sigil.current_sigil[key].is_equal_approx(sigil.target_sigil[key]):
-				return false
-	
+		var current_value = sigil.current_sigil[key]
+		var target_value = sigil.target_sigil[key]
+		var remapped_current_value: float
+		var remapped_target_value: float
+		match key:
+			"p0", "p1":
+				var remapped_current_value_x = remap(current_value.x, -2.0, 2.0, 0.0, 1.0)
+				var remapped_current_value_y = remap(current_value.y, -2.0, 2.0, 0.0, 1.0)
+				var remapped_target_value_x = remap(target_value.x, -2.0, 2.0, 0.0, 1.0)
+				var remapped_target_value_y = remap(target_value.y, -2.0, 2.0, 0.0, 1.0)
+				if abs(remapped_current_value_x - remapped_target_value_x) >= sensitiveness:
+					return false
+				elif abs(remapped_current_value_y - remapped_target_value_y) >= sensitiveness:
+					return false
+				else:
+					continue
+			"s0", "s1":
+				remapped_current_value = remap(current_value, 3.0, 0.75, 0.0, 1.0)
+				remapped_target_value = remap(target_value, 3.0, 0.75, 0.0, 1.0)
+			"twirl0", "twirl1":
+				remapped_current_value = remap(current_value, 10, -10, 0.0, 1.0)
+				remapped_target_value = remap(target_value, 10, -10, 0.0, 1.0)
+			"rotate0", "rotate1":
+				remapped_current_value = remap(current_value, 1.0, 0.0, 0.0, 1.0)
+				remapped_target_value = remap(target_value, 1.0, 0.0, 0.0, 1.0)
+				
+		if abs(remapped_current_value - remapped_target_value) >= sensitiveness:
+			return false
+			
 	return true
 
 func _process(delta: float) -> void:

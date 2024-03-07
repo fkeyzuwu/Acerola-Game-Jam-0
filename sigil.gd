@@ -143,28 +143,28 @@ func hide_sigil() -> void:
 
 # Degree value is wrapped in -180 to 180 degrees.
 func set_shader_parameter(param_name: String, degree_value: float, min_degree: float, max_degree: float, pmin = -2, pmax = 2) -> void:
-	#var remapped_value = degree_value + 180 # from 0 to 360
-	var remapped_value: float
-	match param_name:
-		"p0x", "p0y", "p1x", "p1y":
-			remapped_value = remap(degree_value, min_degree, max_degree, pmin, pmax)
-		"s0", "s1":
-			remapped_value = remap(degree_value, min_degree, max_degree, 3.0, 0.75)
-		"twirl0", "twirl1":
-			remapped_value = remap(degree_value, min_degree, max_degree, 10, -10)
-		"rotate0", "rotate1":
-			remapped_value = remap(degree_value, min_degree, max_degree, 1.0, 0.0)
-	
+	var value = get_remapped_value(param_name, degree_value, min_degree, max_degree, pmin, pmax)
 	if param_name.ends_with("x"):
 		var param = param_name.substr(0,2)
 		var current_y =  material.get_shader_parameter(param).y
-		material.set_shader_parameter(param, Vector2(remapped_value, current_y))
-		current_sigil[param] = Vector2(remapped_value, current_y)
+		material.set_shader_parameter(param, Vector2(value, current_y))
+		current_sigil[param] = Vector2(value, current_y)
 	elif param_name.ends_with("y"):
 		var param = param_name.substr(0,2)
 		var current_x = material.get_shader_parameter(param).x
-		material.set_shader_parameter(param, Vector2(current_x, remapped_value))
-		current_sigil[param] = Vector2(current_x, remapped_value)
+		material.set_shader_parameter(param, Vector2(current_x, value))
+		current_sigil[param] = Vector2(current_x, value)
 	else:
-		material.set_shader_parameter(param_name, remapped_value)
-		current_sigil[param_name] = remapped_value
+		material.set_shader_parameter(param_name, value)
+		current_sigil[param_name] = value
+
+func get_remapped_value(param_name: String, degree_value: float, min_degree: float, max_degree: float, pmin: float, pmax: float) -> float:
+	match param_name:
+		"p0x", "p0y", "p1x", "p1y": return remap(degree_value, min_degree, max_degree, pmin, pmax)
+		"s0", "s1": return remap(degree_value, min_degree, max_degree, 3.0, 0.75)
+		"twirl0", "twirl1": return remap(degree_value, min_degree, max_degree, 10, -10)
+		"rotate0", "rotate1": return remap(degree_value, min_degree, max_degree, 1.0, 0.0)
+	
+	push_error("nonexistent parameter name passed in")
+	return INF
+	

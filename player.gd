@@ -55,11 +55,11 @@ func enter_sigil_machine(sigil_machine: SigilMachine) -> void:
 	
 func exit_sigil_machine() -> void:
 	current_sigil_machine.input_ray_pickable = !current_sigil_machine.locked
+	current_sigil_machine.player_solving = false
 	current_sigil_machine = null
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	orientation.rotation = camera.rotation
 	crosshair.visible = true
-	current_sigil_machine.player_solving = false
 
 func _physics_process(delta: float) -> void:
 	move(delta)
