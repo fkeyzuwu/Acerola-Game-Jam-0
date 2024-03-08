@@ -34,11 +34,6 @@ func _ready() -> void:
 		var min_degree = sigil_stone.min_degrees
 		var max_degree = sigil_stone.max_degrees
 		var target_degrees: float
-		#match param_name:
-			#"p0x", "p0y", "p1x", "p1y": return remap(degree_value, min_degree, max_degree, pmin, pmax)
-			#"s0", "s1": return remap(degree_value, min_degree, max_degree, 3.0, 0.75)
-			#"twirl0", "twirl1": return remap(degree_value, min_degree, max_degree, 10, -10)
-			#"rotate0", "rotate1": return remap(degree_value, min_degree, max_degree, 1.0, 0.0)
 		
 		match param_name:
 			"p0x", "p0y", "p1x", "p1y": target_degrees = remap(param_value, -2.0, 2.0, min_degree, max_degree)
