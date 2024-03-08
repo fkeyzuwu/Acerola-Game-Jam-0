@@ -43,7 +43,7 @@ premade_sigil = {
 starting_permutation = {
 "m0": 1,
 "m1": 1,
-"p0": Vector2(-0.13, 0.85),
+"p0": Vector2(-2, 0.85),
 "p1": Vector2(-0.6, 0.81),
 "rotate0": 1.0,
 "rotate1": 1.0,

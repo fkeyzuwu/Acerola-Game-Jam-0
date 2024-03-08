@@ -18,10 +18,35 @@ var current_stone_sigil: SigilStone = null
 var locked := false
 var player_solving := false
 
-@export_range(0.01, 0.2) var sensitiveness := 0.1
+@export_range(0.01, 0.2) var sensitiveness := 0.05
 
 func _ready() -> void:
 	deactivate(true)
+	for sigil_stone: SigilStone in sigil_stones.get_children():
+		var param_name := sigil_stone.shader_parameter_name
+		var param_value: float
+		if param_name.ends_with("x"):
+			param_value = sigil.current_sigil[param_name.substr(0, 2)].x
+		elif param_name.ends_with("y"):
+			param_value = sigil.current_sigil[param_name.substr(0, 2)].y
+		else:
+			param_value = sigil.current_sigil[param_name]
+		var min_degree = sigil_stone.min_degrees
+		var max_degree = sigil_stone.max_degrees
+		var target_degrees: float
+		#match param_name:
+			#"p0x", "p0y", "p1x", "p1y": return remap(degree_value, min_degree, max_degree, pmin, pmax)
+			#"s0", "s1": return remap(degree_value, min_degree, max_degree, 3.0, 0.75)
+			#"twirl0", "twirl1": return remap(degree_value, min_degree, max_degree, 10, -10)
+			#"rotate0", "rotate1": return remap(degree_value, min_degree, max_degree, 1.0, 0.0)
+		
+		match param_name:
+			"p0x", "p0y", "p1x", "p1y": target_degrees = remap(param_value, -2.0, 2.0, min_degree, max_degree)
+			"s0", "s1": target_degrees = remap(param_value, 3.0, 0.75, min_degree, max_degree)
+			"twirl0", "twirl1": target_degrees = remap(param_value, 10.0, -10.0, min_degree, max_degree)
+			"rotate0", "rotate1": target_degrees = remap(param_value, 1.0, 0.0, min_degree, max_degree)
+		
+		sigil_stone.rotation_degrees.y = target_degrees
 
 func is_solved() -> bool:
 	for key in sigil.current_sigil:

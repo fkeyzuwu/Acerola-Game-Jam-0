@@ -34,7 +34,7 @@ func _ready() -> void:
 		current_sigil = get_starting_sigil_permutation(target_sigil)
 	else:
 		target_sigil = premade_sigil
-		current_sigil = starting_permutation		
+		current_sigil = starting_permutation.duplicate()	
 	
 	for key in base_sigil:
 		material.set_shader_parameter(key, base_sigil[key])
@@ -143,7 +143,7 @@ func hide_sigil() -> void:
 
 # Degree value is wrapped in -180 to 180 degrees.
 func set_shader_parameter(param_name: String, degree_value: float, min_degree: float, max_degree: float, pmin = -2, pmax = 2) -> void:
-	var value = get_remapped_value(param_name, degree_value, min_degree, max_degree, pmin, pmax)
+	var value = get_remapped_value(param_name, degree_value, min_degree, max_degree, pmax, pmin)
 	if param_name.ends_with("x"):
 		var param = param_name.substr(0,2)
 		var current_y =  material.get_shader_parameter(param).y
@@ -160,7 +160,7 @@ func set_shader_parameter(param_name: String, degree_value: float, min_degree: f
 
 func get_remapped_value(param_name: String, degree_value: float, min_degree: float, max_degree: float, pmin: float, pmax: float) -> float:
 	match param_name:
-		"p0x", "p0y", "p1x", "p1y": return remap(degree_value, min_degree, max_degree, pmin, pmax)
+		"p0x", "p0y", "p1x", "p1y": return remap(degree_value, min_degree, max_degree, pmax, pmin)
 		"s0", "s1": return remap(degree_value, min_degree, max_degree, 3.0, 0.75)
 		"twirl0", "twirl1": return remap(degree_value, min_degree, max_degree, 10, -10)
 		"rotate0", "rotate1": return remap(degree_value, min_degree, max_degree, 1.0, 0.0)
