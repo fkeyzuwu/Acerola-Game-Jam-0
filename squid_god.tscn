@@ -99,6 +99,8 @@ axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_tjxct")
 
+[node name="RotationNode" type="Node3D" parent="."]
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_t6012")
 
@@ -142,3 +144,5 @@ shape = SubResource("BoxShape3D_532n5")
 libraries = {
 "": SubResource("AnimationLibrary_chalm")
 }
+
+[connection signal="body_entered" from="PlayerDetectionArea" to="." method="_on_player_detection_area_body_entered"]
