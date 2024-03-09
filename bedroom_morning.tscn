@@ -1,4 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://bussc2vgftywx"]
+[gd_scene load_steps=6 format=3 uid="uid://bussc2vgftywx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1o511"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_21cgy"]
+sky_material = SubResource("ProceduralSkyMaterial_1o511")
+
+[sub_resource type="Environment" id="Environment_d2jmp"]
+background_mode = 2
+sky = SubResource("Sky_21cgy")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lyw2w"]
 
@@ -7,6 +20,13 @@ next_pass = SubResource("ShaderMaterial_lyw2w")
 albedo_color = Color(0.533333, 1, 1, 1)
 
 [node name="BedroomMorning" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_d2jmp")
 
 [node name="Room" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.155, 0, 0)
