@@ -6,6 +6,7 @@ class_name SquidGod extends CharacterBody3D
 @onready var rotation_node: Node3D = $RotationNode
 @onready var squid_model: Node3D = $SquidModel
 @onready var squid_patrol_points: Node3D = $"../SquidPatrolPoints"
+@onready var shore_position: Marker3D = $"../ShorePosition"
 
 @onready var points = squid_patrol_points.get_children()
 var current_point_index := 0
@@ -18,6 +19,7 @@ var emerge_lerp_speed = 50.0
 @export_category("floating")
 @export_range(0.0, 50.0) var float_freq := 50.0
 @export_range(0.0, 50.0) var float_amp := 50.0
+var bobbing_tween: Tween
 
 var state := SquidState.Idle
 
@@ -30,17 +32,26 @@ enum SquidState {
 }
 
 func _ready() -> void:
-	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_loops()
-	tween.tween_property(squid_model, "position:y", 12.0, randf_range(2.0, 3.5))
-	tween.tween_property(squid_model, "position:y", -12.0, randf_range(2.0, 3.5))
+	enter_state(SquidState.Idle)
+
+func start_bobbing() -> void:
+	bobbing_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_loops()
+	bobbing_tween.tween_property(squid_model, "position:y", 12.0, randf_range(2.0, 3.5))
+	bobbing_tween.tween_property(squid_model, "position:y", -12.0, randf_range(2.0, 3.5))
 	
+func stop_bobbing() -> void:
+	bobbing_tween.kill()
+
 func enter_state(_state: SquidState) -> void:
 	state = _state
 	
 	match state:
 		SquidState.Idle:
+			rotation_node.global_rotation = rotation
 			if !player.mobile: player.resume_mobility()
+			start_bobbing()
 		SquidState.Submerge:
+			stop_bobbing()
 			var submerge_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 			submerge_tween.tween_property(self, "global_position:y", submerged_y_value, 2.0);
 			await submerge_tween.finished
@@ -57,8 +68,21 @@ func enter_state(_state: SquidState) -> void:
 		SquidState.Messaging:
 			await get_tree().create_timer(2.0).timeout
 			# do whatever sigil message shit, then go back to submerge
+			enter_state(SquidState.ThorwingPlayer)
 		SquidState.ThorwingPlayer:
-			pass # throw player animation type shit, then go back after to idle
+			player.resume_mobility()
+			var shore_pos = shore_position.global_position
+			var direction_to_shore = player.global_position.direction_to(shore_position.global_position)
+			var distance_to_shore = player.global_position.distance_to(shore_position.global_position)
+			var peak_distance = distance_to_shore / 2
+			var peak_position = direction_to_shore * peak_distance
+			peak_position.y += player.global_position.y + 50
+			
+			var throw_tween = create_tween()
+			throw_tween.tween_property(player, "global_position", peak_position, 2.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+			throw_tween.tween_property(player, "global_position", shore_pos, 2.0).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+			await throw_tween.finished
+			enter_state(SquidState.Idle)
 
 func _process(delta: float) -> void:
 	match state:
@@ -67,6 +91,8 @@ func _process(delta: float) -> void:
 			var direction = global_position.direction_to(target_pos)
 			look_at_target(target_pos, delta)
 			global_position += -transform.basis.z * idle_speed * delta
+			if global_position.y < squid_patrol_points.global_position.y:
+				global_position.y += idle_speed * delta
 			
 			if global_position.distance_to(target_pos) <= 1.0:
 				current_point_index += 1
@@ -85,6 +111,8 @@ func _process(delta: float) -> void:
 		SquidState.ThorwingPlayer:
 			look_at_target(player.global_position, delta)
 			eye.look_at_player(player)
+			#var direction_to_squid = player.global_position.direction_to(global_position)
+			#player.basis.z = lerp(player.basis.z, -direction_to_squid, delta * 20)
 
 func look_at_target(target: Vector3, delta: float) -> void:
 	var rot = rotation_node.global_rotation
@@ -95,3 +123,5 @@ func look_at_target(target: Vector3, delta: float) -> void:
 
 func _on_player_detection_area_body_entered(player: Player) -> void:
 	print("player entered forbidden area O;")
+	if state == SquidState.Idle:
+		enter_state(SquidState.Submerge)

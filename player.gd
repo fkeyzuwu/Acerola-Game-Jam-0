@@ -25,10 +25,10 @@ var current_sigil_machine: SigilMachine = null
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("increase_speed"):
-		speed += 1
+	if event.is_action("increase_speed"):
+		speed += 2
 	elif event.is_action("decrease_speed"):
-		speed -= 1
+		speed -= 2
 	
 	if event is InputEventMouseMotion and current_sigil_machine == null:
 		orientation.rotation.y -= (event.relative.x / yaw_sensitivity)
@@ -70,6 +70,10 @@ func _physics_process(delta: float) -> void:
 	move(delta)
 
 func move(delta: float) -> void:
+	if !mobile:
+		velocity = Vector3.ZERO
+		move_and_slide()
+		return
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -97,15 +101,16 @@ func stop_mobility() -> void:
 	tween.tween_property(self, "yaw_sensitivity", 10000.0, 2.0)
 	tween.tween_property(self, "pitch_sensitivity", 10000.0, 2.0)
 	
+	await tween.finished
 	mobile = false
 	
 func resume_mobility() -> void:
+	mobile = true
+	
 	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel()
 	tween.tween_property(self, "speed", base_speed, 0.5)
 	tween.tween_property(self, "yaw_sensitivity", base_yaw_sensitivity, 0.5)
 	tween.tween_property(self, "pitch_sensitivity", base_pitch_sensitivity, 0.5)
-	
-	mobile = true
 
 func try_get_sigil_stone() -> SigilStone:
 	var space_state = get_world_3d().direct_space_state

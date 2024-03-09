@@ -64,8 +64,8 @@ material = ExtResource("4_bi4vr")
 radius = 0.2
 height = 0.4
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_532n5"]
-size = Vector3(150, 150, 150)
+[sub_resource type="SphereShape3D" id="SphereShape3D_4g1jj"]
+radius = 100.0
 
 [sub_resource type="Animation" id="Animation_h3lq0"]
 length = 0.001
@@ -137,8 +137,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -42.8007)
 collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetectionArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -22.258, 6.94104)
-shape = SubResource("BoxShape3D_532n5")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -42.6269, 6.94104)
+shape = SubResource("SphereShape3D_4g1jj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
