@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bb0b585q723v3"]
+[gd_scene load_steps=5 format=3 uid="uid://bb0b585q723v3"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_uecf8"]
 [ext_resource type="PackedScene" uid="uid://d3kj5bx5as45p" path="res://player.tscn" id="2_r130x"]
 [ext_resource type="PackedScene" uid="uid://caiiwbrumlsfi" path="res://sigil_machine.tscn" id="3_dbado"]
 [ext_resource type="Texture2D" uid="uid://c6gf1wxpmqgm7" path="res://crosshair001.png" id="3_nspj1"]
-[ext_resource type="PackedScene" uid="uid://bl2hrjw11r12m" path="res://squid_god.tscn" id="5_5lxml"]
 
 [node name="TestWorld" type="Node3D"]
 script = ExtResource("1_uecf8")
@@ -24,8 +23,5 @@ texture = ExtResource("3_nspj1")
 
 [node name="SigilMachine" parent="." instance=ExtResource("3_dbado")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.165, -0.571971, -3.23)
-
-[node name="SquidGod" parent="." instance=ExtResource("5_5lxml")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5265, 58.7041)
 
 [editable path="Player"]

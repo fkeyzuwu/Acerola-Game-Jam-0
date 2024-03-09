@@ -20,6 +20,8 @@ var player_solving := false
 
 @export_range(0.01, 0.2) var sensitiveness := 0.05
 
+signal solved
+
 func _ready() -> void:
 	deactivate(true)
 	for sigil_stone: SigilStone in sigil_stones.get_children():
@@ -107,9 +109,9 @@ func _process(_delta: float) -> void:
 			current_stone_sigil.shader_parameter_name, current_stone_sigil.rotation_degrees.y, current_stone_sigil.min_degrees, current_stone_sigil.max_degrees)
 		
 		if is_solved():
-			solved()
+			machine_solved()
 
-func solved() -> void:
+func machine_solved() -> void:
 	# Do solved animation
 	# Stop allowing player to interact with machine anymore
 	input_ray_pickable = false
@@ -123,6 +125,7 @@ func solved() -> void:
 	if light_tween: light_tween.kill()
 	light_tween = create_tween().set_trans(Tween.TRANS_SINE)
 	light_tween.tween_property(mesh_instance.mesh.material, "albedo_color", Color.LIGHT_GREEN, light_up_duration)
+	solved.emit()
 
 func _on_player_detection_area_body_entered(_player: Player) -> void: #lightup
 	if !locked: activate()
