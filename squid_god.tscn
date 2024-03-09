@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bl2hrjw11r12m"]
+[gd_scene load_steps=17 format=3 uid="uid://bl2hrjw11r12m"]
 
 [ext_resource type="Script" path="res://squid_god.gd" id="1_tjxct"]
 [ext_resource type="Script" path="res://eye.gd" id="2_6yo0e"]
@@ -64,6 +64,9 @@ material = ExtResource("4_bi4vr")
 radius = 0.2
 height = 0.4
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_532n5"]
+size = Vector3(150, 150, 150)
+
 [sub_resource type="Animation" id="Animation_h3lq0"]
 length = 0.001
 
@@ -126,6 +129,14 @@ light_volumetric_fog_energy = 0.677
 spot_range = 111.955
 spot_angle = 173.83
 spot_angle_attenuation = 0.015625
+
+[node name="PlayerDetectionArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -42.8007)
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetectionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -22.258, 6.94104)
+shape = SubResource("BoxShape3D_532n5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
