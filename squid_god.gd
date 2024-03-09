@@ -2,12 +2,17 @@ class_name SquidGod extends CharacterBody3D
 
 @export var submerged_y_value = -300.0
 @onready var player: Player = get_tree().get_first_node_in_group("player")
-@onready var eye: SquidEye = $Eye
+@onready var eye: SquidEye = $SquidModel/SquidMesh/Eye/EyeBall
+@onready var squid_model: Node3D = $SquidModel
 
 var submerge_lerp_speed = 100.0
 var emerge_lerp_speed = 50.0
 
-var state := SquidState.Idle
+@export_category("floating")
+@export_range(0.0, 50.0) var float_freq := 50.0
+@export_range(0.0, 50.0) var float_amp := 50.0
+
+var state := SquidState.ThorwingPlayer
 
 enum SquidState {
 	Idle,
@@ -18,8 +23,10 @@ enum SquidState {
 }
 
 func _ready() -> void:
-	enter_state(SquidState.Submerge)
-
+	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_loops()
+	tween.tween_property(squid_model, "position:y", 5.0, 2.0)
+	tween.tween_property(squid_model, "position:y", -5.0, 2.0)
+	
 func enter_state(_state: SquidState) -> void:
 	state = _state
 	
@@ -46,7 +53,7 @@ func enter_state(_state: SquidState) -> void:
 		SquidState.ThorwingPlayer:
 			pass # throw player animation type shit, then go back after to idle
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	match state:
 		SquidState.Idle:
 			pass # move around until seeing player
