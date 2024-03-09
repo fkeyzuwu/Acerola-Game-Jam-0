@@ -61,6 +61,7 @@ sky_mode = 1
 environment = SubResource("Environment_1juu2")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 125, 0)
 use_collision = true
 collision_layer = 2
 collision_mask = 0
@@ -69,10 +70,10 @@ size = Vector3(300, 250, 400)
 material = SubResource("StandardMaterial3D_csk7k")
 
 [node name="SquidGod" parent="." instance=ExtResource("2_d3t13")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -132.786)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 125, -132.786)
 
 [node name="Player" parent="." instance=ExtResource("2_ooj0t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -120.265, 184.267)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 184.267)
 
 [node name="Label" type="Label" parent="."]
 offset_right = 93.0
@@ -81,13 +82,13 @@ theme_override_font_sizes/font_size = 16
 script = ExtResource("4_lxawv")
 
 [node name="ShorePosition" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.3598, -122.483, 154.171)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.3598, 125, 154.171)
 
 [node name="ThrowWallPosition" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.3598, 7.91621, 197.857)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.3598, 125, 197.857)
 
 [node name="SquidPatrolPoints" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -99.8132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 125, -99.8132)
 
 [node name="Point1" type="Marker3D" parent="SquidPatrolPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 83.2068, 0, 75.8883)
@@ -99,7 +100,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.9206, 0, -44.6532)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -152.673, 0, 51.5222)
 
 [node name="InitialPlayerDetector" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -124.778, 153.316)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 153.316)
 collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InitialPlayerDetector"]
@@ -107,10 +108,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
 shape = SubResource("BoxShape3D_6vm4s")
 
 [node name="SigilMachines" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("5_djeko")
 
 [node name="SigilMachine" parent="SigilMachines" instance=ExtResource("5_rjgg0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.165, -125.572, 97.678)
+editor_description = "-0.472 MAGIC Y VALUE FOR SIGIL MACHINE"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.165, -0.472, 97.678)
 
 [node name="ActualSigil" parent="SigilMachines/SigilMachine/SigilTabletBackground" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.150002, 0)
