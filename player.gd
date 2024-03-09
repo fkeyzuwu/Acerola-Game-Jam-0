@@ -25,6 +25,11 @@ var current_sigil_machine: SigilMachine = null
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("increase_speed"):
+		speed += 1
+	elif event.is_action("decrease_speed"):
+		speed -= 1
+	
 	if event is InputEventMouseMotion and current_sigil_machine == null:
 		orientation.rotation.y -= (event.relative.x / yaw_sensitivity)
 		orientation.rotation.x -= (event.relative.y / pitch_sensitivity)

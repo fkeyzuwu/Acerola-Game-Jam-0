@@ -69,5 +69,11 @@ func _process(delta: float) -> void:
 			look_at(player.global_position)
 			eye.look_at_player(player)
 		SquidState.ThorwingPlayer:
-			look_at(player.global_position)
+			look_at_player()
 			eye.look_at_player(player)
+
+func look_at_player() -> void:
+	var rot = global_rotation
+	look_at(player.global_position)
+	global_rotation.x = rot.x
+	global_rotation.z = rot.z
