@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dv0obunuqq8ai"]
+[gd_scene load_steps=10 format=3 uid="uid://dv0obunuqq8ai"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_owgt8"]
 [ext_resource type="PackedScene" uid="uid://bl2hrjw11r12m" path="res://squid_god.tscn" id="2_d3t13"]
@@ -24,6 +24,9 @@ volumetric_fog_albedo = Color(0.384314, 0.384314, 0.384314, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_csk7k"]
 albedo_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_6vm4s"]
+size = Vector3(300, 100, 5)
+
 [node name="World" type="Node3D"]
 script = ExtResource("1_owgt8")
 
@@ -48,11 +51,6 @@ material = SubResource("StandardMaterial3D_csk7k")
 
 [node name="SquidGod" parent="." instance=ExtResource("2_d3t13")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
-submerged_y_value = -300.0
-idle_speed = 20.0
-rotate_lerp_speed = 1
-float_freq = 50.0
-float_amp = 50.0
 
 [node name="Player" parent="." instance=ExtResource("2_ooj0t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -120.526, 184.267)
@@ -76,3 +74,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.9206, 0, 126.707)
 
 [node name="Point3" type="Marker3D" parent="SquidPatrolPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8398, 0, 51.5222)
+
+[node name="InitialPlayerDetector" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -124.778, 126.096)
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InitialPlayerDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+shape = SubResource("BoxShape3D_6vm4s")
+
+[connection signal="body_entered" from="InitialPlayerDetector" to="SquidGod" method="_on_initial_player_detector_body_entered"]

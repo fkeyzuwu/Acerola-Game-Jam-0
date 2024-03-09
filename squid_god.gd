@@ -23,6 +23,8 @@ var bobbing_tween: Tween
 
 var state := SquidState.Idle
 
+var real := false
+
 enum SquidState {
 	Idle,
 	Submerge,
@@ -70,19 +72,23 @@ func enter_state(_state: SquidState) -> void:
 			# do whatever sigil message shit, then go back to submerge
 			enter_state(SquidState.ThorwingPlayer)
 		SquidState.ThorwingPlayer:
-			player.resume_mobility()
-			var shore_pos = shore_position.global_position
-			var direction_to_shore = player.global_position.direction_to(shore_position.global_position)
-			var distance_to_shore = player.global_position.distance_to(shore_position.global_position)
-			var peak_distance = distance_to_shore / 2
-			var peak_position = direction_to_shore * peak_distance
-			peak_position.y += player.global_position.y + 50
-			
-			var throw_tween = create_tween()
-			throw_tween.tween_property(player, "global_position", peak_position, 2.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
-			throw_tween.tween_property(player, "global_position", shore_pos, 2.0).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
-			await throw_tween.finished
-			enter_state(SquidState.Idle)
+			if !real:
+				player.resume_mobility()
+				var shore_pos = shore_position.global_position
+				var direction_to_shore = player.global_position.direction_to(shore_position.global_position)
+				var distance_to_shore = player.global_position.distance_to(shore_position.global_position)
+				var peak_distance = distance_to_shore / 2
+				var peak_position = direction_to_shore * peak_distance
+				peak_position.y += player.global_position.y + 50
+				
+				var throw_tween = create_tween()
+				throw_tween.tween_property(player, "global_position", peak_position, 2.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+				throw_tween.tween_property(player, "global_position", shore_pos, 2.0).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+				await throw_tween.finished
+				real = true
+				enter_state(SquidState.Idle)
+			else:
+				pass #throw player on wall and kill him gehehe
 
 func _process(delta: float) -> void:
 	match state:
@@ -119,9 +125,13 @@ func look_at_target(target: Vector3, delta: float) -> void:
 	rotation_node.look_at(target)
 	rotation_node.global_rotation.x = rot.x
 	rotation_node.global_rotation.z = rot.z
-	rotation = lerp(global_rotation, rotation_node.global_rotation, rotate_lerp_speed * delta)
+	global_rotation = lerp(global_rotation, rotation_node.global_rotation, rotate_lerp_speed * delta)
+
+func _on_initial_player_detector_body_entered(player: Player) -> void:
+	print("penis")
+	if state == SquidState.Idle and !real:
+		enter_state(SquidState.Submerge)
 
 func _on_player_detection_area_body_entered(player: Player) -> void:
-	print("player entered forbidden area O;")
-	if state == SquidState.Idle:
+	if state == SquidState.Idle and real:
 		enter_state(SquidState.Submerge)
