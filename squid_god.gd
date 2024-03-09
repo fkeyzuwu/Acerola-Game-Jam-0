@@ -7,6 +7,7 @@ class_name SquidGod extends CharacterBody3D
 @onready var squid_model: Node3D = $SquidModel
 @onready var squid_patrol_points: Node3D = $"../SquidPatrolPoints"
 @onready var shore_position: Marker3D = $"../ShorePosition"
+@onready var throw_wall_position: Marker3D = $"../ThrowWallPosition"
 
 @onready var points = squid_patrol_points.get_children()
 var current_point_index := 0
@@ -75,8 +76,8 @@ func enter_state(_state: SquidState) -> void:
 			if !real:
 				player.resume_mobility()
 				var shore_pos = shore_position.global_position
-				var direction_to_shore = player.global_position.direction_to(shore_position.global_position)
-				var distance_to_shore = player.global_position.distance_to(shore_position.global_position)
+				var direction_to_shore = player.global_position.direction_to(shore_pos)
+				var distance_to_shore = player.global_position.distance_to(shore_pos)
 				var peak_distance = distance_to_shore / 2
 				var peak_position = direction_to_shore * peak_distance
 				peak_position.y += player.global_position.y + 50
@@ -88,7 +89,20 @@ func enter_state(_state: SquidState) -> void:
 				real = true
 				enter_state(SquidState.Idle)
 			else:
-				pass #throw player on wall and kill him gehehe
+				player.resume_mobility()
+				var throw_wall_pos = throw_wall_position.global_position
+				var direction_to_throw = player.global_position.direction_to(throw_wall_pos)
+				var distance_to_throw = player.global_position.direction_to(throw_wall_pos)
+				var peak_distance = distance_to_throw / 3
+				var peak_position = direction_to_throw * peak_distance
+				peak_position.y += player.global_position.y + throw_wall_pos.y + throw_wall_pos.y / 4
+				
+				var throw_tween = create_tween()
+				throw_tween.tween_property(player, "global_position", peak_position, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+				throw_tween.tween_property(player, "global_position", throw_wall_pos, 2.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUART)
+				await throw_tween.finished
+				player.should_wake_up = true
+				# play aya sound and then player should fall to ground
 
 func _process(delta: float) -> void:
 	match state:
@@ -127,11 +141,11 @@ func look_at_target(target: Vector3, delta: float) -> void:
 	rotation_node.global_rotation.z = rot.z
 	global_rotation = lerp(global_rotation, rotation_node.global_rotation, rotate_lerp_speed * delta)
 
-func _on_initial_player_detector_body_entered(player: Player) -> void:
+func _on_initial_player_detector_body_entered(_player: Player) -> void:
 	print("penis")
 	if state == SquidState.Idle and !real:
 		enter_state(SquidState.Submerge)
 
-func _on_player_detection_area_body_entered(player: Player) -> void:
+func _on_player_detection_area_body_entered(_player: Player) -> void:
 	if state == SquidState.Idle and real:
 		enter_state(SquidState.Submerge)

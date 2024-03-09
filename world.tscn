@@ -64,6 +64,9 @@ script = ExtResource("4_lxawv")
 [node name="ShorePosition" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.3598, -122.483, 154.171)
 
+[node name="ThrowWallPosition" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.3598, 7.91621, 197.857)
+
 [node name="SquidPatrolPoints" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -99.8132)
 

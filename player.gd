@@ -24,6 +24,8 @@ var current_sigil_machine: SigilMachine = null
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var should_wake_up := false
+
 func _input(event: InputEvent) -> void:
 	if event.is_action("increase_speed"):
 		speed += 2
@@ -77,6 +79,8 @@ func move(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+	elif is_on_floor() and should_wake_up:
+		LevelManager.wake_up(false)
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():

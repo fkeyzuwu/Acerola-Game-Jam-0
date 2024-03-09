@@ -76,7 +76,7 @@ func is_solved() -> bool:
 			
 	return true
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if player_solving:
 		for sigil_stone: SigilStone in sigil_stones.get_children():
 			sigil.set_shader_parameter(
