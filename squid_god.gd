@@ -82,8 +82,8 @@ func enter_state(_state: SquidState) -> void:
 				peak_position.y += player.global_position.y + 50
 				
 				var throw_tween = create_tween()
-				throw_tween.tween_property(player, "global_position", peak_position, 2.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
-				throw_tween.tween_property(player, "global_position", shore_pos, 2.0).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+				throw_tween.tween_property(player, "global_position", peak_position, 1.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+				throw_tween.tween_property(player, "global_position", shore_pos, 1.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
 				await throw_tween.finished
 				real = true
 				enter_state(SquidState.Idle)
