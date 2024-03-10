@@ -1,10 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://bl2hrjw11r12m"]
+[gd_scene load_steps=31 format=3 uid="uid://bl2hrjw11r12m"]
 
 [ext_resource type="Script" path="res://squid_god.gd" id="1_tjxct"]
 [ext_resource type="Script" path="res://eye.gd" id="2_6yo0e"]
 [ext_resource type="Shader" path="res://squid_god.gdshader" id="2_erdyy"]
 [ext_resource type="Material" uid="uid://dr1nj1waettv5" path="res://models/squid_god.tres" id="2_gnb45"]
 [ext_resource type="Material" uid="uid://ekdkatkjqkjs" path="res://eyeball.tres" id="4_bi4vr"]
+[ext_resource type="Shader" path="res://sigil.gdshader" id="6_hr0wq"]
+[ext_resource type="PackedScene" uid="uid://vk0kmryvkn2m" path="res://sigil.tscn" id="6_plc7q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t6012"]
 radius = 23.069
@@ -64,8 +66,107 @@ material = ExtResource("4_bi4vr")
 radius = 0.2
 height = 0.4
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_m81ma"]
+viewport_path = NodePath("SubViewportContainer1/SubViewport1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2f88r"]
+resource_local_to_scene = true
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+disable_fog = true
+albedo_texture = SubResource("ViewportTexture_m81ma")
+albedo_texture_force_srgb = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_m06m3"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_2f88r")
+size = Vector2(2, 2)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_cpd3m"]
+viewport_path = NodePath("SubViewportContainer2/SubViewport2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aprpa"]
+resource_local_to_scene = true
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+disable_fog = true
+albedo_texture = SubResource("ViewportTexture_cpd3m")
+albedo_texture_force_srgb = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_m7v0p"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_aprpa")
+size = Vector2(2, 2)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1pkvt"]
+viewport_path = NodePath("SubViewportContainer3/SubViewport3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0w26p"]
+resource_local_to_scene = true
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+disable_fog = true
+albedo_texture = SubResource("ViewportTexture_1pkvt")
+albedo_texture_force_srgb = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_jsn7a"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_0w26p")
+size = Vector2(2, 2)
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_4g1jj"]
 radius = 100.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4vlo2"]
+resource_local_to_scene = true
+shader = ExtResource("6_hr0wq")
+shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
+shader_parameter/p0 = Vector2(-0.13, 0.85)
+shader_parameter/p1 = Vector2(-0.6, 0.81)
+shader_parameter/s0 = 0.75
+shader_parameter/s1 = 0.75
+shader_parameter/m0 = 1
+shader_parameter/m1 = 1
+shader_parameter/twirl0 = 10.0
+shader_parameter/twirl1 = -10.0
+shader_parameter/rotate0 = 0.0
+shader_parameter/rotate1 = 0.0
+shader_parameter/blur = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pcnlk"]
+resource_local_to_scene = true
+shader = ExtResource("6_hr0wq")
+shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
+shader_parameter/p0 = Vector2(-0.13, 0.85)
+shader_parameter/p1 = Vector2(-0.6, 0.81)
+shader_parameter/s0 = 0.75
+shader_parameter/s1 = 0.75
+shader_parameter/m0 = 5
+shader_parameter/m1 = 5
+shader_parameter/twirl0 = 10.0
+shader_parameter/twirl1 = -10.0
+shader_parameter/rotate0 = 0.0
+shader_parameter/rotate1 = 0.0
+shader_parameter/blur = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5v6ul"]
+resource_local_to_scene = true
+shader = ExtResource("6_hr0wq")
+shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
+shader_parameter/p0 = Vector2(-0.13, 0.85)
+shader_parameter/p1 = Vector2(-0.6, 0.81)
+shader_parameter/s0 = 0.75
+shader_parameter/s1 = 0.75
+shader_parameter/m0 = 1
+shader_parameter/m1 = 1
+shader_parameter/twirl0 = 0.872001
+shader_parameter/twirl1 = -10.0
+shader_parameter/rotate0 = 0.0
+shader_parameter/rotate1 = 0.0
+shader_parameter/blur = 0.0
 
 [sub_resource type="Animation" id="Animation_h3lq0"]
 length = 0.001
@@ -132,6 +233,18 @@ spot_range = 111.955
 spot_angle = 173.83
 spot_angle_attenuation = 0.015625
 
+[node name="Sigil1" type="MeshInstance3D" parent="SquidModel"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.82361, -2.70351)
+mesh = SubResource("QuadMesh_m06m3")
+
+[node name="Sigil2" type="MeshInstance3D" parent="SquidModel"]
+transform = Transform3D(-0.838671, 0, 0.544639, 0, 1, 0, -0.544639, 0, -0.838671, 1.52539, 0.844269, -2.35086)
+mesh = SubResource("QuadMesh_m7v0p")
+
+[node name="Sigil3" type="MeshInstance3D" parent="SquidModel"]
+transform = Transform3D(-0.838671, 0, -0.544639, 0, 1, 0, 0.544639, 0, -0.838671, -1.525, 0.844, -2.351)
+mesh = SubResource("QuadMesh_jsn7a")
+
 [node name="PlayerDetectionArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -42.8007)
 collision_layer = 0
@@ -139,6 +252,66 @@ collision_layer = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetectionArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -42.6269, 6.94104)
 shape = SubResource("SphereShape3D_4g1jj")
+
+[node name="SubViewportContainer1" type="SubViewportContainer" parent="."]
+offset_left = -1099.0
+offset_top = -927.0
+offset_right = -843.0
+offset_bottom = -671.0
+
+[node name="SubViewport1" type="SubViewport" parent="SubViewportContainer1"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+size_2d_override = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="Sigil1" parent="SubViewportContainer1/SubViewport1" instance=ExtResource("6_plc7q")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_4vlo2")
+mouse_filter = 2
+script = null
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+offset_left = -767.0
+offset_top = -976.0
+offset_right = -511.0
+offset_bottom = -720.0
+
+[node name="SubViewport2" type="SubViewport" parent="SubViewportContainer2"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+size_2d_override = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="Sigil2" parent="SubViewportContainer2/SubViewport2" instance=ExtResource("6_plc7q")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_pcnlk")
+mouse_filter = 2
+script = null
+
+[node name="SubViewportContainer3" type="SubViewportContainer" parent="."]
+offset_left = -1198.0
+offset_top = -594.0
+offset_right = -942.0
+offset_bottom = -338.0
+
+[node name="SubViewport3" type="SubViewport" parent="SubViewportContainer3"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+size_2d_override = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="Sigil3" parent="SubViewportContainer3/SubViewport3" instance=ExtResource("6_plc7q")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_5v6ul")
+mouse_filter = 2
+script = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

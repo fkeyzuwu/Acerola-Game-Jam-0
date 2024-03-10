@@ -5,7 +5,7 @@ var can_go_to_sleep := false
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
-	animation_player.play("fade_in_black")
+	animation_player.play("fade_in_black_long")
 	await animation_player.animation_finished
 	if get_tree().current_scene.name == "BedroomNight":
 		can_go_to_sleep = true
@@ -38,7 +38,8 @@ func go_to_sleep() -> void:
 	animation_player.play("fade_out_black")
 	await animation_player.animation_finished
 	get_tree().change_scene_to_file("res://world.tscn")
-	animation_player.play("fade_in_black")
+	await get_tree().create_timer(1.0).timeout
+	animation_player.play("fade_in_black_long")
 
 func fade_to_white() -> void:
 	animation_player.play("fade_out_white")

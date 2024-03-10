@@ -26,6 +26,8 @@ var state := SquidState.Idle
 
 var real := false
 
+@onready var sigils: Array[ColorRect] = [%Sigil1, %Sigil2, %Sigil3]
+
 enum SquidState {
 	Idle,
 	Submerge,
@@ -35,6 +37,20 @@ enum SquidState {
 }
 
 func _ready() -> void:
+	await get_tree().process_frame
+	var sigil_machines := get_tree().current_scene.find_child("SigilMachines").get_children()
+	var sigils_used := 0
+	for i in range(sigil_machines.size()): # remember to disable sigils by hand if needed
+		var sigil_machine = sigil_machines[i] as SigilMachine
+		var sigil: ColorRect = sigils[i]
+		for key in sigil_machine.sigil.target_sigil:
+			sigil.material.set_shader_parameter(key, sigil_machine.sigil.target_sigil[key])
+		
+		sigils_used += 1
+	
+	for i in range(sigils_used, sigils.size()):
+		sigils[i].visible = false
+		
 	enter_state(SquidState.Idle)
 
 func start_bobbing() -> void:

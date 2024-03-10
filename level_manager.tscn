@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://wi20gvdcqf6v"]
+[gd_scene load_steps=9 format=3 uid="uid://wi20gvdcqf6v"]
 
 [ext_resource type="Script" path="res://level_manager.gd" id="1_eoyms"]
 
@@ -50,6 +50,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_4q072"]
 resource_name = "fade_out_black"
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -57,7 +58,7 @@ tracks/0/path = NodePath("CanvasLayer/Fader:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0.0235294, 0.0235294, 0.0235294, 0), Color(0.0235294, 0.0235294, 0.0235294, 1)]
@@ -79,10 +80,27 @@ tracks/0/keys = {
 "values": [Color(0.0235294, 0.0235294, 0.0235294, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_0d43j"]
+resource_name = "fade_in_black_long"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Fader:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.0235294, 0.0235294, 0.0235294, 1), Color(0.0235294, 0.0235294, 0.0235294, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rft3r"]
 _data = {
 "RESET": SubResource("Animation_6wii1"),
 "fade_in_black": SubResource("Animation_cg3o2"),
+"fade_in_black_long": SubResource("Animation_0d43j"),
 "fade_in_white": SubResource("Animation_qxq4y"),
 "fade_out_black": SubResource("Animation_4q072"),
 "fade_out_white": SubResource("Animation_8pbsd")
