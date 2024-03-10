@@ -28,6 +28,7 @@ var real := false
 
 @onready var sigils: Array[ColorRect] = [%Sigil1, %Sigil2, %Sigil3]
 @onready var sigil_meshes: Array[MeshInstance3D] = [%SigilMesh1, %SigilMesh2, %SigilMesh3]
+@onready var sub_viewports: Array[SubViewport] = [%SubViewport1, %SubViewport2, %SubViewport3]
 
 enum SquidState {
 	Idle,
@@ -39,6 +40,11 @@ enum SquidState {
 
 func _ready() -> void:
 	await get_tree().process_frame
+	for i in range(sigil_meshes.size()):
+		var sigil_mesh = sigil_meshes[i]
+		var sub_viewport = sub_viewports[i]
+		sigil_mesh.mesh.material.albedo_texture.viewport_path = sub_viewport.get_path()
+	
 	var sigil_machines := get_tree().current_scene.find_child("SigilMachines").get_children()
 	var sigils_used := 0
 	for i in range(sigil_machines.size()): # remember to disable sigils by hand if needed

@@ -4,7 +4,6 @@ class_name SquidEye extends Node3D
 @export var max_vertical = 0.45
 @export var lerp_speed = 1
 @onready var base_position := Vector2(position.x, position.y)
-@onready var eye_light: SpotLight3D = $"Eye Light"
 
 func look_at_player(player: Player) -> void:
 	look_at(player.global_position)

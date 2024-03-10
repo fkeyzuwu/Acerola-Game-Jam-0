@@ -11,55 +11,52 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_csk7k"]
 albedo_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_048dx"]
-viewport_path = NodePath("SquidGod/SubViewportContainer1/SubViewport1")
+[sub_resource type="ViewportTexture" id="ViewportTexture_x1ox3"]
+viewport_path = NodePath("SubViewportContainer1/SubViewport1")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxnws"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yumdj"]
 resource_local_to_scene = true
 transparency = 1
 blend_mode = 1
-shading_mode = 0
 disable_fog = true
-albedo_texture = SubResource("ViewportTexture_048dx")
+albedo_texture = SubResource("ViewportTexture_x1ox3")
 albedo_texture_force_srgb = true
 
-[sub_resource type="QuadMesh" id="QuadMesh_y3di0"]
+[sub_resource type="QuadMesh" id="QuadMesh_1o81a"]
 resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_nxnws")
+material = SubResource("StandardMaterial3D_yumdj")
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_idnjw"]
-viewport_path = NodePath("SquidGod/SubViewportContainer2/SubViewport2")
+[sub_resource type="ViewportTexture" id="ViewportTexture_jstjx"]
+viewport_path = NodePath("SubViewportContainer2/SubViewport2")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5gj65"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d65lo"]
 resource_local_to_scene = true
 transparency = 1
 blend_mode = 1
-shading_mode = 0
 disable_fog = true
-albedo_texture = SubResource("ViewportTexture_idnjw")
+albedo_texture = SubResource("ViewportTexture_jstjx")
 albedo_texture_force_srgb = true
 
-[sub_resource type="QuadMesh" id="QuadMesh_spspg"]
+[sub_resource type="QuadMesh" id="QuadMesh_wc7em"]
 resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_5gj65")
+material = SubResource("StandardMaterial3D_d65lo")
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_hxf57"]
-viewport_path = NodePath("SquidGod/SubViewportContainer3/SubViewport3")
+[sub_resource type="ViewportTexture" id="ViewportTexture_bupbu"]
+viewport_path = NodePath("SubViewportContainer3/SubViewport3")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vl83e"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_05j4m"]
 resource_local_to_scene = true
 transparency = 1
 blend_mode = 1
-shading_mode = 0
 disable_fog = true
-albedo_texture = SubResource("ViewportTexture_hxf57")
+albedo_texture = SubResource("ViewportTexture_bupbu")
 albedo_texture_force_srgb = true
 
-[sub_resource type="QuadMesh" id="QuadMesh_p7wsl"]
+[sub_resource type="QuadMesh" id="QuadMesh_7hi8y"]
 resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_vl83e")
+material = SubResource("StandardMaterial3D_05j4m")
 size = Vector2(2, 2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uah1a"]
@@ -158,14 +155,14 @@ light_energy = 3.285
 omni_range = 93.4
 omni_attenuation = 0.15932
 
-[node name="Sigil1" parent="SquidGod/SquidModel" index="1"]
-mesh = SubResource("QuadMesh_y3di0")
+[node name="SigilMesh1" parent="SquidGod/SquidModel" index="1"]
+mesh = SubResource("QuadMesh_1o81a")
 
-[node name="Sigil2" parent="SquidGod/SquidModel" index="2"]
-mesh = SubResource("QuadMesh_spspg")
+[node name="SigilMesh2" parent="SquidGod/SquidModel" index="2"]
+mesh = SubResource("QuadMesh_wc7em")
 
-[node name="Sigil3" parent="SquidGod/SquidModel" index="3"]
-mesh = SubResource("QuadMesh_p7wsl")
+[node name="SigilMesh3" parent="SquidGod/SquidModel" index="3"]
+mesh = SubResource("QuadMesh_7hi8y")
 
 [node name="Sigil1" parent="SquidGod/SubViewportContainer1/SubViewport1" index="0"]
 material = SubResource("ShaderMaterial_uah1a")

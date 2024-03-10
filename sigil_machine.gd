@@ -7,6 +7,8 @@ class_name SigilMachine extends StaticBody3D
 @export_range(0.1, 1.0) var light_up_duration := 0.3
 @onready var sigil: Sigil = $SubViewportContainer/SubViewport/Sigil
 @onready var sigil_stones: Node3D = $SigilTabletBackground/SigilStones
+@onready var sigil_mesh: MeshInstance3D = $SigilTabletBackground/SigilMesh
+@onready var sub_viewport: SubViewport = $SubViewportContainer/SubViewport
 
 @onready var camera_position: Node3D = $CameraPosition
 
@@ -26,6 +28,7 @@ signal solved
 
 func _ready() -> void:
 	deactivate(true)
+	sigil_mesh.mesh.material.albedo_texture.viewport_path = sub_viewport.get_path()
 	for sigil_stone: SigilStone in sigil_stones.get_children():
 		var param_name := sigil_stone.shader_parameter_name
 		var param_value: float
