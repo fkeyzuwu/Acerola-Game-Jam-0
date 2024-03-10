@@ -67,17 +67,20 @@ func get_starting_sigil_permutation(target: Dictionary) -> Dictionary:
 			"p0x", "p1x":
 				var actual_param = param.substr(0, 2)
 				if target[actual_param].x >= 0.45:
-					random_permutation[actual_param].x = randf_range(-2.0, 0.45)
+					random_permutation[actual_param].x = randf_range(-0.3, 0.45)
 				else:
-					random_permutation[actual_param].x = randf_range(0.45, 2.0)
+					random_permutation[actual_param].x = randf_range(0.45, 1.1)
 			"p0y", "p1y":
 				var actual_param = param.substr(0, 2)
 				if target[actual_param].y >= 0.6:
-					random_permutation[actual_param].y = randf_range(-2.0, 0.6)
+					random_permutation[actual_param].y = randf_range(-0.3, 0.6)
 				else:
-					random_permutation[actual_param].y = randf_range(0.6, 2.0)
+					random_permutation[actual_param].y = randf_range(0.6, 1.5)
 			"s0", "s1":
-				random_permutation[param] = randf_range(1.1, 2.0)
+				if target[param] >= 0.925:
+					random_permutation[param] = randf_range(0.75, 0.925)
+				else:
+					random_permutation[param] = randf_range(0.925, 1.1)
 			"twirl0", "twirl1":
 				if target[param] >= 0.0:
 					random_permutation[param] = randf_range(-10.0, 0)
@@ -166,8 +169,8 @@ func tween_sigil_to_target() -> void:
 	
 	await tween.finished
 # Degree value is wrapped in -180 to 180 degrees.
-func set_shader_parameter(param_name: String, degree_value: float, min_degree: float, max_degree: float, pmin = -2, pmax = 2) -> void:
-	var value = get_remapped_value(param_name, degree_value, min_degree, max_degree, pmax, pmin)
+func set_shader_parameter(param_name: String, degree_value: float, min_degree: float, max_degree: float) -> void:
+	var value = get_remapped_value(param_name, degree_value, min_degree, max_degree)
 	if param_name.ends_with("x"):
 		var param = param_name.substr(0,2)
 		var current_y =  material.get_shader_parameter(param).y
@@ -182,10 +185,11 @@ func set_shader_parameter(param_name: String, degree_value: float, min_degree: f
 		material.set_shader_parameter(param_name, value)
 		current_sigil[param_name] = value
 
-func get_remapped_value(param_name: String, degree_value: float, min_degree: float, max_degree: float, pmin: float, pmax: float) -> float:
+func get_remapped_value(param_name: String, degree_value: float, min_degree: float, max_degree: float) -> float:
 	match param_name:
-		"p0x", "p0y", "p1x", "p1y": return remap(degree_value, min_degree, max_degree, pmax, pmin)
-		"s0", "s1": return remap(degree_value, min_degree, max_degree, 3.0, 0.75)
+		"p0x", "p1x": return remap(degree_value, min_degree, max_degree, -0.3, 1.1)
+		"p0y", "p1y": return remap(degree_value, min_degree, max_degree, -0.3, 1.5)
+		"s0", "s1": return remap(degree_value, min_degree, max_degree, 1.1, 0.75)
 		"twirl0", "twirl1": return remap(degree_value, min_degree, max_degree, 10, -10)
 		"rotate0", "rotate1": return remap(degree_value, min_degree, max_degree, 1.0, 0.0)
 	
