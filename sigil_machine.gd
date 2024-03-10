@@ -40,8 +40,9 @@ func _ready() -> void:
 		var target_degrees: float
 		
 		match param_name:
-			"p0x", "p0y", "p1x", "p1y": target_degrees = remap(param_value, -2.0, 2.0, min_degree, max_degree)
-			"s0", "s1": target_degrees = remap(param_value, 3.0, 0.75, min_degree, max_degree)
+			"p0x", "p1x": target_degrees = remap(param_value, -0.3, 1.1, min_degree, max_degree)
+			"p0y", "p1y": target_degrees = remap(param_value, -0.3, 1.5, min_degree, max_degree)
+			"s0", "s1": target_degrees = remap(param_value, 1.0, 0.75, min_degree, max_degree)
 			"twirl0", "twirl1": target_degrees = remap(param_value, 10.0, -10.0, min_degree, max_degree)
 			"rotate0", "rotate1": target_degrees = remap(param_value, 1.0, 0.0, min_degree, max_degree)
 		
@@ -55,10 +56,10 @@ func is_solved() -> bool:
 		var remapped_target_value: float
 		match key:
 			"p0", "p1":
-				var remapped_current_value_x = remap(current_value.x, -2.0, 2.0, 0.0, 1.0)
-				var remapped_current_value_y = remap(current_value.y, -2.0, 2.0, 0.0, 1.0)
-				var remapped_target_value_x = remap(target_value.x, -2.0, 2.0, 0.0, 1.0)
-				var remapped_target_value_y = remap(target_value.y, -2.0, 2.0, 0.0, 1.0)
+				var remapped_current_value_x = remap(current_value.x, -0.3, 1.1, 0.0, 1.0)
+				var remapped_current_value_y = remap(current_value.y, -0.3, 1.5, 0.0, 1.0)
+				var remapped_target_value_x = remap(target_value.x, -0.3, 1.1, 0.0, 1.0)
+				var remapped_target_value_y = remap(target_value.y, -0.3, 1.5, 0.0, 1.0)
 				if abs(remapped_current_value_x - remapped_target_value_x) >= sensitiveness:
 					return false
 				elif abs(remapped_current_value_y - remapped_target_value_y) >= sensitiveness:
@@ -66,8 +67,8 @@ func is_solved() -> bool:
 				else:
 					continue
 			"s0", "s1":
-				remapped_current_value = remap(current_value, 3.0, 0.75, 0.0, 1.0)
-				remapped_target_value = remap(target_value, 3.0, 0.75, 0.0, 1.0)
+				remapped_current_value = remap(current_value, 1.0, 0.75, 0.0, 1.0)
+				remapped_target_value = remap(target_value, 1.0, 0.75, 0.0, 1.0)
 			"twirl0", "twirl1":
 				remapped_current_value = remap(current_value, 10, -10, 0.0, 1.0)
 				remapped_target_value = remap(target_value, 10, -10, 0.0, 1.0)
