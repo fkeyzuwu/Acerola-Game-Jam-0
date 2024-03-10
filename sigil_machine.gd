@@ -20,7 +20,7 @@ var current_stone_sigil: SigilStone = null
 var locked := false
 var player_solving := false
 
-@export_range(0.01, 0.2) var sensitiveness := 0.05
+@export_range(0.01, 0.2) var sensitiveness := 0.1
 
 signal solved
 
@@ -119,7 +119,9 @@ func machine_solved() -> void:
 	input_ray_pickable = false
 	locked = true
 	current_stone_sigil = null
-	await get_tree().create_timer(1.0).timeout
+	player_solving = false
+	await sigil.tween_sigil_to_target()
+	await get_tree().create_timer(0.5).timeout
 	
 	if player.current_sigil_machine != null:
 		player.exit_sigil_machine()

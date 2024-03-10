@@ -41,16 +41,16 @@ radius = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d5s1f"]
 shader = ExtResource("4_x5axq")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
-shader_parameter/p0 = Vector2(-0.58, 0.285)
-shader_parameter/p1 = Vector2(1.035, 1)
+shader_parameter/p0 = Vector2(0.975, -1.33)
+shader_parameter/p1 = Vector2(0, 1.5)
 shader_parameter/s0 = 0.75
-shader_parameter/s1 = 0.75
+shader_parameter/s1 = 1.023
 shader_parameter/m0 = 5
 shader_parameter/m1 = 5
-shader_parameter/twirl0 = 0.0
-shader_parameter/twirl1 = -10.0
-shader_parameter/rotate0 = 0.0
-shader_parameter/rotate1 = 0.0
+shader_parameter/twirl0 = -2.606
+shader_parameter/twirl1 = 2.121
+shader_parameter/rotate0 = 0.5
+shader_parameter/rotate1 = 0.158
 shader_parameter/blur = 0.0
 
 [node name="SigilMachine" type="StaticBody3D"]

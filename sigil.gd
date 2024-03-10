@@ -2,6 +2,7 @@ class_name Sigil extends ColorRect
 
 @export_range(1.0, 7.0) var reveal_tween_duration := 4.0
 @export_range(1.0, 3.0) var hide_tween_duration := 2.5
+@export_range(1.0, 3.0) var to_target_tween_duration := 0.5
 @onready var sigil_stones: Node3D = $"../../../SigilTabletBackground/SigilStones"
 @onready var sigil_machine: SigilMachine = $"../../.."
 
@@ -64,9 +65,17 @@ func get_starting_sigil_permutation(target: Dictionary) -> Dictionary:
 	for param: String in params:
 		match param:
 			"p0x", "p1x":
-				random_permutation[param.substr(0, 2)].x = randf_range(-1.0, 1.0)
+				var actual_param = param.substr(0, 2)
+				if target[actual_param].x >= 0.45:
+					random_permutation[actual_param].x = randf_range(-2.0, 0.45)
+				else:
+					random_permutation[actual_param].x = randf_range(0.45, 2.0)
 			"p0y", "p1y":
-				random_permutation[param.substr(0, 2)].y = randf_range(-1.0, 1.0)
+				var actual_param = param.substr(0, 2)
+				if target[actual_param].y >= 0.6:
+					random_permutation[actual_param].y = randf_range(-2.0, 0.6)
+				else:
+					random_permutation[actual_param].y = randf_range(0.6, 2.0)
 			"s0", "s1":
 				random_permutation[param] = randf_range(1.1, 2.0)
 			"twirl0", "twirl1":
@@ -85,8 +94,8 @@ func get_starting_sigil_permutation(target: Dictionary) -> Dictionary:
 func create_random_sigil() -> Dictionary:
 	var random_sigil := {}
 	
-	random_sigil["p0"] = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
-	random_sigil["p1"] = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
+	random_sigil["p0"] = Vector2(randf_range(-0.3, 1.1), randf_range(-0.3, 1.5))
+	random_sigil["p1"] = Vector2(randf_range(-0.3, 1.1), randf_range(-0.3, 1.5))
 	random_sigil["s0"] = randf_range(0.75, 1.0)
 	random_sigil["s1"] = randf_range(0.75, 1.0)
 	
@@ -142,6 +151,20 @@ func hide_sigil() -> void:
 	await tween.finished
 	animating = false
 
+func tween_sigil_to_target() -> void:
+	tween = create_tween().set_parallel()
+	
+	tween.tween_property(material, "shader_parameter/p0", target_sigil["p0"], to_target_tween_duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(material, "shader_parameter/p1", target_sigil["p1"], to_target_tween_duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(material, "shader_parameter/s0", target_sigil["s0"], to_target_tween_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(material, "shader_parameter/s1", target_sigil["s1"], to_target_tween_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	tween.tween_property(material, "shader_parameter/twirl0", target_sigil["twirl0"], to_target_tween_duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(material, "shader_parameter/twirl1", target_sigil["twirl1"], to_target_tween_duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(material, "shader_parameter/rotate0", target_sigil["rotate0"], to_target_tween_duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(material, "shader_parameter/rotate1", target_sigil["rotate1"], to_target_tween_duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	
+	await tween.finished
 # Degree value is wrapped in -180 to 180 degrees.
 func set_shader_parameter(param_name: String, degree_value: float, min_degree: float, max_degree: float, pmin = -2, pmax = 2) -> void:
 	var value = get_remapped_value(param_name, degree_value, min_degree, max_degree, pmax, pmin)
