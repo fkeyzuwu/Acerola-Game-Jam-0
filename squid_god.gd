@@ -27,6 +27,7 @@ var state := SquidState.Idle
 var real := false
 
 @onready var sigils: Array[ColorRect] = [%Sigil1, %Sigil2, %Sigil3]
+@onready var sigil_meshes: Array[MeshInstance3D] = [%SigilMesh1, %SigilMesh2, %SigilMesh3]
 
 enum SquidState {
 	Idle,
@@ -49,7 +50,7 @@ func _ready() -> void:
 		sigils_used += 1
 	
 	for i in range(sigils_used, sigils.size()):
-		sigils[i].visible = false
+		sigil_meshes[i].visible = false
 		
 	enter_state(SquidState.Idle)
 

@@ -73,7 +73,6 @@ viewport_path = NodePath("SubViewportContainer1/SubViewport1")
 resource_local_to_scene = true
 transparency = 1
 blend_mode = 1
-shading_mode = 0
 disable_fog = true
 albedo_texture = SubResource("ViewportTexture_m81ma")
 albedo_texture_force_srgb = true
@@ -90,7 +89,6 @@ viewport_path = NodePath("SubViewportContainer2/SubViewport2")
 resource_local_to_scene = true
 transparency = 1
 blend_mode = 1
-shading_mode = 0
 disable_fog = true
 albedo_texture = SubResource("ViewportTexture_cpd3m")
 albedo_texture_force_srgb = true
@@ -107,7 +105,6 @@ viewport_path = NodePath("SubViewportContainer3/SubViewport3")
 resource_local_to_scene = true
 transparency = 1
 blend_mode = 1
-shading_mode = 0
 disable_fog = true
 albedo_texture = SubResource("ViewportTexture_1pkvt")
 albedo_texture_force_srgb = true
@@ -120,7 +117,7 @@ size = Vector2(2, 2)
 [sub_resource type="SphereShape3D" id="SphereShape3D_4g1jj"]
 radius = 100.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sr757"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ytths"]
 resource_local_to_scene = true
 shader = ExtResource("6_hr0wq")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -136,7 +133,7 @@ shader_parameter/rotate0 = 0.0
 shader_parameter/rotate1 = 0.0
 shader_parameter/blur = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_chxj1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xx3pg"]
 resource_local_to_scene = true
 shader = ExtResource("6_hr0wq")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -152,7 +149,7 @@ shader_parameter/rotate0 = 0.0
 shader_parameter/rotate1 = 0.0
 shader_parameter/blur = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7f2ue"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fr1e"]
 resource_local_to_scene = true
 shader = ExtResource("6_hr0wq")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -224,26 +221,48 @@ mesh = SubResource("SphereMesh_x312p")
 skeleton = NodePath("../..")
 script = ExtResource("2_6yo0e")
 
-[node name="Eye Light" type="SpotLight3D" parent="SquidModel/SquidMesh/Eye/EyeBall"]
-transform = Transform3D(-0.151736, 0.00345594, 0.350596, -0.000666656, 0.221976, -0.00247661, -0.35061, -0.0027457, -0.151716, 0.468552, -0.0277856, -0.220061)
-light_color = Color(1, 1, 0.792157, 1)
-light_energy = 16.0
-light_volumetric_fog_energy = 0.677
-spot_range = 111.955
-spot_angle = 173.83
-spot_angle_attenuation = 0.015625
+[node name="OmniLight3D" type="OmniLight3D" parent="SquidModel/SquidMesh/Eye/EyeBall"]
+transform = Transform3D(0.382038, 4.42378e-09, -4.91738e-07, 6.98492e-10, 0.221991, 3.49246e-10, 0, 6.98492e-10, 0.382038, 0.380661, 0.00284963, -0.235077)
+light_color = Color(0.984314, 0.945098, 0.647059, 1)
+light_energy = 2.462
+omni_range = 42.73
+omni_attenuation = 0.112657
 
-[node name="Sigil1" type="MeshInstance3D" parent="SquidModel"]
+[node name="SigilMesh1" type="MeshInstance3D" parent="SquidModel"]
+unique_name_in_owner = true
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.82361, -2.70351)
 mesh = SubResource("QuadMesh_m06m3")
 
-[node name="Sigil2" type="MeshInstance3D" parent="SquidModel"]
+[node name="OmniLight3D" type="OmniLight3D" parent="SquidModel/SigilMesh1"]
+transform = Transform3D(0.142857, -2.6119e-10, -8.88178e-16, 2.6119e-10, 0.142857, -4.49499e-10, 8.88178e-16, 4.49499e-10, 0.142857, 0.0247522, 0.00284958, 0.157341)
+light_color = Color(0.984314, 0.945098, 0.647059, 1)
+light_energy = 3.011
+omni_range = 20.499
+omni_attenuation = 0.329878
+
+[node name="SigilMesh2" type="MeshInstance3D" parent="SquidModel"]
+unique_name_in_owner = true
 transform = Transform3D(-0.838671, 0, 0.544639, 0, 1, 0, -0.544639, 0, -0.838671, 1.52539, 0.844269, -2.35086)
 mesh = SubResource("QuadMesh_m7v0p")
 
-[node name="Sigil3" type="MeshInstance3D" parent="SquidModel"]
+[node name="OmniLight3D" type="OmniLight3D" parent="SquidModel/SigilMesh2"]
+transform = Transform3D(0.142857, -2.6119e-10, 0, 2.6119e-10, 0.142857, -4.49499e-10, 0, 4.49499e-10, 0.142857, 0.0702999, 0.00284964, 0.247254)
+light_color = Color(0.984314, 0.945098, 0.647059, 1)
+light_energy = 1.731
+omni_range = 20.499
+omni_attenuation = 0.329878
+
+[node name="SigilMesh3" type="MeshInstance3D" parent="SquidModel"]
+unique_name_in_owner = true
 transform = Transform3D(-0.838671, 0, -0.544639, 0, 1, 0, 0.544639, 0, -0.838671, -1.525, 0.844, -2.351)
 mesh = SubResource("QuadMesh_jsn7a")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SquidModel/SigilMesh3"]
+transform = Transform3D(0.142857, -2.6119e-10, 0, 2.6119e-10, 0.142857, -4.49499e-10, 0, 4.49499e-10, 0.142857, 0.0688657, 0.00284964, 0.245046)
+light_color = Color(0.984314, 0.945098, 0.647059, 1)
+light_energy = 1.731
+omni_range = 20.499
+omni_attenuation = 0.329878
 
 [node name="PlayerDetectionArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -42.8007)
@@ -269,7 +288,7 @@ render_target_update_mode = 4
 
 [node name="Sigil1" parent="SubViewportContainer1/SubViewport1" instance=ExtResource("6_plc7q")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_sr757")
+material = SubResource("ShaderMaterial_ytths")
 mouse_filter = 2
 script = null
 
@@ -289,7 +308,7 @@ render_target_update_mode = 4
 
 [node name="Sigil2" parent="SubViewportContainer2/SubViewport2" instance=ExtResource("6_plc7q")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_chxj1")
+material = SubResource("ShaderMaterial_xx3pg")
 mouse_filter = 2
 script = null
 
@@ -309,7 +328,7 @@ render_target_update_mode = 4
 
 [node name="Sigil3" parent="SubViewportContainer3/SubViewport3" instance=ExtResource("6_plc7q")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_7f2ue")
+material = SubResource("ShaderMaterial_3fr1e")
 mouse_filter = 2
 script = null
 
