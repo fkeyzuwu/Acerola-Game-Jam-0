@@ -1,9 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://bb0b585q723v3"]
+[gd_scene load_steps=8 format=3 uid="uid://bb0b585q723v3"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_uecf8"]
 [ext_resource type="PackedScene" uid="uid://d3kj5bx5as45p" path="res://player.tscn" id="2_r130x"]
 [ext_resource type="PackedScene" uid="uid://caiiwbrumlsfi" path="res://sigil_machine.tscn" id="3_dbado"]
 [ext_resource type="Texture2D" uid="uid://c6gf1wxpmqgm7" path="res://crosshair001.png" id="3_nspj1"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8b50t"]
+viewport_path = NodePath("SigilMachine/SubViewportContainer/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fp21f"]
+resource_local_to_scene = true
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+disable_fog = true
+albedo_texture = SubResource("ViewportTexture_8b50t")
+albedo_texture_force_srgb = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_21euw"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_fp21f")
+size = Vector2(1.3, 1.3)
 
 [node name="TestWorld" type="Node3D"]
 script = ExtResource("1_uecf8")
@@ -24,4 +41,8 @@ texture = ExtResource("3_nspj1")
 [node name="SigilMachine" parent="." instance=ExtResource("3_dbado")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.165, -0.571971, -3.23)
 
+[node name="ActualSigil" parent="SigilMachine/SigilTabletBackground" index="0"]
+mesh = SubResource("QuadMesh_21euw")
+
 [editable path="Player"]
+[editable path="SigilMachine"]

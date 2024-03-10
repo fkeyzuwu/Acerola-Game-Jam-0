@@ -120,7 +120,7 @@ size = Vector2(2, 2)
 [sub_resource type="SphereShape3D" id="SphereShape3D_4g1jj"]
 radius = 100.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4vlo2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j1n8w"]
 resource_local_to_scene = true
 shader = ExtResource("6_hr0wq")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -136,7 +136,7 @@ shader_parameter/rotate0 = 0.0
 shader_parameter/rotate1 = 0.0
 shader_parameter/blur = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pcnlk"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fq7pm"]
 resource_local_to_scene = true
 shader = ExtResource("6_hr0wq")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -152,7 +152,7 @@ shader_parameter/rotate0 = 0.0
 shader_parameter/rotate1 = 0.0
 shader_parameter/blur = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5v6ul"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dblgu"]
 resource_local_to_scene = true
 shader = ExtResource("6_hr0wq")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -269,7 +269,7 @@ render_target_update_mode = 4
 
 [node name="Sigil1" parent="SubViewportContainer1/SubViewport1" instance=ExtResource("6_plc7q")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_4vlo2")
+material = SubResource("ShaderMaterial_j1n8w")
 mouse_filter = 2
 script = null
 
@@ -289,7 +289,7 @@ render_target_update_mode = 4
 
 [node name="Sigil2" parent="SubViewportContainer2/SubViewport2" instance=ExtResource("6_plc7q")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_pcnlk")
+material = SubResource("ShaderMaterial_fq7pm")
 mouse_filter = 2
 script = null
 
@@ -309,7 +309,7 @@ render_target_update_mode = 4
 
 [node name="Sigil3" parent="SubViewportContainer3/SubViewport3" instance=ExtResource("6_plc7q")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_5v6ul")
+material = SubResource("ShaderMaterial_dblgu")
 mouse_filter = 2
 script = null
 

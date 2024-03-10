@@ -1,6 +1,8 @@
 class_name SigilMachine extends StaticBody3D
-@onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 
+@export var slider_amount := 3
+
+@onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 @onready var light_tween: Tween
 @export_range(0.1, 1.0) var light_up_duration := 0.3
 @onready var sigil: Sigil = $SubViewportContainer/SubViewport/Sigil

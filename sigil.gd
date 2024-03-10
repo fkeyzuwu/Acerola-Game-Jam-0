@@ -1,8 +1,9 @@
 class_name Sigil extends ColorRect
 
-@export var current_sigil_index := 0
 @export_range(1.0, 7.0) var reveal_tween_duration := 4.0
 @export_range(1.0, 3.0) var hide_tween_duration := 2.5
+@onready var sigil_stones: Node3D = $"../../../SigilTabletBackground/SigilStones"
+@onready var sigil_machine: SigilMachine = $"../../.."
 
 var animating := false
 
@@ -44,50 +45,50 @@ func _ready() -> void:
 
 func get_starting_sigil_permutation(target: Dictionary) -> Dictionary:
 	var random_permutation := {}
-	random_permutation["m0"] = target["m0"]
-	random_permutation["m1"] = target["m1"]
+	for key in target:
+		random_permutation[key] = target[key] # first intialize, then switch
+	
+	var params: Array[String] = []
+	var random_params = ["p0x", "p0y", "p1x", "p1y", "s0", "s1", "twirl0", "twirl1", "rotate0", "rotate1"]
+	
+	for i in range(sigil_machine.slider_amount):
+		var random_param = random_params.pick_random()
+		params.append(random_param)
+		random_params.erase(random_param)
 	
 	#check what actual sigil parameter the sigils stone are controlling
+	for i in range(sigil_stones.get_children().size()):
+		var sigil_stone = sigil_stones.get_children()[i] as SigilStone
+		sigil_stone.shader_parameter_name = params[i]
 	
-	if target["s0"] >= 1.875:
-		random_permutation["s0"] = randf_range(0.75, 1.875)
-	else:
-		random_permutation["s0"] = randf_range(1.875, 3.0)
-	
-	if target["s1"] >= 1.875:
-		random_permutation["s1"] = randf_range(0.75, 1.875)
-	else:
-		random_permutation["s1"] = randf_range(1.875, 3.0)
-	
-	if target["twirl0"] >= 0.0:
-		random_permutation["twirl0"] = randf_range(-10.0, 0)
-	else:
-		random_permutation["twirl0"] = randf_range(0, 10.0)
-	
-	if target["twirl1"] >= 0.0:
-		random_permutation["twirl1"] = randf_range(-10.0, 0)
-	else:
-		random_permutation["twirl1"] = randf_range(0, 10.0)
-		
-	if target["rotate0"] >= 0.5:
-		random_permutation["rotate0"] = randf_range(0.0, 0.5)
-	else:
-		random_permutation["rotate0"] = randf_range(0.5, 1.0)
-		
-	if target["rotate1"] >= 0.5:
-		random_permutation["rotate1"] = randf_range(0.0, 0.5)
-	else:
-		random_permutation["rotate1"] = randf_range(0.5, 1.0)
+	for param: String in params:
+		match param:
+			"p0x", "p1x":
+				random_permutation[param.substr(0, 2)].x = randf_range(-1.0, 1.0)
+			"p0y", "p1y":
+				random_permutation[param.substr(0, 2)].y = randf_range(-1.0, 1.0)
+			"s0", "s1":
+				random_permutation[param] = randf_range(1.1, 2.0)
+			"twirl0", "twirl1":
+				if target[param] >= 0.0:
+					random_permutation[param] = randf_range(-10.0, 0)
+				else:
+					random_permutation[param] = randf_range(0, 10.0)
+			"rotate0", "rotate1":
+				if target[param] >= 0.5:
+					random_permutation[param] = randf_range(0.0, 0.5)
+				else:
+					random_permutation[param] = randf_range(0.5, 1.0)
 	
 	return random_permutation
 
 func create_random_sigil() -> Dictionary:
 	var random_sigil := {}
 	
-	random_sigil["p0"] = Vector2(randf_range(-2.0, 2.0), randf_range(-2.0, 2.0))
-	random_sigil["p1"] = Vector2(randf_range(-2.0, 2.0), randf_range(-2.0, 2.0))
-	random_sigil["s0"] = randf_range(0.75, 3.0)
-	random_sigil["s1"] = randf_range(0.75, 3.0)
+	random_sigil["p0"] = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
+	random_sigil["p1"] = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
+	random_sigil["s0"] = randf_range(0.75, 1.0)
+	random_sigil["s1"] = randf_range(0.75, 1.0)
 	
 	random_sigil["m0"] = randi_range(1, 5)
 	random_sigil["m1"] = randi_range(1, 5)
