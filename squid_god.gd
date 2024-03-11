@@ -16,6 +16,7 @@ var current_point_index := 0
 
 var submerge_lerp_speed = 100.0
 var emerge_lerp_speed = 50.0
+var emerge_distance_to_player := 40.0
 
 @export_category("floating")
 @export_range(0.0, 50.0) var float_freq := 50.0
@@ -86,9 +87,9 @@ func enter_state(_state: SquidState) -> void:
 		SquidState.Emerge:
 			player.stop_mobility()
 			var emerge_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
-			global_position = player.global_position - (player.orientation.basis.z * 45)
+			global_position = player.global_position - (player.orientation.basis.z * emerge_distance_to_player)
 			global_position.y = submerged_y_value
-			emerge_tween.tween_property(self, "global_position:y", player.global_position.y, 5.0)
+			emerge_tween.tween_property(self, "global_position:y", 1.0, 5.0)
 			await emerge_tween.finished
 			enter_state(SquidState.Messaging)
 		SquidState.Messaging:
@@ -144,9 +145,8 @@ func _process(delta: float) -> void:
 		SquidState.Submerge:
 			look_at_target(player.global_position, delta)
 		SquidState.Emerge:
-			var prev_y = global_position.y
-			global_position = player.global_position - (player.orientation.basis.z * 45)
-			global_position.y = prev_y
+			var pos = player.global_position - (player.orientation.basis.z * emerge_distance_to_player)
+			global_position = Vector3(pos.x, global_position.y, pos.z)
 			look_at_target(player.global_position, delta)
 			eye.look_at_player(player)
 		SquidState.Messaging:
