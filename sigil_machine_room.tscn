@@ -53,6 +53,34 @@ collision_layer = 2
 collision_mask = 0
 size = Vector3(13, 1, 7.5)
 
+[node name="CSGBox3D9" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.142626, 8.21975, -1.506)
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+size = Vector3(14.446, 3.49707, 7.5)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="CSGBox3D9"]
+transform = Transform3D(0.942641, 0.333807, 0, -0.333807, 0.942641, 0, 0, 0, 1, 5.99619, 0.155902, 0)
+operation = 2
+collision_layer = 2
+collision_mask = 0
+size = Vector3(13.9341, 3.49707, 7.5)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="CSGBox3D9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31413, 2.23092, 0)
+operation = 2
+collision_layer = 2
+collision_mask = 0
+size = Vector3(13, 3.49707, 7.5)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="CSGBox3D9"]
+transform = Transform3D(-0.942641, -0.333807, -1.50996e-07, -0.333807, 0.942641, -2.97956e-15, 1.42335e-07, 5.04034e-08, -1, -6.07507, 0.316204, -1.19209e-07)
+operation = 2
+collision_layer = 2
+collision_mask = 0
+size = Vector3(14.8945, 3.49707, 7.5)
+
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.21804, -5.78343)
 use_collision = true
@@ -82,18 +110,18 @@ collision_mask = 0
 height = 6.0
 
 [node name="CSGCylinder3D10" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.18585, 2.5, 3.35287)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.18585, 2.48601, 3.35287)
 use_collision = true
 collision_layer = 2
 collision_mask = 0
-height = 5.435
+height = 5.874
 
 [node name="CSGCylinder3D11" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.186, 2.5, 3.353)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.186, 2.48661, 3.353)
 use_collision = true
 collision_layer = 2
 collision_mask = 0
-height = 5.435
+height = 5.874
 
 [node name="CSGCylinder3D6" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.5, -1.12538)
@@ -137,22 +165,6 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 polygon = PackedVector2Array(0, 0, 0, 1, 1, 0, 1, 0)
-depth = 7.5
-
-[node name="CSGPolygon3D3" type="CSGPolygon3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.50732, 6.48061, 2.17185)
-use_collision = true
-collision_layer = 2
-collision_mask = 0
-polygon = PackedVector2Array(-5.6, 2.17, 0, 0.5, 1, 0, 1, 0)
-depth = 7.5
-
-[node name="CSGPolygon3D4" type="CSGPolygon3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5.55285, 6.48061, -5.32941)
-use_collision = true
-collision_layer = 2
-collision_mask = 0
-polygon = PackedVector2Array(-5.57, 2.17, 0, 0.5, 1, 0, 1, 0)
 depth = 7.5
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="."]
