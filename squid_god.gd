@@ -78,6 +78,7 @@ func enter_state(_state: SquidState) -> void:
 			start_bobbing()
 		SquidState.Submerge:
 			stop_bobbing()
+			await get_tree().create_timer(2.0).timeout
 			var submerge_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 			submerge_tween.tween_property(self, "global_position:y", submerged_y_value, 2.0);
 			await submerge_tween.finished
@@ -87,12 +88,11 @@ func enter_state(_state: SquidState) -> void:
 			var emerge_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 			global_position = player.global_position - (player.orientation.basis.z * 45)
 			global_position.y = submerged_y_value
-			emerge_tween.tween_property(self, "global_position:y", player.global_position.y, 4.0)
+			emerge_tween.tween_property(self, "global_position:y", player.global_position.y, 5.0)
 			await emerge_tween.finished
-			await get_tree().create_timer(2.0).timeout
 			enter_state(SquidState.Messaging)
 		SquidState.Messaging:
-			await get_tree().create_timer(2.0).timeout
+			await get_tree().create_timer(4.0).timeout
 			# do whatever sigil message shit, then go back to submerge
 			enter_state(SquidState.ThorwingPlayer)
 		SquidState.ThorwingPlayer:
@@ -109,6 +109,7 @@ func enter_state(_state: SquidState) -> void:
 				throw_tween.tween_property(player, "global_position", peak_position, 1.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 				throw_tween.tween_property(player, "global_position", shore_pos, 1.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
 				await throw_tween.finished
+				await get_tree().create_timer(2.0).timeout
 				real = true
 				enter_state(SquidState.Idle)
 			else:
@@ -141,7 +142,7 @@ func _process(delta: float) -> void:
 				current_point_index += 1
 				current_point_index %= points.size()
 		SquidState.Submerge:
-			pass
+			look_at_target(player.global_position, delta)
 		SquidState.Emerge:
 			var prev_y = global_position.y
 			global_position = player.global_position - (player.orientation.basis.z * 45)
@@ -162,13 +163,13 @@ func look_at_target(target: Vector3, delta: float) -> void:
 	rotation_node.look_at(target)
 	rotation_node.global_rotation.x = rot.x
 	rotation_node.global_rotation.z = rot.z
-	global_rotation = lerp(global_rotation, rotation_node.global_rotation, rotate_lerp_speed * delta)
+	global_rotation.y = lerp_angle(global_rotation.y, rotation_node.global_rotation.y, rotate_lerp_speed * delta)
 
 func _on_initial_player_detector_body_entered(_player: Player) -> void:
 	print("penis")
 	if state == SquidState.Idle and !real:
 		enter_state(SquidState.Submerge)
 
-func _on_player_detection_area_body_entered(_player: Player) -> void:
-	if state == SquidState.Idle and real:
+func _on_player_detection_area_body_entered(player: Player) -> void:
+	if state == SquidState.Idle and real and !player.safe:
 		enter_state(SquidState.Submerge)

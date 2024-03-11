@@ -213,3 +213,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5463, 68.7279)
 [connection signal="body_entered" from="InitialPlayerDetector" to="SquidGod" method="_on_initial_player_detector_body_entered"]
 
 [editable path="SquidGod"]
+[editable path="SigilMachineRoom"]

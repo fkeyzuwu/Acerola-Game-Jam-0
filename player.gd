@@ -5,6 +5,8 @@ var base_speed := 5.0
 var jump_velocity := 4.5
 var mobile := true
 
+var safe := false
+
 var current_sigil_machine: SigilMachine = null
 
 @export_group("Camera Settings")
@@ -101,9 +103,7 @@ func move(delta: float) -> void:
 
 func stop_mobility() -> void:
 	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel()
-	tween.tween_property(self, "speed", 0.0, 3.0)
-	tween.tween_property(self, "yaw_sensitivity", 10000.0, 2.0)
-	tween.tween_property(self, "pitch_sensitivity", 10000.0, 2.0)
+	tween.tween_property(self, "speed", 0.0, 2.0).set_delay(3.0)
 	
 	await tween.finished
 	mobile = false
@@ -113,8 +113,6 @@ func resume_mobility() -> void:
 	
 	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel()
 	tween.tween_property(self, "speed", base_speed, 0.5)
-	tween.tween_property(self, "yaw_sensitivity", base_yaw_sensitivity, 0.5)
-	tween.tween_property(self, "pitch_sensitivity", base_pitch_sensitivity, 0.5)
 
 func try_get_sigil_stone() -> SigilStone:
 	var space_state = get_world_3d().direct_space_state

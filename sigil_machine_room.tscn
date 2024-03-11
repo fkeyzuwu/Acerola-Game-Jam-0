@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bofkymi4uxbb3"]
+[gd_scene load_steps=6 format=3 uid="uid://bofkymi4uxbb3"]
 
 [ext_resource type="PackedScene" uid="uid://caiiwbrumlsfi" path="res://sigil_machine.tscn" id="1_dde37"]
+[ext_resource type="Script" path="res://sigil_machine_room.gd" id="1_i513j"]
 [ext_resource type="Script" path="res://sigil_machine_container.gd" id="1_vj3if"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h34sx"]
@@ -10,7 +11,11 @@ rim_tint = 0.04
 clearcoat = 0.0
 clearcoat_roughness = 0.99
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_qdj0y"]
+radius = 13.833
+
 [node name="SigilMachineRoom" type="Node3D"]
+script = ExtResource("1_i513j")
 
 [node name="SigilMachines" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -220,3 +225,13 @@ light_color = Color(0.996078, 0.988235, 0.905882, 1)
 light_energy = 0.872
 omni_range = 6.695
 omni_attenuation = 0.0872644
+
+[node name="PlayerAreaDetector" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerAreaDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.54595)
+shape = SubResource("SphereShape3D_qdj0y")
+
+[connection signal="body_entered" from="PlayerAreaDetector" to="." method="_on_player_area_detector_body_entered"]
+[connection signal="body_exited" from="PlayerAreaDetector" to="." method="_on_player_area_detector_body_exited"]
