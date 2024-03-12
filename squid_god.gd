@@ -89,7 +89,7 @@ func enter_state(_state: SquidState) -> void:
 			var emerge_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 			global_position = player.global_position - (player.orientation.basis.z * emerge_distance_to_player)
 			global_position.y = submerged_y_value
-			emerge_tween.tween_property(self, "global_position:y", 1.0, 5.0)
+			emerge_tween.tween_property(self, "global_position:y", 1.0, 3.0)
 			await emerge_tween.finished
 			enter_state(SquidState.Messaging)
 		SquidState.Messaging:

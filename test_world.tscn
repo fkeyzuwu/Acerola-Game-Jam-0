@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bb0b585q723v3"]
+[gd_scene load_steps=10 format=3 uid="uid://bb0b585q723v3"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_uecf8"]
 [ext_resource type="PackedScene" uid="uid://d3kj5bx5as45p" path="res://player.tscn" id="2_r130x"]
 [ext_resource type="PackedScene" uid="uid://caiiwbrumlsfi" path="res://sigil_machine.tscn" id="3_dbado"]
 [ext_resource type="Texture2D" uid="uid://c6gf1wxpmqgm7" path="res://crosshair001.png" id="3_nspj1"]
+[ext_resource type="Shader" path="res://sigil.gdshader" id="5_tgnt6"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_uut80"]
 
@@ -20,6 +21,22 @@ albedo_texture_force_srgb = true
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_ndtuc")
 size = Vector2(1.3, 1.3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ey00e"]
+resource_local_to_scene = true
+shader = ExtResource("5_tgnt6")
+shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
+shader_parameter/p0 = Vector2(0.975, -1.33)
+shader_parameter/p1 = Vector2(0, 1.5)
+shader_parameter/s0 = 0.75
+shader_parameter/s1 = 1.023
+shader_parameter/m0 = 5
+shader_parameter/m1 = 5
+shader_parameter/twirl0 = -2.606
+shader_parameter/twirl1 = 2.121
+shader_parameter/rotate0 = 0.5
+shader_parameter/rotate1 = 0.158
+shader_parameter/blur = 0.0
 
 [node name="TestWorld" type="Node3D"]
 script = ExtResource("1_uecf8")
@@ -38,10 +55,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.94179)
 texture = ExtResource("3_nspj1")
 
 [node name="SigilMachine" parent="." instance=ExtResource("3_dbado")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.165, -0.571971, -3.23)
+transform = Transform3D(0.761538, 0, 0.64812, 0, 1, 0, -0.64812, 0, 0.761538, 0.165, -0.571971, -3.23)
 
 [node name="SigilMesh" parent="SigilMachine/SigilTabletBackground" index="0"]
 mesh = SubResource("QuadMesh_31elb")
+
+[node name="Sigil" parent="SigilMachine/SubViewportContainer/SubViewport" index="0"]
+material = SubResource("ShaderMaterial_ey00e")
 
 [editable path="Player"]
 [editable path="SigilMachine"]

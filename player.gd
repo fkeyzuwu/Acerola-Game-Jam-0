@@ -1,6 +1,6 @@
 class_name Player extends CharacterBody3D
 
-var base_speed := 5.0
+var base_speed := 10.0
 @onready var speed := base_speed
 var jump_velocity := 4.5
 var mobile := true
@@ -57,8 +57,14 @@ func enter_sigil_machine(sigil_machine: SigilMachine) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel()
 	tween.tween_property(self, "global_position", current_sigil_machine.camera_position.global_position, 0.8)
-	tween.tween_property(camera, "rotation:y", camera.rotation.y - transform.basis.z.signed_angle_to(camera.transform.basis.z ,Vector3.UP), 0.8)
+	#var target_rotation = camera.rotation.y - transform.basis.z.signed_angle_to(camera.transform.basis.z ,Vector3.UP) + sigil_machine.rotation.y
+	var dummy = Node3D.new()
+	add_child(dummy)
+	dummy.global_position = current_sigil_machine.camera_position.global_position
+	dummy.look_at(sigil_machine.sigil_mesh.global_position)
+	tween.tween_property(camera, "rotation:y", dummy.rotation.y, 0.8)
 	tween.tween_property(camera, "rotation:x", 0, 0.8)
+	dummy.queue_free()
 	crosshair.visible = false
 	current_sigil_machine.player_solving = true
 	
