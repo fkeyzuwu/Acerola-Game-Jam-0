@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj25qeuq31xvs"]
+
+[ext_resource type="Script" path="res://player_safe_zone.gd" id="1_3uf1w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_48c7b"]
+
+[node name="PlayerSafeZone" type="Area3D"]
+collision_layer = 0
+script = ExtResource("1_3uf1w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_48c7b")
+
+[connection signal="body_entered" from="." to="." method="_on_player_entered"]
+[connection signal="body_exited" from="." to="." method="_on_player_exited"]

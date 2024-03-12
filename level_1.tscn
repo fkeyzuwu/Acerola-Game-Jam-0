@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://btyrjayg8h7tf"]
+[gd_scene load_steps=45 format=3 uid="uid://btyrjayg8h7tf"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_i71a5"]
 [ext_resource type="PackedScene" uid="uid://bl2hrjw11r12m" path="res://squid_god.tscn" id="2_ug27n"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://blgpm257wkydb" path="res://models/table.tscn" id="9_772km"]
 [ext_resource type="PackedScene" uid="uid://f5wxuvjfa2wu" path="res://sigil_stone.tscn" id="9_i0meg"]
 [ext_resource type="PackedScene" uid="uid://vk0kmryvkn2m" path="res://sigil.tscn" id="10_xejg1"]
+[ext_resource type="PackedScene" uid="uid://cj25qeuq31xvs" path="res://player_safe_zone.tscn" id="13_se7jx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hlnlh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -171,7 +172,7 @@ height = 0.6
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lq0pl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tbjp5"]
 resource_local_to_scene = true
 shader = ExtResource("3_04ala")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -197,6 +198,9 @@ clearcoat_roughness = 0.99
 [sub_resource type="SphereShape3D" id="SphereShape3D_qdj0y"]
 radius = 13.833
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_f7esp"]
+size = Vector3(15.4957, 4.66406, 54.6784)
+
 [node name="Level1" type="Node3D"]
 script = ExtResource("1_i71a5")
 
@@ -204,19 +208,24 @@ script = ExtResource("1_i71a5")
 environment = SubResource("Environment_1tcvx")
 
 [node name="DirectionalLight3D" parent="." instance=ExtResource("2_xpx14")]
-transform = Transform3D(0.564252, 0.406936, -0.718347, -0.444256, -0.583727, -0.679632, -0.695885, 0.702614, -0.148585, -28.4583, 32.0153, -43.9533)
+transform = Transform3D(-0.747928, 0.339568, 0.570348, -0.576979, -0.757394, -0.305695, 0.328174, -0.557717, 0.7624, -11.8629, 98.6305, 35.3438)
+light_color = Color(0.235294, 0.207843, 0.223529, 1)
+light_energy = 4.0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(-0.367589, 0, -0.929988, 0, 1, 0, 0.929988, 0, -0.367589, 85.5219, 125, 108.614)
+transform = Transform3D(0.83527, 0, -0.549839, 0, 1, 0, 0.549839, 0, 0.83527, 35.3749, 125, 89.2439)
 use_collision = true
 collision_layer = 2
 collision_mask = 0
 flip_faces = true
-size = Vector3(300, 250, 400)
+size = Vector3(300, 250, 345.849)
 material = SubResource("StandardMaterial3D_csk7k")
 
 [node name="SquidGod" parent="." instance=ExtResource("2_ug27n")]
-transform = Transform3D(0.367589, 0, 0.929988, 0, 1, 0, -0.929988, 0, 0.367589, 209.011, 125, 157.424)
+transform = Transform3D(-0.83527, 0, 0.549839, 0, 1, 0, -0.549839, 0, -0.83527, 181.127, 125, 58.6313)
+
+[node name="SquidMesh" parent="SquidGod/SquidModel" index="0"]
+transform = Transform3D(0.196484, -0.00123515, 0.318152, -0.00311009, 0.643488, 0.00276423, -0.318137, -0.00705355, 0.196466, -1.53247, -4.97539, 0.640711)
 
 [node name="OmniLight3D" parent="SquidGod/SquidModel/SquidMesh/Eye/EyeBall" index="0"]
 light_energy = 3.285
@@ -242,10 +251,10 @@ material = SubResource("ShaderMaterial_k8ieo")
 material = SubResource("ShaderMaterial_4566b")
 
 [node name="Player" parent="." instance=ExtResource("4_hn3od")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -84.0524, 1, 41.5875)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -63.2848, 1, 193.115)
 
 [node name="Orientation" parent="Player" index="2"]
-transform = Transform3D(-0.882948, 0, 0.469472, 0, 1, 0, -0.469472, 0, -0.882948, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Label" type="Label" parent="."]
 offset_right = 93.0
@@ -254,29 +263,29 @@ theme_override_font_sizes/font_size = 16
 script = ExtResource("5_xkitr")
 
 [node name="ShorePosition" type="Marker3D" parent="."]
-transform = Transform3D(-0.367589, 0, -0.929988, 0, 1, 0, 0.929988, 0, -0.367589, -36.0092, 1, 158.312)
+transform = Transform3D(0.83527, 0, -0.549839, 0, 1, 0, 0.549839, 0, 0.83527, -112.674, 9.84056, 174.494)
 
 [node name="ThrowWallPosition" type="Marker3D" parent="."]
-transform = Transform3D(-0.367589, 0, -0.929988, 0, 1, 0, 0.929988, 0, -0.367589, -128.912, 125, 184.348)
+transform = Transform3D(0.83527, 0, -0.549839, 0, 1, 0, 0.549839, 0, 0.83527, -124.103, 125, 84.5684)
 
 [node name="SquidPatrolPoints" type="Node3D" parent="."]
-transform = Transform3D(-0.367589, 0, -0.929988, 0, 1, 0, 0.929988, 0, -0.367589, 178.347, 125, 145.304)
+transform = Transform3D(0.83527, 0, -0.549839, 0, 1, 0, 0.549839, 0, 0.83527, 75.3689, 125, 28.488)
 
 [node name="Point1" type="Marker3D" parent="SquidPatrolPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106.355, 0, 43.9139)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -79.3158, 0, 38.5174)
 
 [node name="Point2" type="Marker3D" parent="SquidPatrolPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.9206, 0, -44.6532)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 91.5243, 0, 89.9527)
 
 [node name="Point3" type="Marker3D" parent="SquidPatrolPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -119.287, 0, 54.5466)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84.5848, 0, -68.6373)
 
 [node name="InitialPlayerDetector" type="Area3D" parent="."]
-transform = Transform3D(0.913069, 0, -0.407805, 0, 1, 0, 0.407805, 0, 0.913069, 47.8109, 0, 93.708)
+transform = Transform3D(-0.321323, 0, 0.94697, 0, 1, 0, -0.94697, 0, -0.321323, -16.1808, 44.5448, 67.5681)
 collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InitialPlayerDetector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1645, 0)
 shape = SubResource("BoxShape3D_6vm4s")
 
 [node name="SigilMachineRoom" type="Node3D" parent="."]
@@ -368,7 +377,7 @@ size_2d_override = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_xejg1")]
-material = SubResource("ShaderMaterial_lq0pl")
+material = SubResource("ShaderMaterial_tbjp5")
 mouse_filter = 2
 premade_sigil = {
 "m0": 2,
@@ -394,9 +403,6 @@ starting_permutation = {
 "twirl0": 10.0,
 "twirl1": -7.467
 }
-set_shader_to_premade_sigil = false
-get_starting_permutaion_from_shader = false
-get_sigil_from_shader = false
 
 [node name="CSGBox3D" type="CSGBox3D" parent="SigilMachineRoom"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1.21233)
@@ -601,37 +607,44 @@ collision_layer = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.54595)
 shape = SubResource("SphereShape3D_qdj0y")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(-0.0238564, 0, -0.999715, 0, 1, 0, 0.999715, 0, -0.0238564, -55.7796, 115.78, -1.85184)
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(0.657349, 0, -0.753587, 0, 1, 0, 0.753587, 0, 0.657349, 53.3579, 115.78, 204.953)
 use_collision = true
 collision_layer = 2
 collision_mask = 0
-size = Vector3(222.503, 232.559, 11.8589)
+size = Vector3(201.38, 232.559, 11.8589)
+material = SubResource("StandardMaterial3D_csk7k")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(0.57379, 0, -0.819002, 0, 1, 0, 0.819002, 0, 0.57379, -69.0354, 115.78, 0.613251)
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+size = Vector3(79.7433, 232.559, 11.8589)
 material = SubResource("StandardMaterial3D_csk7k")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="."]
-transform = Transform3D(0.929988, 0, -0.367589, 0, 1, 0, 0.367589, 0, 0.929988, -69.8536, 115.78, -12.6774)
+transform = Transform3D(0.212484, 0, -0.977164, 0, 1, 0, 0.977164, 0, 0.212484, 3.80819, 115.78, 215.269)
 use_collision = true
 collision_layer = 2
 collision_mask = 0
-size = Vector3(36.4687, 232.559, 11.8589)
+size = Vector3(163.215, 232.559, 11.8589)
 material = SubResource("StandardMaterial3D_csk7k")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="."]
-transform = Transform3D(0.663051, 0, -0.748574, 0, 1, 0, 0.748574, 0, 0.663051, -65.0988, 115.78, -11.6974)
+transform = Transform3D(-0.375772, 0, -0.926712, 0, 1, 0, 0.926712, 0, -0.375772, -12.362, 115.78, 222.993)
 use_collision = true
 collision_layer = 2
 collision_mask = 0
-size = Vector3(32.7709, 232.559, 11.8589)
+size = Vector3(140.967, 232.559, 11.8589)
 material = SubResource("StandardMaterial3D_csk7k")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(-0.948694, 0, -0.316195, 0, 1, 0, 0.316195, 0, -0.948694, -29.7592, 115.78, 189.539)
-use_collision = true
-collision_layer = 2
-collision_mask = 0
-size = Vector3(174.485, 232.559, 11.8589)
-material = SubResource("StandardMaterial3D_csk7k")
+[node name="PlayerSafeZone" parent="." instance=ExtResource("13_se7jx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -67.0927, 0, 0)
+
+[node name="CollisionShape3D" parent="PlayerSafeZone" index="0"]
+transform = Transform3D(0.843391, 0, 0.5373, 0, 1, 0, -0.5373, 0, 0.843391, -3.43228, 1.83203, 16.5161)
+shape = SubResource("BoxShape3D_f7esp")
 
 [connection signal="body_entered" from="InitialPlayerDetector" to="SquidGod" method="_on_initial_player_detector_body_entered"]
 [connection signal="body_entered" from="SigilMachineRoom/SigilMachines/SigilMachine/PlayerDetectionArea" to="SigilMachineRoom/SigilMachines/SigilMachine" method="_on_player_detection_area_body_entered"]
@@ -641,3 +654,4 @@ material = SubResource("StandardMaterial3D_csk7k")
 
 [editable path="SquidGod"]
 [editable path="Player"]
+[editable path="PlayerSafeZone"]
