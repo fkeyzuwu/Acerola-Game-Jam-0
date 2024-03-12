@@ -179,16 +179,16 @@ radius = 3.0
 resource_local_to_scene = true
 shader = ExtResource("3_uy2gn")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
-shader_parameter/p0 = Vector2(0, 0)
-shader_parameter/p1 = Vector2(0, 0)
-shader_parameter/s0 = 20.0
-shader_parameter/s1 = 20.0
-shader_parameter/m0 = 1
-shader_parameter/m1 = 1
-shader_parameter/twirl0 = 0.0
-shader_parameter/twirl1 = 0.0
-shader_parameter/rotate0 = 0.0
-shader_parameter/rotate1 = 0.0
+shader_parameter/p0 = Vector2(0.660198, 1.13574)
+shader_parameter/p1 = Vector2(-0.14614, -0.0619756)
+shader_parameter/s0 = 0.893342
+shader_parameter/s1 = 0.88848
+shader_parameter/m0 = 5
+shader_parameter/m1 = 5
+shader_parameter/twirl0 = -8.51635
+shader_parameter/twirl1 = 0.866398
+shader_parameter/rotate0 = 0.167897
+shader_parameter/rotate1 = 0.399274
 shader_parameter/blur = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h34sx"]
@@ -298,7 +298,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.972, -3.23)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("8_auf44")
-sensitiveness = 0.01
+sensitiveness = 0.15
 
 [node name="CameraPosition" type="Node3D" parent="SigilMachineRoom/SigilMachines/SigilMachine"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47, 1.1)
@@ -325,13 +325,13 @@ skeleton = NodePath("")
 transform = Transform3D(0.34202, 0, -0.939693, 0, 1, 0, 0.939693, 0, 0.34202, 0, 0, 0)
 min_degrees = -140.0
 max_degrees = -70.0
-shader_parameter_name = "twirl1"
+shader_parameter_name = "p0y"
 
 [node name="SigilStone2" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground/SigilStones" instance=ExtResource("9_otdh7")]
 transform = Transform3D(0.766045, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766045, 0, 0, 0)
 min_degrees = -40.0
 max_degrees = 40.0
-shader_parameter_name = "twirl1"
+shader_parameter_name = "twirl0"
 
 [node name="SigilStone3" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground/SigilStones" instance=ExtResource("9_otdh7")]
 transform = Transform3D(0.34202, 0, 0.939693, 0, 1, 0, -0.939693, 0, 0.34202, 0, 0, 0)
@@ -385,16 +385,28 @@ render_target_update_mode = 4
 [node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_w2qiy")]
 material = SubResource("ShaderMaterial_vff8k")
 mouse_filter = 2
+premade_sigil = {
+"m0": 5,
+"m1": 5,
+"p0": Vector2(0.660198, 1.13574),
+"p1": Vector2(-0.14614, -0.0619756),
+"rotate0": 0.167897,
+"rotate1": 0.399274,
+"s0": 0.893342,
+"s1": 0.88848,
+"twirl0": -8.51635,
+"twirl1": 0.866398
+}
 starting_permutation = {
-"m0": 1,
-"m1": 1,
-"p0": Vector2(-0.13, 0.85),
-"p1": Vector2(-0.6, 0.81),
-"rotate0": 1.0,
-"rotate1": 1.0,
-"s0": 0.75,
-"s1": 0.75,
-"twirl0": 10.0,
+"m0": 5,
+"m1": 5,
+"p0": Vector2(0.66, 0.986),
+"p1": Vector2(-0.14614, -0.0619756),
+"rotate0": 0.167897,
+"rotate1": 0.399274,
+"s0": 0.893342,
+"s1": 0.88848,
+"twirl0": -10.0,
 "twirl1": 10.0
 }
 
