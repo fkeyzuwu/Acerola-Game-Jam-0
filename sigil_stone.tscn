@@ -1,11 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://f5wxuvjfa2wu"]
+[gd_scene load_steps=5 format=3 uid="uid://f5wxuvjfa2wu"]
 
 [ext_resource type="Script" path="res://sigil_stone.gd" id="1_umv2w"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2juct"]
 radius = 0.07
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xhy3t"]
+albedo_color = Color(0.882353, 0.882353, 0.882353, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_kvlrl"]
+material = SubResource("StandardMaterial3D_xhy3t")
 radius = 0.07
 height = 0.07
 

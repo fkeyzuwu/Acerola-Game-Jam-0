@@ -94,7 +94,7 @@ func enter_state(_state: SquidState) -> void:
 			await emerge_tween.finished
 			enter_state(SquidState.Messaging)
 		SquidState.Messaging:
-			await get_tree().create_timer(3.0).timeout
+			await get_tree().create_timer(4.2).timeout
 			# do whatever sigil message shit, then go back to submerge
 			enter_state(SquidState.ThorwingPlayer)
 		SquidState.ThorwingPlayer:
