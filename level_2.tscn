@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://byaonwhfopaf5"]
+[gd_scene load_steps=44 format=3 uid="uid://byaonwhfopaf5"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_hj6pn"]
 [ext_resource type="PackedScene" uid="uid://bl2hrjw11r12m" path="res://squid_god.tscn" id="2_c1sws"]
@@ -164,12 +164,18 @@ outer_radius = 0.672
 inner_radius = 0.8
 outer_radius = 0.489
 
-[sub_resource type="SphereMesh" id="SphereMesh_bxvy5"]
+[sub_resource type="SphereMesh" id="SphereMesh_c3qh2"]
+radius = 0.4
+height = 0.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_lufdp"]
+radius = 0.1
+height = 0.2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sqdve"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vff8k"]
 resource_local_to_scene = true
 shader = ExtResource("3_uy2gn")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -316,9 +322,21 @@ skeleton = NodePath("")
 [node name="SigilStones" type="Node3D" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground"]
 
 [node name="SigilStone" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground/SigilStones" instance=ExtResource("9_otdh7")]
-transform = Transform3D(-0.642788, 0, 0.766045, 0, 1, 0, -0.766045, 0, -0.642788, 0, 0, 0)
-min_degrees = -130.0
-max_degrees = 130.0
+transform = Transform3D(0.34202, 0, -0.939693, 0, 1, 0, 0.939693, 0, 0.34202, 0, 0, 0)
+min_degrees = -140.0
+max_degrees = -70.0
+shader_parameter_name = "twirl1"
+
+[node name="SigilStone2" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground/SigilStones" instance=ExtResource("9_otdh7")]
+transform = Transform3D(0.766045, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766045, 0, 0, 0)
+min_degrees = -40.0
+max_degrees = 40.0
+shader_parameter_name = "twirl1"
+
+[node name="SigilStone3" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground/SigilStones" instance=ExtResource("9_otdh7")]
+transform = Transform3D(0.34202, 0, 0.939693, 0, 1, 0, -0.939693, 0, 0.34202, 0, 0, 0)
+min_degrees = 70.0
+max_degrees = 140.0
 shader_parameter_name = "twirl1"
 
 [node name="StoneHolder" type="CSGMesh3D" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground"]
@@ -330,9 +348,19 @@ operation = 2
 mesh = SubResource("TorusMesh_usm6r")
 
 [node name="CSGMesh3D3" type="CSGMesh3D" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground/StoneHolder"]
-transform = Transform3D(0.8, 0.000157464, 0.000647549, -0.000157112, 0.8, -0.000435146, -0.000647634, 0.000435019, 0.8, 0, 0.0699997, 0.52)
+transform = Transform3D(0.8, 0.000157464, 0.000647549, -0.000157112, 0.8, -0.000435146, -0.000647634, 0.000435019, 0.8, 0, -0.00392151, 0.581045)
 operation = 2
-mesh = SubResource("SphereMesh_bxvy5")
+mesh = SubResource("SphereMesh_c3qh2")
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground/StoneHolder"]
+transform = Transform3D(0.8, 0.000157464, 0.000647549, -0.000157112, 0.8, -0.000435146, -0.000647634, 0.000435019, 0.8, -0.499395, -0.00392151, -0.34104)
+operation = 2
+mesh = SubResource("SphereMesh_lufdp")
+
+[node name="CSGMesh3D5" type="CSGMesh3D" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground/StoneHolder"]
+transform = Transform3D(0.8, 0.000157464, 0.000647549, -0.000157112, 0.8, -0.000435146, -0.000647634, 0.000435019, 0.8, 0.501364, -0.00392151, -0.34104)
+operation = 2
+mesh = SubResource("SphereMesh_lufdp")
 
 [node name="PlayerDetectionArea" type="Area3D" parent="SigilMachineRoom/SigilMachines/SigilMachine"]
 collision_layer = 0
@@ -355,7 +383,7 @@ size_2d_override = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_w2qiy")]
-material = SubResource("ShaderMaterial_sqdve")
+material = SubResource("ShaderMaterial_vff8k")
 mouse_filter = 2
 starting_permutation = {
 "m0": 1,
@@ -369,9 +397,6 @@ starting_permutation = {
 "twirl0": 10.0,
 "twirl1": 10.0
 }
-set_shader_to_premade_sigil = false
-get_starting_permutaion_from_shader = false
-get_sigil_from_shader = false
 
 [node name="CSGBox3D" type="CSGBox3D" parent="SigilMachineRoom"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1.21233)
