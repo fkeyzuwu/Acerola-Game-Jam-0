@@ -1,7 +1,8 @@
-[gd_scene load_steps=42 format=3 uid="uid://dv0obunuqq8ai"]
+[gd_scene load_steps=43 format=3 uid="uid://dv0obunuqq8ai"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_owgt8"]
 [ext_resource type="PackedScene" uid="uid://bl2hrjw11r12m" path="res://squid_god.tscn" id="2_d3t13"]
+[ext_resource type="PackedScene" uid="uid://bk3ii0mg0nd61" path="res://models/main_directional_light.tscn" id="2_j8ito"]
 [ext_resource type="PackedScene" uid="uid://d3kj5bx5as45p" path="res://player.tscn" id="2_ooj0t"]
 [ext_resource type="Shader" path="res://sigil.gdshader" id="3_1iw13"]
 [ext_resource type="Script" path="res://Label.gd" id="4_lxawv"]
@@ -168,7 +169,7 @@ outer_radius = 0.489
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_p2nj7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xv72c"]
 resource_local_to_scene = true
 shader = ExtResource("3_1iw13")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -200,13 +201,7 @@ script = ExtResource("1_owgt8")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1tcvx")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.599457, -0.48376, -0.637674, 0.449455, -0.455775, 0.768283, -0.662301, -0.747159, -0.0557892, 0, 58.8273, 0)
-light_color = Color(0.215686, 0.215686, 0.215686, 1)
-light_energy = 3.432
-light_volumetric_fog_energy = 12.445
-shadow_enabled = true
-sky_mode = 1
+[node name="DirectionalLight3D" parent="." instance=ExtResource("2_j8ito")]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(-0.367589, 0, -0.929988, 0, 1, 0, 0.929988, 0, -0.367589, 85.5219, 125, 108.614)
@@ -296,13 +291,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.972, -3.23)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("8_yhwv1")
-slider_amount = null
-light_up_duration = null
-radius = null
 sensitiveness = 0.01
-incative_color = null
-active_color = null
-solved_color = null
 
 [node name="CameraPosition" type="Node3D" parent="SigilMachineRoom/SigilMachines/SigilMachine"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47, 1.1)
@@ -365,7 +354,7 @@ size_2d_override = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_gmlvi")]
-material = SubResource("ShaderMaterial_p2nj7")
+material = SubResource("ShaderMaterial_xv72c")
 mouse_filter = 2
 starting_permutation = {
 "m0": 1,
@@ -377,7 +366,7 @@ starting_permutation = {
 "s0": 0.75,
 "s1": 0.75,
 "twirl0": 10.0,
-"twirl1": 10.0
+"twirl1": -10.0
 }
 set_shader_to_premade_sigil = false
 get_starting_permutaion_from_shader = false

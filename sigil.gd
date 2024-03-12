@@ -43,6 +43,15 @@ const base_sigil := {
 		
 @export var get_starting_permutaion_from_shader: bool:
 	set(value):
+		if !Engine.is_editor_hint():
+			print("PENIS PENIS ALERT")
+			return
+		elif value == false:
+			print("PENIS PENIS EDITOR ALERT")
+			return
+		else:
+			print("penis in the editor false")
+		
 		starting_permutation = {}
 		for key in base_sigil:
 			starting_permutation[key] = material.get_shader_parameter(key)

@@ -51,6 +51,3 @@ starting_permutation = {
 "twirl0": 10.0,
 "twirl1": -10.0
 }
-set_shader_to_premade_sigil = null
-get_starting_permutaion_from_shader = null
-get_sigil_from_shader = null

@@ -25,7 +25,7 @@ var bobbing_tween: Tween
 
 var state := SquidState.Idle
 
-var real := false
+@export var real := false
 
 @onready var sigils: Array[ColorRect] = [%Sigil1, %Sigil2, %Sigil3]
 @onready var sigil_meshes: Array[MeshInstance3D] = [%SigilMesh1, %SigilMesh2, %SigilMesh3]

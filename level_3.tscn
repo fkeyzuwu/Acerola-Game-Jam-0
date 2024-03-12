@@ -1,7 +1,8 @@
-[gd_scene load_steps=43 format=3 uid="uid://dtsup7kclmx6x"]
+[gd_scene load_steps=44 format=3 uid="uid://dtsup7kclmx6x"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_wp4x1"]
 [ext_resource type="PackedScene" uid="uid://bl2hrjw11r12m" path="res://squid_god.tscn" id="2_dqq5w"]
+[ext_resource type="PackedScene" uid="uid://bk3ii0mg0nd61" path="res://models/main_directional_light.tscn" id="2_nwd6k"]
 [ext_resource type="Shader" path="res://sigil.gdshader" id="3_u6ouk"]
 [ext_resource type="PackedScene" uid="uid://d3kj5bx5as45p" path="res://player.tscn" id="4_4pkns"]
 [ext_resource type="Script" path="res://Label.gd" id="5_a60ke"]
@@ -173,7 +174,7 @@ outer_radius = 0.489
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rirn1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ba34"]
 resource_local_to_scene = true
 shader = ExtResource("3_u6ouk")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -205,13 +206,8 @@ script = ExtResource("1_wp4x1")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1tcvx")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.599457, -0.48376, -0.637674, 0.449455, -0.455775, 0.768283, -0.662301, -0.747159, -0.0557892, 0, 58.8273, 0)
-light_color = Color(0.215686, 0.215686, 0.215686, 1)
-light_energy = 3.432
-light_volumetric_fog_energy = 12.445
-shadow_enabled = true
-sky_mode = 1
+[node name="DirectionalLight3D" parent="." instance=ExtResource("2_nwd6k")]
+transform = Transform3D(0.564252, 0.406936, -0.718347, -0.444256, -0.583727, -0.679632, -0.695885, 0.702614, -0.148585, -28.4583, 32.0153, -43.9533)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(-0.367589, 0, -0.929988, 0, 1, 0, 0.929988, 0, -0.367589, 85.5219, 125, 108.614)
@@ -365,7 +361,7 @@ size_2d_override = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_sjh0v")]
-material = SubResource("ShaderMaterial_rirn1")
+material = SubResource("ShaderMaterial_0ba34")
 mouse_filter = 2
 starting_permutation = {
 "m0": 1,
@@ -377,7 +373,7 @@ starting_permutation = {
 "s0": 0.75,
 "s1": 0.75,
 "twirl0": 10.0,
-"twirl1": -10.0
+"twirl1": 10.0
 }
 set_shader_to_premade_sigil = false
 get_starting_permutaion_from_shader = false

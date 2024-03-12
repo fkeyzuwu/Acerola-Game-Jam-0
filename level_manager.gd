@@ -14,6 +14,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("mouse_left") and can_go_to_sleep:
 		go_to_sleep()
+	elif event.is_action_pressed("quit"): get_tree().quit.call_deferred()
 
 func wake_up(success: bool) -> void:
 	deferred_goto_scene.call_deferred("res://bedroom_morning.tscn")

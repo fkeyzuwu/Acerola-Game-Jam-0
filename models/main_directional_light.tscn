@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bk3ii0mg0nd61"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D"]
+transform = Transform3D(0.599457, -0.48376, -0.637674, 0.449455, -0.455775, 0.768283, -0.662301, -0.747159, -0.0557892, 0, 58.8273, 0)
+light_color = Color(0.215686, 0.215686, 0.215686, 1)
+light_energy = 4.008
+light_volumetric_fog_energy = 12.445
+shadow_enabled = true
+sky_mode = 1

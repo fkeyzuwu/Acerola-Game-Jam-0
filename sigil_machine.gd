@@ -145,4 +145,3 @@ func deactivate(init := false) -> void:
 	table.light_down()
 	if !init:
 		sigil.hide_sigil()
-

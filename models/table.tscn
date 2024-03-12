@@ -7,6 +7,7 @@
 [node name="Table" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00685883, 0, -0.000225067)
 script = ExtResource("1_xa845")
+max_light_energy = 0.3
 
 [node name="Top" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.311951, 0)
@@ -44,3 +45,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.345, 0)
 radius = 0.171445
 height = 1.2274
 material = SubResource("StandardMaterial3D_54pmc")
+
+[node name="Light" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16147, 0)
+light_color = Color(0.94902, 1, 1, 1)
+light_energy = 0.294
+shadow_enabled = true
+omni_range = 1.557
