@@ -57,15 +57,16 @@ func enter_sigil_machine(sigil_machine: SigilMachine) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel()
 	tween.tween_property(self, "global_position", current_sigil_machine.camera_position.global_position, 0.8)
-	#var target_rotation = camera.rotation.y - transform.basis.z.signed_angle_to(camera.transform.basis.z ,Vector3.UP) + sigil_machine.rotation.y
-	var dummy = Node3D.new()
-	add_child(dummy)
-	dummy.global_position = current_sigil_machine.camera_position.global_position
-	dummy.rotation = orientation.rotation
-	dummy.look_at(sigil_machine.sigil_mesh.global_position)
-	tween.tween_property(camera, "rotation:y", dummy.rotation.y, 0.8)
+	#var dummy = Node3D.new()
+	#add_child(dummy)
+	#dummy.global_position = current_sigil_machine.camera_position.global_position
+	#dummy.rotation = orientation.rotation
+	##dummy.look_at(sigil_machine.sigil_mesh.global_position)
+	#tween.tween_property(camera, "rotation:y", dummy.rotation.y, 0.8)
+	#var point_infront = find_obj_position_infront()
+	tween.tween_property(camera, "rotation:y", camera.rotation.y - transform.basis.z.signed_angle_to(camera.transform.basis.z ,Vector3.UP), 0.8)
 	tween.tween_property(camera, "rotation:x", 0, 0.8)
-	dummy.queue_free()
+	#dummy.queue_free()
 	crosshair.visible = false
 	current_sigil_machine.player_solving = true
 	
@@ -120,6 +121,22 @@ func resume_mobility() -> void:
 	
 	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel()
 	tween.tween_property(self, "speed", base_speed, 0.5)
+
+func find_obj_position_infront() -> Vector3:
+	var space_state = get_world_3d().direct_space_state
+	var mouse_pos = get_viewport().get_mouse_position()
+	var raycast_origin = camera.project_ray_origin(mouse_pos)
+	var raycast_end = camera.project_position(mouse_pos, 1000)
+	var query = PhysicsRayQueryParameters3D.create(raycast_origin, raycast_end)
+	query.collide_with_areas = true
+	query.collide_with_bodies = true
+	var ray_info = space_state.intersect_ray(query)
+	if !ray_info.is_empty():
+		return ray_info.collider.get_parent().global_position
+	else:
+		print("didnt find collider to look when entering sigil machine")
+		return Vector3.ZERO
+
 
 func try_get_sigil_stone() -> SigilStone:
 	var space_state = get_world_3d().direct_space_state
