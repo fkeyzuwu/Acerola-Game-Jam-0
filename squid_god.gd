@@ -92,7 +92,11 @@ func enter_state(_state: SquidState) -> void:
 			global_position.y = submerged_y_value
 			emerge_tween.tween_property(self, "global_position:y", 6.0, 6.0)
 			await emerge_tween.finished
-			enter_state(SquidState.Messaging)
+			if !real:
+				enter_state(SquidState.Messaging)
+			else:
+				await get_tree().create_timer(1.0).timeout
+				enter_state(SquidState.ThorwingPlayer)
 		SquidState.Messaging:
 			await get_tree().create_timer(4.2).timeout
 			# do whatever sigil message shit, then go back to submerge
@@ -136,9 +140,6 @@ func enter_state(_state: SquidState) -> void:
 				# play aya sound and then player should fall to ground
 
 func _process(delta: float) -> void:
-	print("global pos: ", global_position.y)
-	print("local pos: ", position.y)
-	
 	match state:
 		SquidState.Idle:
 			var target_pos = points[current_point_index].global_position
