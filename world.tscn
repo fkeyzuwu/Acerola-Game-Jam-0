@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dv0obunuqq8ai"]
+[gd_scene load_steps=42 format=3 uid="uid://dv0obunuqq8ai"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_owgt8"]
 [ext_resource type="PackedScene" uid="uid://bl2hrjw11r12m" path="res://squid_god.tscn" id="2_d3t13"]
@@ -6,8 +6,10 @@
 [ext_resource type="Shader" path="res://sigil.gdshader" id="3_1iw13"]
 [ext_resource type="Script" path="res://Label.gd" id="4_lxawv"]
 [ext_resource type="Script" path="res://sigil_machine_container.gd" id="5_djeko"]
-[ext_resource type="PackedScene" uid="uid://caiiwbrumlsfi" path="res://sigil_machine.tscn" id="5_rjgg0"]
 [ext_resource type="Script" path="res://sigil_machine_room.gd" id="6_kbjjg"]
+[ext_resource type="Script" path="res://sigil_machine.gd" id="8_yhwv1"]
+[ext_resource type="PackedScene" uid="uid://f5wxuvjfa2wu" path="res://sigil_stone.tscn" id="9_f873r"]
+[ext_resource type="PackedScene" uid="uid://vk0kmryvkn2m" path="res://sigil.tscn" id="10_gmlvi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hlnlh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -125,6 +127,64 @@ shader_parameter/blur = 0.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_6vm4s"]
 size = Vector3(200, 100, 5)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_dn8my"]
+size = Vector3(1.5, 2, 1.005)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h384g"]
+albedo_color = Color(0.831373, 0.619608, 0.968627, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5jfac"]
+material = SubResource("StandardMaterial3D_h384g")
+size = Vector3(1, 0.62, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4lxl5"]
+height = 0.3
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0jt4g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_di246"]
+resource_local_to_scene = true
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+disable_fog = true
+albedo_texture = SubResource("ViewportTexture_0jt4g")
+albedo_texture_force_srgb = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_cmmy3"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_di246")
+size = Vector2(1.3, 1.3)
+
+[sub_resource type="TorusMesh" id="TorusMesh_fl0jb"]
+inner_radius = 0.53
+outer_radius = 0.672
+
+[sub_resource type="TorusMesh" id="TorusMesh_usm6r"]
+inner_radius = 0.8
+outer_radius = 0.489
+
+[sub_resource type="SphereMesh" id="SphereMesh_bxvy5"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
+radius = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_riudk"]
+resource_local_to_scene = true
+shader = ExtResource("3_1iw13")
+shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
+shader_parameter/p0 = Vector2(0.975, -1.33)
+shader_parameter/p1 = Vector2(0, 1.5)
+shader_parameter/s0 = 0.75
+shader_parameter/s1 = 1.023
+shader_parameter/m0 = 5
+shader_parameter/m1 = 5
+shader_parameter/twirl0 = -2.606
+shader_parameter/twirl1 = 2.121
+shader_parameter/rotate0 = 0.5
+shader_parameter/rotate1 = 0.158
+shader_parameter/blur = 0.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h34sx"]
 albedo_color = Color(0.882353, 0.882353, 0.882353, 1)
 rim = 0.0
@@ -230,8 +290,90 @@ script = ExtResource("6_kbjjg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("5_djeko")
 
-[node name="SigilMachine" parent="SigilMachineRoom/SigilMachines" instance=ExtResource("5_rjgg0")]
+[node name="SigilMachine" type="StaticBody3D" parent="SigilMachineRoom/SigilMachines"]
+editor_description = "-0.572 MAGIC Y VALUE FOR SIGIL MACHINE
+-1.602 MAGIC Y VALUE FOR GROUND"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.972, -3.23)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("8_yhwv1")
+
+[node name="CameraPosition" type="Node3D" parent="SigilMachineRoom/SigilMachines/SigilMachine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47, 1.1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SigilMachineRoom/SigilMachines/SigilMachine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_dn8my")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SigilMachineRoom/SigilMachines/SigilMachine"]
+mesh = SubResource("BoxMesh_5jfac")
+
+[node name="SigilTabletBackground" type="MeshInstance3D" parent="SigilMachineRoom/SigilMachines/SigilMachine"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
+mesh = SubResource("SphereMesh_4lxl5")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="SigilMesh" type="MeshInstance3D" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.15, 0)
+mesh = SubResource("QuadMesh_cmmy3")
+skeleton = NodePath("../../MeshInstance3D")
+
+[node name="SigilStones" type="Node3D" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground"]
+
+[node name="SigilStone" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground/SigilStones" instance=ExtResource("9_f873r")]
+transform = Transform3D(-0.642788, 0, 0.766045, 0, 1, 0, -0.766045, 0, -0.642788, 0, 0, 0)
+min_degrees = -130.0
+max_degrees = 130.0
+shader_parameter_name = "twirl1"
+
+[node name="StoneHolder" type="CSGMesh3D" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground"]
+mesh = SubResource("TorusMesh_fl0jb")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground/StoneHolder"]
+transform = Transform3D(0.8, 0.000157464, 0.000647549, -0.000157112, 0.8, -0.000435146, -0.000647634, 0.000435019, 0.8, 0, 0.07, 0)
+operation = 2
+mesh = SubResource("TorusMesh_usm6r")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground/StoneHolder"]
+transform = Transform3D(0.8, 0.000157464, 0.000647549, -0.000157112, 0.8, -0.000435146, -0.000647634, 0.000435019, 0.8, 0, 0.0699997, 0.52)
+operation = 2
+mesh = SubResource("SphereMesh_bxvy5")
+
+[node name="PlayerDetectionArea" type="Area3D" parent="SigilMachineRoom/SigilMachines/SigilMachine"]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SigilMachineRoom/SigilMachines/SigilMachine/PlayerDetectionArea"]
+shape = SubResource("SphereShape3D_qkmt8")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="SigilMachineRoom/SigilMachines/SigilMachine"]
+offset_left = -1099.0
+offset_top = -927.0
+offset_right = -843.0
+offset_bottom = -671.0
+
+[node name="SubViewport" type="SubViewport" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+size_2d_override = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_gmlvi")]
+material = SubResource("ShaderMaterial_riudk")
+mouse_filter = 2
+starting_permutation = {
+"m0": 1,
+"m1": 1,
+"p0": Vector2(-0.13, 0.85),
+"p1": Vector2(-0.6, 0.81),
+"rotate0": 1.0,
+"rotate1": 1.0,
+"s0": 0.75,
+"s1": 0.75,
+"twirl0": 10.0,
+"twirl1": -10.0
+}
 
 [node name="CSGBox3D" type="CSGBox3D" parent="SigilMachineRoom"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1.21233)
@@ -461,6 +603,8 @@ size = Vector3(174.485, 232.559, 11.8589)
 material = SubResource("StandardMaterial3D_csk7k")
 
 [connection signal="body_entered" from="InitialPlayerDetector" to="SquidGod" method="_on_initial_player_detector_body_entered"]
+[connection signal="body_entered" from="SigilMachineRoom/SigilMachines/SigilMachine/PlayerDetectionArea" to="SigilMachineRoom/SigilMachines/SigilMachine" method="_on_player_detection_area_body_entered"]
+[connection signal="body_exited" from="SigilMachineRoom/SigilMachines/SigilMachine/PlayerDetectionArea" to="SigilMachineRoom/SigilMachines/SigilMachine" method="_on_player_detection_area_body_exited"]
 [connection signal="body_entered" from="SigilMachineRoom/PlayerAreaDetector" to="SigilMachineRoom" method="_on_player_area_detector_body_entered"]
 [connection signal="body_exited" from="SigilMachineRoom/PlayerAreaDetector" to="SigilMachineRoom" method="_on_player_area_detector_body_exited"]
 
