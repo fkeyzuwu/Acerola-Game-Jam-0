@@ -61,6 +61,7 @@ func enter_sigil_machine(sigil_machine: SigilMachine) -> void:
 	var dummy = Node3D.new()
 	add_child(dummy)
 	dummy.global_position = current_sigil_machine.camera_position.global_position
+	dummy.rotation = orientation.rotation
 	dummy.look_at(sigil_machine.sigil_mesh.global_position)
 	tween.tween_property(camera, "rotation:y", dummy.rotation.y, 0.8)
 	tween.tween_property(camera, "rotation:x", 0, 0.8)
