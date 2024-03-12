@@ -169,7 +169,7 @@ outer_radius = 0.489
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n3quc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_guntq"]
 resource_local_to_scene = true
 shader = ExtResource("3_1iw13")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -361,7 +361,7 @@ size_2d_override = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_gmlvi")]
-material = SubResource("ShaderMaterial_n3quc")
+material = SubResource("ShaderMaterial_guntq")
 mouse_filter = 2
 starting_permutation = {
 "m0": 1,
@@ -582,24 +582,32 @@ shape = SubResource("SphereShape3D_qdj0y")
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(-0.0238564, 0, -0.999715, 0, 1, 0, 0.999715, 0, -0.0238564, -55.7796, 115.78, -1.85184)
 use_collision = true
+collision_layer = 2
+collision_mask = 0
 size = Vector3(222.503, 232.559, 11.8589)
 material = SubResource("StandardMaterial3D_csk7k")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="."]
 transform = Transform3D(0.929988, 0, -0.367589, 0, 1, 0, 0.367589, 0, 0.929988, -69.8536, 115.78, -12.6774)
 use_collision = true
+collision_layer = 2
+collision_mask = 0
 size = Vector3(36.4687, 232.559, 11.8589)
 material = SubResource("StandardMaterial3D_csk7k")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="."]
 transform = Transform3D(0.663051, 0, -0.748574, 0, 1, 0, 0.748574, 0, 0.663051, -65.0988, 115.78, -11.6974)
 use_collision = true
+collision_layer = 2
+collision_mask = 0
 size = Vector3(32.7709, 232.559, 11.8589)
 material = SubResource("StandardMaterial3D_csk7k")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
 transform = Transform3D(-0.948694, 0, -0.316195, 0, 1, 0, 0.316195, 0, -0.948694, -29.7592, 115.78, 189.539)
 use_collision = true
+collision_layer = 2
+collision_mask = 0
 size = Vector3(174.485, 232.559, 11.8589)
 material = SubResource("StandardMaterial3D_csk7k")
 

@@ -151,3 +151,8 @@ func try_get_sigil_stone() -> SigilStone:
 	else:
 		print("didnt find collider")
 		return null
+
+func set_safe(seconds: float) -> void:
+	safe = true
+	await get_tree().create_timer(seconds).timeout
+	safe = false

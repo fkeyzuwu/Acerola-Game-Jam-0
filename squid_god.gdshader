@@ -6,9 +6,6 @@ uniform float y_threshold: hint_range(0.0, 1.0, 0.01) = 0.5;
 uniform float x_speed: hint_range(0.0, 10.0, 0.01) = 0.01;
 uniform float x_amplitude: hint_range(0.0, 10.0, 0.01) = 0.01;
 
-uniform float y_speed: hint_range(0.0, 10.0, 0.01) = 0.01;
-uniform float y_amplitude: hint_range(0.0, 10.0, 0.01) = 0.01;
-
 void vertex() {
     if (VERTEX.y < y_threshold)
 	{

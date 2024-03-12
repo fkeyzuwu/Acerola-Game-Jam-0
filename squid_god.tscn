@@ -50,8 +50,6 @@ shader_parameter/color = Color(0.427451, 0.113725, 0.172549, 1)
 shader_parameter/y_threshold = 0.5
 shader_parameter/x_speed = 2.0
 shader_parameter/x_amplitude = 0.08
-shader_parameter/y_speed = 0.2
-shader_parameter/y_amplitude = 1.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s5sgx"]
 albedo_color = Color(0.843137, 0.815686, 0.576471, 1)
@@ -114,7 +112,7 @@ size = Vector2(2, 2)
 [sub_resource type="SphereShape3D" id="SphereShape3D_4g1jj"]
 radius = 100.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o2nvj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3shfr"]
 resource_local_to_scene = true
 shader = ExtResource("6_hr0wq")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -130,7 +128,7 @@ shader_parameter/rotate0 = 0.0
 shader_parameter/rotate1 = 0.0
 shader_parameter/blur = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_btd0e"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tjyhk"]
 resource_local_to_scene = true
 shader = ExtResource("6_hr0wq")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -146,7 +144,7 @@ shader_parameter/rotate0 = 0.0
 shader_parameter/rotate1 = 0.0
 shader_parameter/blur = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5jihb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_owcm2"]
 resource_local_to_scene = true
 shader = ExtResource("6_hr0wq")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -286,7 +284,7 @@ render_target_update_mode = 4
 
 [node name="Sigil1" parent="SubViewportContainer1/SubViewport1" instance=ExtResource("6_plc7q")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_o2nvj")
+material = SubResource("ShaderMaterial_3shfr")
 mouse_filter = 2
 script = null
 
@@ -307,7 +305,7 @@ render_target_update_mode = 4
 
 [node name="Sigil2" parent="SubViewportContainer2/SubViewport2" instance=ExtResource("6_plc7q")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_btd0e")
+material = SubResource("ShaderMaterial_tjyhk")
 mouse_filter = 2
 script = null
 
@@ -328,7 +326,7 @@ render_target_update_mode = 4
 
 [node name="Sigil3" parent="SubViewportContainer3/SubViewport3" instance=ExtResource("6_plc7q")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_5jihb")
+material = SubResource("ShaderMaterial_owcm2")
 mouse_filter = 2
 script = null
 

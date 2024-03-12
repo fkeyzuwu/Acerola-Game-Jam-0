@@ -1,6 +1,6 @@
 class_name SquidGod extends CharacterBody3D
 
-@export var submerged_y_value = -300.0
+@export var submerged_y_value = -200.0
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 @onready var eye: SquidEye = $SquidModel/SquidMesh/Eye/EyeBall
 @onready var rotation_node: Node3D = $RotationNode
@@ -16,7 +16,7 @@ var current_point_index := 0
 
 var submerge_lerp_speed = 100.0
 var emerge_lerp_speed = 50.0
-var emerge_distance_to_player := 40.0
+var emerge_distance_to_player := 42.0
 
 @export_category("floating")
 @export_range(0.0, 50.0) var float_freq := 50.0
@@ -83,17 +83,18 @@ func enter_state(_state: SquidState) -> void:
 			var submerge_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 			submerge_tween.tween_property(self, "global_position:y", submerged_y_value, 2.0);
 			await submerge_tween.finished
+			squid_model.position.y = 0
 			enter_state(SquidState.Emerge)
 		SquidState.Emerge:
 			player.stop_mobility()
-			var emerge_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+			var emerge_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 			global_position = player.global_position - (player.orientation.basis.z * emerge_distance_to_player)
 			global_position.y = submerged_y_value
-			emerge_tween.tween_property(self, "global_position:y", 1.0, 3.0)
+			emerge_tween.tween_property(self, "global_position:y", 6.0, 6.0)
 			await emerge_tween.finished
 			enter_state(SquidState.Messaging)
 		SquidState.Messaging:
-			await get_tree().create_timer(4.0).timeout
+			await get_tree().create_timer(3.0).timeout
 			# do whatever sigil message shit, then go back to submerge
 			enter_state(SquidState.ThorwingPlayer)
 		SquidState.ThorwingPlayer:
@@ -112,6 +113,7 @@ func enter_state(_state: SquidState) -> void:
 				await throw_tween.finished
 				await get_tree().create_timer(2.0).timeout
 				real = true
+				player.set_safe(3.0)
 				enter_state(SquidState.Idle)
 			else:
 				player.resume_mobility()
@@ -130,6 +132,9 @@ func enter_state(_state: SquidState) -> void:
 				# play aya sound and then player should fall to ground
 
 func _process(delta: float) -> void:
+	print("global pos: ", global_position.y)
+	print("local pos: ", position.y)
+	
 	match state:
 		SquidState.Idle:
 			var target_pos = points[current_point_index].global_position
