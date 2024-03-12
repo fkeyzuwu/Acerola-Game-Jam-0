@@ -1,3 +1,4 @@
+@tool
 class_name Sigil extends ColorRect
 
 @export_range(1.0, 7.0) var reveal_tween_duration := 4.0
@@ -24,6 +25,37 @@ const base_sigil := {
 @export var use_random_sigil := true
 @export var premade_sigil: Dictionary
 @export var starting_permutation: Dictionary
+
+@export var generate_random_sigil: bool:
+	set(value):
+		premade_sigil = create_random_sigil()
+		for key in base_sigil:
+			material.set_shader_parameter(key, premade_sigil[key])
+	get:
+		return generate_random_sigil
+
+@export var set_shader_to_premade_sigil: bool:
+	set(value):
+		for key in base_sigil:
+			material.set_shader_parameter(key, premade_sigil[key])
+	get:
+		return set_shader_to_premade_sigil
+		
+@export var get_starting_permutaion_from_shader: bool:
+	set(value):
+		starting_permutation = {}
+		for key in base_sigil:
+			starting_permutation[key] = material.get_shader_parameter(key)
+	get:
+		return get_starting_permutaion_from_shader
+
+@export var get_sigil_from_shader: bool:
+	set(value):
+		premade_sigil = {}
+		for key in base_sigil:
+			premade_sigil[key] = material.get_shader_parameter(key)
+	get:
+		return get_sigil_from_shader
 
 var target_sigil: Dictionary
 var current_sigil: Dictionary

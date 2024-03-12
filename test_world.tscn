@@ -26,16 +26,16 @@ size = Vector2(1.3, 1.3)
 resource_local_to_scene = true
 shader = ExtResource("5_tgnt6")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
-shader_parameter/p0 = Vector2(0.975, -1.33)
-shader_parameter/p1 = Vector2(0, 1.5)
-shader_parameter/s0 = 0.75
-shader_parameter/s1 = 1.023
-shader_parameter/m0 = 5
-shader_parameter/m1 = 5
-shader_parameter/twirl0 = -2.606
-shader_parameter/twirl1 = 2.121
-shader_parameter/rotate0 = 0.5
-shader_parameter/rotate1 = 0.158
+shader_parameter/p0 = Vector2(0, 0)
+shader_parameter/p1 = Vector2(0, 0)
+shader_parameter/s0 = 20.0
+shader_parameter/s1 = 20.0
+shader_parameter/m0 = 3
+shader_parameter/m1 = 3
+shader_parameter/twirl0 = 0.0
+shader_parameter/twirl1 = 0.0
+shader_parameter/rotate0 = 0.0
+shader_parameter/rotate1 = 0.0
 shader_parameter/blur = 0.0
 
 [node name="TestWorld" type="Node3D"]
@@ -60,8 +60,20 @@ transform = Transform3D(0.761538, 0, 0.64812, 0, 1, 0, -0.64812, 0, 0.761538, 0.
 [node name="SigilMesh" parent="SigilMachine/SigilTabletBackground" index="0"]
 mesh = SubResource("QuadMesh_31elb")
 
+[node name="SigilStone" parent="SigilMachine/SigilTabletBackground/SigilStones" index="0"]
+shader_parameter_name = "p1y"
+
+[node name="SigilStone2" parent="SigilMachine/SigilTabletBackground/SigilStones" index="1"]
+shader_parameter_name = "rotate1"
+
+[node name="SigilStone3" parent="SigilMachine/SigilTabletBackground/SigilStones" index="2"]
+shader_parameter_name = "p0y"
+
 [node name="Sigil" parent="SigilMachine/SubViewportContainer/SubViewport" index="0"]
 material = SubResource("ShaderMaterial_ey00e")
+set_shader_to_premade_sigil = null
+get_starting_permutaion_from_shader = null
+get_sigil_from_shader = null
 
 [editable path="Player"]
 [editable path="SigilMachine"]

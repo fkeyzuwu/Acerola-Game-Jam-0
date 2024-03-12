@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dv0obunuqq8ai"]
+[gd_scene load_steps=42 format=3 uid="uid://dv0obunuqq8ai"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_owgt8"]
 [ext_resource type="PackedScene" uid="uid://bl2hrjw11r12m" path="res://squid_god.tscn" id="2_d3t13"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://sigil_machine_container.gd" id="5_djeko"]
 [ext_resource type="Script" path="res://sigil_machine_room.gd" id="6_kbjjg"]
 [ext_resource type="Script" path="res://sigil_machine.gd" id="8_yhwv1"]
+[ext_resource type="PackedScene" uid="uid://blgpm257wkydb" path="res://models/table.tscn" id="9_cqpyf"]
 [ext_resource type="PackedScene" uid="uid://f5wxuvjfa2wu" path="res://sigil_stone.tscn" id="9_f873r"]
 [ext_resource type="PackedScene" uid="uid://vk0kmryvkn2m" path="res://sigil.tscn" id="10_gmlvi"]
 
@@ -130,17 +131,11 @@ size = Vector3(200, 100, 5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_dn8my"]
 size = Vector3(1.5, 2, 1.005)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h384g"]
-albedo_color = Color(0.831373, 0.619608, 0.968627, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_5jfac"]
-material = SubResource("StandardMaterial3D_h384g")
-size = Vector3(1, 0.62, 1)
-
 [sub_resource type="SphereMesh" id="SphereMesh_4lxl5"]
 height = 0.3
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0jt4g"]
+viewport_path = NodePath("SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_di246"]
 resource_local_to_scene = true
@@ -173,20 +168,20 @@ outer_radius = 0.489
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_eksf4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p2nj7"]
 resource_local_to_scene = true
 shader = ExtResource("3_1iw13")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
-shader_parameter/p0 = Vector2(0.975, -1.33)
-shader_parameter/p1 = Vector2(0, 1.5)
-shader_parameter/s0 = 0.75
-shader_parameter/s1 = 1.023
-shader_parameter/m0 = 5
-shader_parameter/m1 = 5
-shader_parameter/twirl0 = -2.606
-shader_parameter/twirl1 = 2.121
-shader_parameter/rotate0 = 0.5
-shader_parameter/rotate1 = 0.158
+shader_parameter/p0 = Vector2(0, 0)
+shader_parameter/p1 = Vector2(0, 0)
+shader_parameter/s0 = 20.0
+shader_parameter/s1 = 20.0
+shader_parameter/m0 = 1
+shader_parameter/m1 = 1
+shader_parameter/twirl0 = 0.0
+shader_parameter/twirl1 = 0.0
+shader_parameter/rotate0 = 0.0
+shader_parameter/rotate1 = 0.0
 shader_parameter/blur = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h34sx"]
@@ -199,7 +194,7 @@ clearcoat_roughness = 0.99
 [sub_resource type="SphereShape3D" id="SphereShape3D_qdj0y"]
 radius = 13.833
 
-[node name="World" type="Node3D"]
+[node name="Level0" type="Node3D"]
 script = ExtResource("1_owgt8")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -301,27 +296,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.972, -3.23)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("8_yhwv1")
+slider_amount = null
+light_up_duration = null
+radius = null
 sensitiveness = 0.01
+incative_color = null
+active_color = null
+solved_color = null
 
 [node name="CameraPosition" type="Node3D" parent="SigilMachineRoom/SigilMachines/SigilMachine"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47, 1.1)
+
+[node name="Table" parent="SigilMachineRoom/SigilMachines/SigilMachine" instance=ExtResource("9_cqpyf")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SigilMachineRoom/SigilMachines/SigilMachine"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_dn8my")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SigilMachineRoom/SigilMachines/SigilMachine"]
-mesh = SubResource("BoxMesh_5jfac")
-
 [node name="SigilTabletBackground" type="MeshInstance3D" parent="SigilMachineRoom/SigilMachines/SigilMachine"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
 mesh = SubResource("SphereMesh_4lxl5")
-skeleton = NodePath("../MeshInstance3D")
+skeleton = NodePath("")
 
 [node name="SigilMesh" type="MeshInstance3D" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.15, 0)
 mesh = SubResource("QuadMesh_cmmy3")
-skeleton = NodePath("../../MeshInstance3D")
+skeleton = NodePath("")
 
 [node name="SigilStones" type="Node3D" parent="SigilMachineRoom/SigilMachines/SigilMachine/SigilTabletBackground"]
 
@@ -365,7 +365,7 @@ size_2d_override = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_gmlvi")]
-material = SubResource("ShaderMaterial_eksf4")
+material = SubResource("ShaderMaterial_p2nj7")
 mouse_filter = 2
 starting_permutation = {
 "m0": 1,
@@ -377,8 +377,11 @@ starting_permutation = {
 "s0": 0.75,
 "s1": 0.75,
 "twirl0": 10.0,
-"twirl1": -10.0
+"twirl1": 10.0
 }
+set_shader_to_premade_sigil = false
+get_starting_permutaion_from_shader = false
+get_sigil_from_shader = false
 
 [node name="CSGBox3D" type="CSGBox3D" parent="SigilMachineRoom"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1.21233)

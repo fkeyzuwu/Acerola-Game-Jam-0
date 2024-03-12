@@ -51,20 +51,20 @@ outer_radius = 0.489
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4vx6r"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8a55n"]
 resource_local_to_scene = true
 shader = ExtResource("4_x5axq")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
-shader_parameter/p0 = Vector2(0.975, -1.33)
-shader_parameter/p1 = Vector2(0, 1.5)
-shader_parameter/s0 = 0.75
-shader_parameter/s1 = 1.023
-shader_parameter/m0 = 5
-shader_parameter/m1 = 5
-shader_parameter/twirl0 = -2.606
-shader_parameter/twirl1 = 2.121
-shader_parameter/rotate0 = 0.5
-shader_parameter/rotate1 = 0.158
+shader_parameter/p0 = Vector2(0, 0)
+shader_parameter/p1 = Vector2(0, 0)
+shader_parameter/s0 = 20.0
+shader_parameter/s1 = 20.0
+shader_parameter/m0 = 3
+shader_parameter/m1 = 3
+shader_parameter/twirl0 = 0.0
+shader_parameter/twirl1 = 0.0
+shader_parameter/rotate0 = 0.0
+shader_parameter/rotate1 = 0.0
 shader_parameter/blur = 0.0
 
 [node name="SigilMachine" type="StaticBody3D"]
@@ -102,19 +102,19 @@ skeleton = NodePath("../../MeshInstance3D")
 transform = Transform3D(-0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, -0.984808, 0, 0, 0)
 min_degrees = -170.0
 max_degrees = -70.0
-shader_parameter_name = "rotate0"
+shader_parameter_name = "rotate1"
 
 [node name="SigilStone2" parent="SigilTabletBackground/SigilStones" instance=ExtResource("2_4p0ol")]
 transform = Transform3D(0.642788, 0, 0.766044, 0, 1, 0, -0.766044, 0, 0.642788, 0, 0, 0)
 min_degrees = -50.0
 max_degrees = 50.0
-shader_parameter_name = "p0x"
+shader_parameter_name = "rotate0"
 
 [node name="SigilStone3" parent="SigilTabletBackground/SigilStones" instance=ExtResource("2_4p0ol")]
 transform = Transform3D(-0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, -0.984808, 0, 0, 0)
 min_degrees = 70.0
 max_degrees = 170.0
-shader_parameter_name = "twirl1"
+shader_parameter_name = "p0y"
 
 [node name="StoneHolder" type="CSGMesh3D" parent="SigilTabletBackground"]
 mesh = SubResource("TorusMesh_j2b6p")
@@ -150,7 +150,7 @@ size_2d_override = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Sigil" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_e2wqf")]
-material = SubResource("ShaderMaterial_4vx6r")
+material = SubResource("ShaderMaterial_8a55n")
 mouse_filter = 2
 use_random_sigil = true
 starting_permutation = {
@@ -165,6 +165,9 @@ starting_permutation = {
 "twirl0": 10.0,
 "twirl1": -10.0
 }
+set_shader_to_premade_sigil = null
+get_starting_permutaion_from_shader = null
+get_sigil_from_shader = null
 
 [connection signal="body_entered" from="PlayerDetectionArea" to="." method="_on_player_detection_area_body_entered"]
 [connection signal="body_exited" from="PlayerDetectionArea" to="." method="_on_player_detection_area_body_exited"]

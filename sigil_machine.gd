@@ -2,9 +2,7 @@ class_name SigilMachine extends StaticBody3D
 
 @export var slider_amount := 3
 
-@onready var mesh_instance: MeshInstance3D = $MeshInstance3D
-@onready var light_tween: Tween
-@export_range(0.1, 1.0) var light_up_duration := 0.3
+@onready var table: Table = $Table
 @onready var sigil: Sigil = $SubViewportContainer/SubViewport/Sigil
 @onready var sigil_stones: Node3D = $SigilTabletBackground/SigilStones
 @onready var sigil_mesh: MeshInstance3D = $SigilTabletBackground/SigilMesh
@@ -130,9 +128,7 @@ func machine_solved() -> void:
 	if player.current_sigil_machine != null:
 		player.exit_sigil_machine()
 	
-	if light_tween: light_tween.kill()
-	light_tween = create_tween().set_trans(Tween.TRANS_SINE)
-	light_tween.tween_property(mesh_instance.mesh.material, "albedo_color", Color.LIGHT_GREEN, light_up_duration)
+	table.machine_solved()
 	solved.emit()
 
 func _on_player_detection_area_body_entered(_player: Player) -> void: #lightup
@@ -142,15 +138,11 @@ func _on_player_detection_area_body_exited(_player: Player) -> void: #lightdown
 	if !locked: deactivate()
 
 func activate() -> void:
-	if light_tween: light_tween.kill()
-	light_tween = create_tween().set_trans(Tween.TRANS_SINE)
-	light_tween.tween_property(mesh_instance.mesh.material, "albedo_color", Color.RED, light_up_duration)
+	table.light_up()
 	sigil.reveal_sigil()
 
 func deactivate(init := false) -> void:
-	if light_tween: light_tween.kill()
-	light_tween = create_tween().set_trans(Tween.TRANS_SINE)
-	light_tween.tween_property(mesh_instance.mesh.material, "albedo_color", Color.PURPLE, light_up_duration)
+	table.light_down()
 	if !init:
 		sigil.hide_sigil()
 

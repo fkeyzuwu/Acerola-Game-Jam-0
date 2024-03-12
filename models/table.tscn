@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://blgpm257wkydb"]
+
+[ext_resource type="Script" path="res://models/table.gd" id="1_xa845"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54pmc"]
+
+[node name="Table" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00685883, 0, -0.000225067)
+script = ExtResource("1_xa845")
+
+[node name="Top" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.311951, 0)
+size = Vector3(1.33, 0.173, 1)
+material = SubResource("StandardMaterial3D_54pmc")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Top"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43275, -0.769261, -0.00451279)
+operation = 2
+radius = 1.204
+rings = 16
+material = SubResource("StandardMaterial3D_54pmc")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Top"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40711, -0.769261, -0.00451279)
+operation = 2
+radius = 1.204
+rings = 16
+material = SubResource("StandardMaterial3D_54pmc")
+
+[node name="Base" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.180639, 0)
+size = Vector3(0.735, 0.808, 1)
+material = SubResource("StandardMaterial3D_54pmc")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00761223, -0.769261, -0.00451279)
+operation = 2
+radius = 1.204
+rings = 16
+material = SubResource("StandardMaterial3D_54pmc")
+
+[node name="BaseCylindar" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.345, 0)
+radius = 0.171445
+height = 1.2274
+material = SubResource("StandardMaterial3D_54pmc")
