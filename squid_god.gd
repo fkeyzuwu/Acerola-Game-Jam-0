@@ -107,10 +107,14 @@ func enter_state(_state: SquidState) -> void:
 				var peak_position = direction_to_shore * peak_distance
 				peak_position.y += player.global_position.y + 50
 				
-				var throw_tween = create_tween()
-				throw_tween.tween_property(player, "global_position", peak_position, 1.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
-				throw_tween.tween_property(player, "global_position", shore_pos, 1.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
-				await throw_tween.finished
+				var first_tween = create_tween().set_parallel()
+				first_tween.tween_property(player, "global_position:x", peak_position.x, 1.5).set_trans(Tween.TRANS_LINEAR)
+				first_tween.tween_property(player, "global_position:y", peak_position.y, 1.5).set_trans(Tween.TRANS_SINE)
+				await first_tween.finished
+				var second_tween = create_tween().set_parallel()
+				second_tween.tween_property(player, "global_position:x", shore_pos.x, 1.5).set_trans(Tween.TRANS_LINEAR)
+				second_tween.tween_property(player, "global_position:y", shore_pos.y, 1.5).set_trans(Tween.TRANS_SINE)
+				await second_tween.finished
 				await get_tree().create_timer(2.0).timeout
 				real = true
 				player.set_safe(3.0)
