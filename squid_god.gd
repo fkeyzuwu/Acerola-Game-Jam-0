@@ -135,10 +135,12 @@ func enter_state(_state: SquidState) -> void:
 				
 				var first_tween = create_tween().set_parallel()
 				first_tween.tween_property(player, "global_position:x", peak_position.x, 1.5).set_trans(Tween.TRANS_LINEAR)
+				first_tween.tween_property(player, "global_position:z", peak_position.z, 1.5).set_trans(Tween.TRANS_LINEAR)
 				first_tween.tween_property(player, "global_position:y", peak_position.y, 1.5).set_trans(Tween.TRANS_SINE)
 				await first_tween.finished
 				var second_tween = create_tween().set_parallel()
 				second_tween.tween_property(player, "global_position:x", shore_pos.x, 1.5).set_trans(Tween.TRANS_LINEAR)
+				second_tween.tween_property(player, "global_position:z", shore_pos.z, 1.5).set_trans(Tween.TRANS_LINEAR)
 				second_tween.tween_property(player, "global_position:y", shore_pos.y, 1.5).set_trans(Tween.TRANS_SINE)
 				await second_tween.finished
 				await get_tree().create_timer(2.0).timeout
@@ -152,12 +154,12 @@ func enter_state(_state: SquidState) -> void:
 				var direction_to_throw = player.global_position.direction_to(throw_wall_pos)
 				var distance_to_throw = player.global_position.direction_to(throw_wall_pos)
 				var peak_distance = distance_to_throw / 3
-				var peak_position = direction_to_throw * peak_distance
+				var peak_position = global_position + direction_to_throw * peak_distance
 				peak_position.y += player.global_position.y + throw_wall_pos.y + throw_wall_pos.y / 4
 				
 				var throw_tween = create_tween()
 				throw_tween.tween_property(player, "global_position", peak_position, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
-				throw_tween.tween_property(player, "global_position", throw_wall_pos, 2.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUART)
+				throw_tween.tween_property(player, "global_position", throw_wall_pos, 1.0).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUART)
 				await throw_tween.finished
 				player.should_wake_up = true
 				# play aya sound and then player should fall to ground
