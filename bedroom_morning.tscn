@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bussc2vgftywx"]
+[gd_scene load_steps=10 format=3 uid="uid://bussc2vgftywx"]
 
 [ext_resource type="Script" path="res://bedroom_morning.gd" id="1_k5ofg"]
 [ext_resource type="PackedScene" uid="uid://vnfm55vhgao3" path="res://bedroom_model.tscn" id="2_d5c7c"]
@@ -77,6 +77,15 @@ _data = {
 "wake_up": SubResource("Animation_b7pi5")
 }
 
+[sub_resource type="EventAsset" id="EventAsset_n14ub"]
+is_3d = true
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/MorningAmb"
+guid = "{ed02b679-ee84-497b-8739-73ac11d22702}"
+name = "MorningAmb"
+
 [node name="BedroomMorning" type="Node3D"]
 script = ExtResource("1_k5ofg")
 
@@ -97,7 +106,15 @@ environment = SubResource("Environment_d2jmp")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.64, -0.14, 0.892)
 
+[node name="StudioListener3D" type="StudioListener3D" parent="Camera3D"]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_tf4sg")
 }
+
+[node name="StudioEventEmitter3D" type="StudioEventEmitter3D" parent="."]
+play_event = 1
+stop_event = 3
+event = SubResource("EventAsset_n14ub")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09898, 4.42782, -3.54897)

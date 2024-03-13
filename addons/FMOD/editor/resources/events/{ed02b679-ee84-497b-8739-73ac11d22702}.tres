@@ -1,0 +1,10 @@
+[gd_resource type="EventAsset" format=3 uid="uid://dgssxyqg7sd7e"]
+
+[resource]
+is_3d = true
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/MorningAmb"
+guid = "{ed02b679-ee84-497b-8739-73ac11d22702}"
+name = "MorningAmb"

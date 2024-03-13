@@ -1,0 +1,10 @@
+{81406378-8e91-4085-b1e1-5d919f1355aa} bank:/Master
+{195d43ac-ffea-0cc7-37a8-d76f6ee05332} bank:/Master.strings
+{accecd80-e757-446e-9a58-677fe87215e2} bus:/
+{aa99be5e-b0bc-4c80-bfd2-4616f5c3b0ea} bus:/Reverb
+{341b30d9-4f4f-4228-9a27-41489095e54a} event:/GameAmbience
+{017f1844-7eb5-4907-a44e-68360d0d295b} event:/KrakenIdle
+{ed02b679-ee84-497b-8739-73ac11d22702} event:/MorningAmb
+{c7bd3007-b6c3-4bfa-95c6-7e6eceb34850} event:/MoveStone
+{780a19bf-edb9-439b-82dc-04fcc3c59555} event:/NightAmbience
+{f45c96c1-6e7c-4b07-9bd7-930a364b3f92} parameter:/Distance
