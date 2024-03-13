@@ -10,7 +10,16 @@ class_name SigilMachine extends StaticBody3D
 
 @onready var camera_position: Node3D = $CameraPosition
 
-var current_stone_sigil: SigilStone = null
+var current_stone_sigil: SigilStone = null:
+	set(value):
+		if value != null and current_stone_sigil == null:
+			move_stone_instance.start()
+		elif value == null and current_stone_sigil != null:
+			move_stone_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
+			
+		current_stone_sigil = value
+	get:
+		return current_stone_sigil
 @export var radius = 0.6
 
 @onready var camera := get_viewport().get_camera_3d()
@@ -23,6 +32,9 @@ var player_solving := false
 @export_range(0.01, 0.2) var sensitiveness := 0.1
 
 signal solved
+
+var move_stone_guid = FMODGuids.Events.MOVESTONE
+@onready var move_stone_instance: EventInstance = FMODRuntime.create_instance_id(move_stone_guid)
 
 func _ready() -> void:
 	deactivate(true)
@@ -145,3 +157,7 @@ func deactivate(init := false) -> void:
 	table.light_down()
 	if !init:
 		sigil.hide_sigil()
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		move_stone_instance.release()

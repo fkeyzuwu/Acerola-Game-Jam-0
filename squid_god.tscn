@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://bl2hrjw11r12m"]
+[gd_scene load_steps=32 format=3 uid="uid://bl2hrjw11r12m"]
 
 [ext_resource type="Script" path="res://squid_god.gd" id="1_tjxct"]
 [ext_resource type="Script" path="res://eye.gd" id="2_6yo0e"]
 [ext_resource type="Shader" path="res://squid_god.gdshader" id="2_erdyy"]
 [ext_resource type="Material" uid="uid://dr1nj1waettv5" path="res://models/squid_god.tres" id="2_gnb45"]
+[ext_resource type="EventAsset" uid="uid://ydk37tspj1fg" path="res://addons/FMOD/editor/resources/events/{017f1844-7eb5-4907-a44e-68360d0d295b}.tres" id="2_rnalg"]
 [ext_resource type="Material" uid="uid://ekdkatkjqkjs" path="res://eyeball.tres" id="4_bi4vr"]
 [ext_resource type="Shader" path="res://sigil.gdshader" id="6_hr0wq"]
 [ext_resource type="PackedScene" uid="uid://vk0kmryvkn2m" path="res://sigil.tscn" id="6_plc7q"]
@@ -192,6 +193,7 @@ axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_tjxct")
 distance_to_patrol_spot_threshold = 15.0
+idle_event = ExtResource("2_rnalg")
 
 [node name="RotationNode" type="Node3D" parent="."]
 

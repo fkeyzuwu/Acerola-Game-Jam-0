@@ -1,6 +1,7 @@
-[gd_scene load_steps=43 format=3 uid="uid://dv0obunuqq8ai"]
+[gd_scene load_steps=44 format=3 uid="uid://dv0obunuqq8ai"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_owgt8"]
+[ext_resource type="EventAsset" uid="uid://ckwxirphgnmvq" path="res://addons/FMOD/editor/resources/events/{341b30d9-4f4f-4228-9a27-41489095e54a}.tres" id="2_3oowd"]
 [ext_resource type="PackedScene" uid="uid://bl2hrjw11r12m" path="res://squid_god.tscn" id="2_d3t13"]
 [ext_resource type="PackedScene" uid="uid://bk3ii0mg0nd61" path="res://models/main_directional_light.tscn" id="2_j8ito"]
 [ext_resource type="PackedScene" uid="uid://d3kj5bx5as45p" path="res://player.tscn" id="2_ooj0t"]
@@ -169,7 +170,7 @@ outer_radius = 0.489
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xv72c"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ne3ru"]
 resource_local_to_scene = true
 shader = ExtResource("3_1iw13")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -197,6 +198,7 @@ radius = 13.833
 
 [node name="Level0" type="Node3D"]
 script = ExtResource("1_owgt8")
+ambience_event = ExtResource("2_3oowd")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1tcvx")
@@ -354,7 +356,7 @@ size_2d_override = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_gmlvi")]
-material = SubResource("ShaderMaterial_xv72c")
+material = SubResource("ShaderMaterial_ne3ru")
 mouse_filter = 2
 starting_permutation = {
 "m0": 1,
@@ -368,9 +370,6 @@ starting_permutation = {
 "twirl0": 10.0,
 "twirl1": -10.0
 }
-set_shader_to_premade_sigil = false
-get_starting_permutaion_from_shader = false
-get_sigil_from_shader = false
 
 [node name="CSGBox3D" type="CSGBox3D" parent="SigilMachineRoom"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1.21233)
