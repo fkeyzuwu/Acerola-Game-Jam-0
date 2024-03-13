@@ -128,7 +128,7 @@ shader_parameter/rotate1 = 0.0
 shader_parameter/blur = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6vm4s"]
-size = Vector3(200, 100, 5)
+size = Vector3(354.608, 100, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dn8my"]
 size = Vector3(1.5, 2, 1.005)
@@ -170,7 +170,7 @@ outer_radius = 0.489
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_upydv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3hol1"]
 resource_local_to_scene = true
 shader = ExtResource("3_1iw13")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -243,6 +243,9 @@ material = SubResource("ShaderMaterial_4566b")
 [node name="Player" parent="." instance=ExtResource("2_ooj0t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -84.0524, 1, 41.5875)
 
+[node name="MeshInstance3D" parent="Player" index="0"]
+visible = false
+
 [node name="Orientation" parent="Player" index="2"]
 transform = Transform3D(-0.882948, 0, 0.469472, 0, 1, 0, -0.469472, 0, -0.882948, 0, 0, 0)
 
@@ -276,7 +279,7 @@ transform = Transform3D(0.913069, 0, -0.407805, 0, 1, 0, 0.407805, 0, 0.913069, 
 collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InitialPlayerDetector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.8365, 50, 7.62939e-06)
 shape = SubResource("BoxShape3D_6vm4s")
 
 [node name="SigilMachineRoom" type="Node3D" parent="."]
@@ -357,7 +360,7 @@ size_2d_override = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_gmlvi")]
-material = SubResource("ShaderMaterial_upydv")
+material = SubResource("ShaderMaterial_3hol1")
 mouse_filter = 2
 starting_permutation = {
 "m0": 1,

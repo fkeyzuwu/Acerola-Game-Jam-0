@@ -1,9 +1,11 @@
 class_name Player extends CharacterBody3D
 
-@export var base_speed := 10.0
+@export var base_speed := 8.0
 @onready var speed := base_speed
+@onready var sprint_speed := base_speed * 1.5
 var jump_velocity := 4.5
 var mobile := true
+var mobilizing := true
 
 var safe := false
 
@@ -27,8 +29,11 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var should_wake_up := false
 
 func _input(event: InputEvent) -> void:
-	if event.is_action("increase_speed"):
-		speed += 2
+	if mobile and mobilizing:
+		if event.is_action_pressed("sprint"):
+			speed = sprint_speed
+		elif event.is_action_released("sprint"):
+			speed = base_speed
 	
 	if event is InputEventMouseMotion and current_sigil_machine == null:
 		orientation.rotation.y -= (event.relative.x / mouse_sensitivity)
@@ -106,11 +111,13 @@ func move(delta: float) -> void:
 	move_and_slide()
 
 func stop_mobility() -> void:
+	mobilizing = false
 	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel()
 	tween.tween_property(self, "speed", 0.0, 2.0).set_delay(3.0)
 	
 	await tween.finished
 	mobile = false
+	mobilizing = true
 	
 func resume_mobility() -> void:
 	mobile = true
