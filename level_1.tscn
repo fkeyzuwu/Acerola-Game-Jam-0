@@ -181,7 +181,7 @@ height = 0.6
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vwxrb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_68yvf"]
 resource_local_to_scene = true
 shader = ExtResource("3_04ala")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -207,8 +207,8 @@ clearcoat_roughness = 0.99
 [sub_resource type="SphereShape3D" id="SphereShape3D_qdj0y"]
 radius = 13.833
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_f7esp"]
-size = Vector3(15.4957, 4.66406, 54.6784)
+[sub_resource type="BoxShape3D" id="BoxShape3D_rwatu"]
+size = Vector3(23.3626, 9.73059, 54.6784)
 
 [node name="Level1" type="Node3D"]
 script = ExtResource("1_i71a5")
@@ -385,7 +385,7 @@ size_2d_override = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_xejg1")]
-material = SubResource("ShaderMaterial_vwxrb")
+material = SubResource("ShaderMaterial_68yvf")
 mouse_filter = 2
 premade_sigil = {
 "m0": 2,
@@ -651,8 +651,8 @@ material = SubResource("StandardMaterial3D_csk7k")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -67.0927, 0, 0)
 
 [node name="CollisionShape3D" parent="PlayerSafeZone" index="0"]
-transform = Transform3D(0.843391, 0, 0.5373, 0, 1, 0, -0.5373, 0, 0.843391, -3.43228, 1.83203, 16.5161)
-shape = SubResource("BoxShape3D_f7esp")
+transform = Transform3D(0.843391, 0, 0.5373, 0, 1, 0, -0.5373, 0, 0.843391, -6.74972, 4.36529, 18.6295)
+shape = SubResource("BoxShape3D_rwatu")
 
 [connection signal="body_entered" from="InitialPlayerDetector" to="SquidGod" method="_on_initial_player_detector_body_entered"]
 [connection signal="body_entered" from="SigilMachineRoom/SigilMachines/SigilMachine/PlayerDetectionArea" to="SigilMachineRoom/SigilMachines/SigilMachine" method="_on_player_detection_area_body_entered"]

@@ -20,4 +20,5 @@ func start_ambience() -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_PREDELETE:
+		ambience_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
 		ambience_instance.release()

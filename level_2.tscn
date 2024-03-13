@@ -33,7 +33,7 @@ glow_enabled = true
 albedo_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ei8wy"]
-size = Vector3(49.4379, 22.7989, 232.4)
+size = Vector3(55.0627, 22.7989, 279.725)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_x1ox3"]
 viewport_path = NodePath("SubViewportContainer1/SubViewport1")
@@ -184,16 +184,16 @@ radius = 3.0
 resource_local_to_scene = true
 shader = ExtResource("3_uy2gn")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
-shader_parameter/p0 = Vector2(0, 0)
-shader_parameter/p1 = Vector2(0, 0)
-shader_parameter/s0 = 20.0
-shader_parameter/s1 = 20.0
+shader_parameter/p0 = Vector2(0.66, 0.716)
+shader_parameter/p1 = Vector2(-0.14614, -0.0619756)
+shader_parameter/s0 = 0.893342
+shader_parameter/s1 = 0.88848
 shader_parameter/m0 = 5
 shader_parameter/m1 = 5
-shader_parameter/twirl0 = 0.0
-shader_parameter/twirl1 = 0.0
-shader_parameter/rotate0 = 0.0
-shader_parameter/rotate1 = 0.0
+shader_parameter/twirl0 = -10.0
+shader_parameter/twirl1 = 10.0
+shader_parameter/rotate0 = 0.167897
+shader_parameter/rotate1 = 0.399274
 shader_parameter/blur = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h34sx"]
@@ -326,11 +326,12 @@ collision_layer = 0
 script = ExtResource("3_uv6sk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerSafeZone2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.12975, 10.8994, 30.0322)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31735, 10.8994, 41.4708)
 shape = SubResource("BoxShape3D_ei8wy")
 
 [node name="SquidGod" parent="." instance=ExtResource("2_c1sws")]
 transform = Transform3D(0.367589, 0, 0.929988, 0, 1, 0, -0.929988, 0, 0.367589, 5.25534, 125, 88.8264)
+rotate_lerp_speed = 3
 
 [node name="SquidMesh" parent="SquidGod/SquidModel" index="0"]
 surface_material_override/0 = null
@@ -369,7 +370,7 @@ theme_override_font_sizes/font_size = 16
 script = ExtResource("5_soac0")
 
 [node name="ShorePosition" type="Marker3D" parent="."]
-transform = Transform3D(-0.367589, 0, -0.929988, 0, 1, 0, 0.929988, 0, -0.367589, 0.828751, 1, 501.125)
+transform = Transform3D(-0.367589, 0, -0.929988, 0, 1, 0, 0.929988, 0, -0.367589, 0.828751, 0.669749, 501.125)
 
 [node name="ThrowWallPosition" type="Marker3D" parent="."]
 transform = Transform3D(-0.367589, 0, -0.929988, 0, 1, 0, 0.929988, 0, -0.367589, 7.88562, 125, 578.004)
@@ -406,7 +407,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.972, -3.23)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("8_auf44")
-sensitiveness = 0.15
+sensitiveness = 0.12
 
 [node name="CameraPosition" type="Node3D" parent="SigilMachineRoom/SigilMachines/SigilMachine"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47, 1.1)
@@ -508,7 +509,7 @@ premade_sigil = {
 starting_permutation = {
 "m0": 5,
 "m1": 5,
-"p0": Vector2(0.66, 0.986),
+"p0": Vector2(0.66, 0.716),
 "p1": Vector2(-0.14614, -0.0619756),
 "rotate0": 0.167897,
 "rotate1": 0.399274,
