@@ -10,10 +10,7 @@ var safe := false
 var current_sigil_machine: SigilMachine = null
 
 @export_group("Camera Settings")
-@export var base_yaw_sensitivity := 600.0
-@export var base_pitch_sensitivity := 600.0
-@onready var yaw_sensitivity := base_yaw_sensitivity
-@onready var pitch_sensitivity := base_pitch_sensitivity
+@onready var mouse_sensitivity := LevelManager.mouse_sensitivity
 @export_range(-90.0, -80.0, 1.0, "degrees") var min_pitch = -85.0
 @export_range(80.0, 90.0, 1.0, "degrees") var max_pitch := 85.0
 @export_range(60.0, 100.0) var normal_fov := 75.0
@@ -33,8 +30,8 @@ func _input(event: InputEvent) -> void:
 		speed += 2
 	
 	if event is InputEventMouseMotion and current_sigil_machine == null:
-		orientation.rotation.y -= (event.relative.x / yaw_sensitivity)
-		orientation.rotation.x -= (event.relative.y / pitch_sensitivity)
+		orientation.rotation.y -= (event.relative.x / mouse_sensitivity)
+		orientation.rotation.x -= (event.relative.y / mouse_sensitivity)
 		orientation.rotation_degrees.x = clamp(orientation.rotation_degrees.x, min_pitch, max_pitch)
 		camera.rotation = Vector3(orientation.rotation.x, orientation.rotation.y, camera.rotation.z)
 	elif event is InputEventMouseButton:

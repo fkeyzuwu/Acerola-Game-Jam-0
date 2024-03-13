@@ -5,6 +5,9 @@ var levels := ["res://level_0.tscn", "res://level_1.tscn", "res://level_2.tscn",
 var can_go_to_sleep := false
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+var mouse_sensitivity := 600.0
+var brightness: float
+
 func _ready() -> void:
 	animation_player.play("fade_in_black_long")
 	await animation_player.animation_finished
@@ -61,3 +64,7 @@ func deferred_goto_scene(path: String):
 
 	# Set it as the current scene, only after it has been added to the tree
 	get_tree().current_scene = instanced_scene
+
+
+func _on_mouse_sensitivity_slider_value_changed(value: float) -> void:
+	mouse_sensitivity = 2000.0 - value
