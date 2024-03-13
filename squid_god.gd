@@ -29,9 +29,16 @@ var state := SquidState.Idle
 
 @export var real := false
 
+@export_category("Audio")
+@export var idle_event: EventAsset
+var idle_instance: EventInstance
+
 @onready var sigils: Array[ColorRect] = [%Sigil1, %Sigil2, %Sigil3]
 @onready var sigil_meshes: Array[MeshInstance3D] = [%SigilMesh1, %SigilMesh2, %SigilMesh3]
 @onready var sub_viewports: Array[SubViewport] = [%SubViewport1, %SubViewport2, %SubViewport3]
+
+signal start_interacting
+signal stop_interacting
 
 enum SquidState {
 	Idle,
@@ -62,6 +69,18 @@ func _ready() -> void:
 		sigil_meshes[i].visible = false
 		
 	enter_state(SquidState.Idle)
+	
+	await get_tree().create_timer(2.0).timeout
+	idle_instance = FMODRuntime.create_instance(idle_event)
+	FMODRuntime.attach_instance_to_node(idle_instance, self)
+	idle_instance.start()
+	
+	start_interacting.connect(on_start_interacting)
+	stop_interacting.connect(on_stop_interacting)
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		idle_instance.release()
 
 func start_bobbing() -> void:
 	bobbing_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_loops()
@@ -80,6 +99,7 @@ func enter_state(_state: SquidState) -> void:
 			if !player.mobile: player.resume_mobility()
 			start_bobbing()
 		SquidState.Submerge:
+			start_interacting.emit()
 			stop_bobbing()
 			await get_tree().create_timer(2.0).timeout
 			var submerge_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
@@ -124,6 +144,7 @@ func enter_state(_state: SquidState) -> void:
 				await get_tree().create_timer(2.0).timeout
 				real = true
 				player.set_safe(3.0)
+				stop_interacting.emit()
 				enter_state(SquidState.Idle)
 			else:
 				player.resume_mobility()
@@ -185,3 +206,9 @@ func _on_initial_player_detector_body_entered(_player: Player) -> void:
 func _on_player_detection_area_body_entered(player: Player) -> void:
 	if state == SquidState.Idle and real and !player.safe:
 		enter_state(SquidState.Submerge)
+
+func on_start_interacting() -> void:
+	idle_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
+
+func on_stop_interacting() -> void:
+	idle_instance.start()

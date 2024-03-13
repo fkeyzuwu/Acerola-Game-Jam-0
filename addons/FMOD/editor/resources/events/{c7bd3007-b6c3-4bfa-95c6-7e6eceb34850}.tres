@@ -1,0 +1,8 @@
+[gd_resource type="EventAsset" format=3 uid="uid://cor34fuxfodhn"]
+
+[resource]
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/MoveStone"
+guid = "{c7bd3007-b6c3-4bfa-95c6-7e6eceb34850}"
+name = "MoveStone"

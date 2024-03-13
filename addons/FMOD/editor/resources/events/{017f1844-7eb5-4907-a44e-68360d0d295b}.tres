@@ -1,0 +1,8 @@
+[gd_resource type="EventAsset" format=3 uid="uid://ydk37tspj1fg"]
+
+[resource]
+is_3d = true
+max_distance = 300.0
+path = "event:/KrakenIdle"
+guid = "{017f1844-7eb5-4907-a44e-68360d0d295b}"
+name = "KrakenIdle"
