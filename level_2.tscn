@@ -180,7 +180,7 @@ height = 0.2
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6nwwi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qwlw6"]
 resource_local_to_scene = true
 shader = ExtResource("3_uy2gn")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -214,7 +214,7 @@ ambience_event = ExtResource("2_dyg05")
 environment = SubResource("Environment_1tcvx")
 
 [node name="DirectionalLight3D" parent="." instance=ExtResource("2_c3cnr")]
-transform = Transform3D(0.564252, 0.406936, -0.718347, -0.444256, -0.583727, -0.679632, -0.695885, 0.702614, -0.148585, -28.4583, 32.0153, -43.9533)
+transform = Transform3D(-0.993811, -0.0801637, 0.0769007, 0.00782022, 0.640062, 0.768283, -0.11081, 0.76413, -0.635474, 20.381, 186.262, -547.394)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9079, 125, 11.2059)
@@ -360,6 +360,7 @@ material = SubResource("ShaderMaterial_4566b")
 
 [node name="Player" parent="." instance=ExtResource("4_lonth")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.41191, 2.07513, 514.161)
+base_speed = 17.0
 
 [node name="Label" type="Label" parent="."]
 offset_right = 93.0
@@ -490,7 +491,7 @@ size_2d_override = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_w2qiy")]
-material = SubResource("ShaderMaterial_6nwwi")
+material = SubResource("ShaderMaterial_qwlw6")
 mouse_filter = 2
 premade_sigil = {
 "m0": 5,

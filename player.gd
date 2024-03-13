@@ -1,6 +1,6 @@
 class_name Player extends CharacterBody3D
 
-var base_speed := 10.0
+@export var base_speed := 10.0
 @onready var speed := base_speed
 var jump_velocity := 4.5
 var mobile := true
