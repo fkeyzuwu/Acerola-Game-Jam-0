@@ -364,6 +364,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.41191, 2.07513, 514.161)
 base_speed = 17.0
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_right = 93.0
 offset_bottom = 36.0
 theme_override_font_sizes/font_size = 16

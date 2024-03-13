@@ -247,6 +247,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -84.0524, 1, 41.5875)
 transform = Transform3D(-0.882948, 0, 0.469472, 0, 1, 0, -0.469472, 0, -0.882948, 0, 0, 0)
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_right = 93.0
 offset_bottom = 36.0
 theme_override_font_sizes/font_size = 16
