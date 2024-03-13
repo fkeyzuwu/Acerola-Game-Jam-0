@@ -4,11 +4,15 @@ var current_level := 0
 var levels := ["res://level_0.tscn", "res://level_1.tscn", "res://level_2.tscn", "res://level_3.tscn"]
 var can_go_to_sleep := false
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var options_menu: Control = $CanvasLayer/OptionsMenu
 
 var mouse_sensitivity := 600.0
 var brightness: float
 
+var is_options_open := false
+
 func _ready() -> void:
+	options_menu.visible = false
 	animation_player.play("fade_in_black_long")
 	await animation_player.animation_finished
 	if get_tree().current_scene.name == "BedroomNight":
@@ -17,7 +21,11 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("mouse_left") and can_go_to_sleep:
 		go_to_sleep()
-	elif event.is_action_pressed("quit"): get_tree().quit.call_deferred()
+	elif event.is_action_pressed("quit"):
+		if !is_options_open:
+			open_options()
+		else:
+			close_options()
 
 func wake_up(success: bool) -> void:
 	deferred_goto_scene.call_deferred("res://bedroom_morning.tscn")
@@ -65,6 +73,23 @@ func deferred_goto_scene(path: String):
 	# Set it as the current scene, only after it has been added to the tree
 	get_tree().current_scene = instanced_scene
 
+func open_options() -> void:
+	is_options_open = true
+	options_menu.visible = true
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	get_tree().paused = true
+
+func close_options() -> void:
+	is_options_open = false
+	options_menu.visible = false
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	get_tree().paused = false
 
 func _on_mouse_sensitivity_slider_value_changed(value: float) -> void:
 	mouse_sensitivity = 2000.0 - value
+
+func _on_resume_button_pressed() -> void:
+	close_options()
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit.call_deferred()

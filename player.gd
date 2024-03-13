@@ -10,7 +10,8 @@ var safe := false
 var current_sigil_machine: SigilMachine = null
 
 @export_group("Camera Settings")
-@onready var mouse_sensitivity := LevelManager.mouse_sensitivity
+var mouse_sensitivity:
+	get: return LevelManager.mouse_sensitivity
 @export_range(-90.0, -80.0, 1.0, "degrees") var min_pitch = -85.0
 @export_range(80.0, 90.0, 1.0, "degrees") var max_pitch := 85.0
 @export_range(60.0, 100.0) var normal_fov := 75.0

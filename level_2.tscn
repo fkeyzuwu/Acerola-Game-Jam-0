@@ -180,7 +180,7 @@ height = 0.2
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bempp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6nwwi"]
 resource_local_to_scene = true
 shader = ExtResource("3_uy2gn")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -490,7 +490,7 @@ size_2d_override = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_w2qiy")]
-material = SubResource("ShaderMaterial_bempp")
+material = SubResource("ShaderMaterial_6nwwi")
 mouse_filter = 2
 premade_sigil = {
 "m0": 5,
