@@ -2,7 +2,7 @@
 
 [resource]
 is_3d = true
-max_distance = 300.0
+max_distance = 450.0
 path = "event:/KrakenIdle"
 guid = "{017f1844-7eb5-4907-a44e-68360d0d295b}"
 name = "KrakenIdle"

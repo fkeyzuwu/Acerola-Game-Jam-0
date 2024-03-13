@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://difkqko4qmbvi"]
+
+[resource]
+is_3d = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/NightAmbience"
+guid = "{780a19bf-edb9-439b-82dc-04fcc3c59555}"
+name = "NightAmbience"

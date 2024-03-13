@@ -11,7 +11,7 @@ class Events:
 	const KRAKENIDLE = "{017f1844-7eb5-4907-a44e-68360d0d295b}"
 	const MORNINGAMBIENCE = "{a14a2593-dd9e-4b13-8b9b-bf05c2f850d6}"
 	const MOVESTONE = "{c7bd3007-b6c3-4bfa-95c6-7e6eceb34850}"
-	const NIGHTAMBIENCE = "{2cc4e599-eff5-4571-a1a8-d328c992ce0e}"
+	const NIGHTAMBIENCE = "{780a19bf-edb9-439b-82dc-04fcc3c59555}"
 
 class Busses:
 	const MASTER_BUS = "{accecd80-e757-446e-9a58-677fe87215e2}"
@@ -25,4 +25,8 @@ class VCAs:
 
 class Banks:
 	const MASTER = "{81406378-8e91-4085-b1e1-5d919f1355aa}"
+
+class Parameters:
+	const DISTANCE = "{cd4ffb59-fd1d-44c8-9705-125361c63a50}"
+	const DISTANCE_TO_PLAYER = "{c656d71c-427b-4aa7-a22e-93601c294d32}"
 

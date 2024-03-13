@@ -5,10 +5,10 @@
 [ext_resource type="BusAsset" uid="uid://dkc4a5vvdd3o0" path="res://addons/FMOD/editor/resources/busses/{accecd80-e757-446e-9a58-677fe87215e2}.tres" id="3_3o0h8"]
 [ext_resource type="BusAsset" uid="uid://dfb8rwp3ao1ac" path="res://addons/FMOD/editor/resources/busses/{aa99be5e-b0bc-4c80-bfd2-4616f5c3b0ea}.tres" id="4_b43r2"]
 [ext_resource type="EventAsset" uid="uid://ckwxirphgnmvq" path="res://addons/FMOD/editor/resources/events/{341b30d9-4f4f-4228-9a27-41489095e54a}.tres" id="5_mw3vr"]
-[ext_resource type="EventAsset" uid="uid://rmfddcj3iuap" path="res://addons/FMOD/editor/resources/events/{2cc4e599-eff5-4571-a1a8-d328c992ce0e}.tres" id="5_up384"]
 [ext_resource type="EventAsset" uid="uid://ydk37tspj1fg" path="res://addons/FMOD/editor/resources/events/{017f1844-7eb5-4907-a44e-68360d0d295b}.tres" id="6_6lt6a"]
 [ext_resource type="EventAsset" uid="uid://c25phbn0k0v00" path="res://addons/FMOD/editor/resources/events/{a14a2593-dd9e-4b13-8b9b-bf05c2f850d6}.tres" id="7_aote3"]
 [ext_resource type="EventAsset" uid="uid://cor34fuxfodhn" path="res://addons/FMOD/editor/resources/events/{c7bd3007-b6c3-4bfa-95c6-7e6eceb34850}.tres" id="8_4hoo2"]
+[ext_resource type="EventAsset" uid="uid://difkqko4qmbvi" path="res://addons/FMOD/editor/resources/events/{780a19bf-edb9-439b-82dc-04fcc3c59555}.tres" id="9_gd7l1"]
 
 [resource]
 banks = {
@@ -17,8 +17,8 @@ banks = {
 }
 events = {
 "{017f1844-7eb5-4907-a44e-68360d0d295b}": ExtResource("6_6lt6a"),
-"{2cc4e599-eff5-4571-a1a8-d328c992ce0e}": ExtResource("5_up384"),
 "{341b30d9-4f4f-4228-9a27-41489095e54a}": ExtResource("5_mw3vr"),
+"{780a19bf-edb9-439b-82dc-04fcc3c59555}": ExtResource("9_gd7l1"),
 "{a14a2593-dd9e-4b13-8b9b-bf05c2f850d6}": ExtResource("7_aote3"),
 "{c7bd3007-b6c3-4bfa-95c6-7e6eceb34850}": ExtResource("8_4hoo2")
 }
@@ -68,7 +68,7 @@ event_tree = [{
 "item_type": 1,
 "node_name": "NightAmbience",
 "path": "event:/NightAmbience",
-"resource": ExtResource("5_up384")
+"resource": ExtResource("9_gd7l1")
 }]
 bus_tree = [{
 "children": [{
