@@ -33,6 +33,10 @@ var state := SquidState.Idle
 @export var idle_event: EventAsset
 var idle_instance: EventInstance
 
+var submerge_guid := FMODGuids.Events.KRAKENSUBMERGE
+var submerge_instance: EventInstance
+var throw_guid := FMODGuids.Events.KRAKENTHROW
+
 @onready var sigils: Array[ColorRect] = [%Sigil1, %Sigil2, %Sigil3]
 @onready var sigil_meshes: Array[MeshInstance3D] = [%SigilMesh1, %SigilMesh2, %SigilMesh3]
 @onready var sub_viewports: Array[SubViewport] = [%SubViewport1, %SubViewport2, %SubViewport3]
@@ -82,6 +86,7 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_PREDELETE:
 		idle_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
 		idle_instance.release()
+		submerge_instance.release()
 
 func start_bobbing() -> void:
 	bobbing_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_loops()
@@ -102,7 +107,11 @@ func enter_state(_state: SquidState) -> void:
 		SquidState.Submerge:
 			start_interacting.emit()
 			stop_bobbing()
+			
+			submerge_instance = FMODRuntime.create_instance_id(submerge_guid)
+			get_tree().create_timer(1.7).timeout.connect(func(): submerge_instance.start())
 			await get_tree().create_timer(2.0).timeout
+			
 			var submerge_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 			submerge_tween.tween_property(self, "global_position:y", submerged_y_value, 2.0);
 			await submerge_tween.finished
@@ -121,6 +130,7 @@ func enter_state(_state: SquidState) -> void:
 				await get_tree().create_timer(1.0).timeout
 				enter_state(SquidState.ThorwingPlayer)
 		SquidState.Messaging:
+			get_tree().create_timer(4.0).timeout.connect(func(): FMODRuntime.play_one_shot_id(throw_guid))
 			await get_tree().create_timer(4.2).timeout
 			# do whatever sigil message shit, then go back to submerge
 			enter_state(SquidState.ThorwingPlayer)

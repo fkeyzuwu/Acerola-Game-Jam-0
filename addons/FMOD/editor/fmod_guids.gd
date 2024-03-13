@@ -9,6 +9,8 @@ class_name FMODGuids
 class Events:
 	const GAMEAMBIENCE = "{341b30d9-4f4f-4228-9a27-41489095e54a}"
 	const KRAKENIDLE = "{017f1844-7eb5-4907-a44e-68360d0d295b}"
+	const KRAKENSUBMERGE = "{0039acc3-a7c5-471a-88ce-ea09cdb642a0}"
+	const KRAKENTHROW = "{13754b03-eb66-423f-aa66-8620ea05299f}"
 	const MORNINGAMB = "{ed02b679-ee84-497b-8739-73ac11d22702}"
 	const MOVESTONE = "{c7bd3007-b6c3-4bfa-95c6-7e6eceb34850}"
 	const NIGHTAMBIENCE = "{780a19bf-edb9-439b-82dc-04fcc3c59555}"

@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://w4exyhgxdxvu"]
+
+[resource]
+is_3d = true
+is_oneshot = true
+max_distance = 450.0
+path = "event:/KrakenSubmerge"
+guid = "{e0ec132b-e49a-4a66-b51a-df1b1b37cae0}"
+name = "KrakenSubmerge"
