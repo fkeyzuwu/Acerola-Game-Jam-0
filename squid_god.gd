@@ -14,6 +14,8 @@ var current_point_index := 0
 @export var idle_speed = 20.0
 @export var rotate_lerp_speed = 1
 
+@export var distance_to_patrol_spot_threshold := 5.0
+
 var submerge_lerp_speed = 100.0
 var emerge_lerp_speed = 50.0
 var emerge_distance_to_player := 42.0
@@ -149,7 +151,7 @@ func _process(delta: float) -> void:
 			if global_position.y < squid_patrol_points.global_position.y:
 				global_position.y += idle_speed * delta
 			
-			if global_position.distance_to(target_pos) <= 1.0:
+			if global_position.distance_to(target_pos) <= distance_to_patrol_spot_threshold:
 				current_point_index += 1
 				current_point_index %= points.size()
 		SquidState.Submerge:
