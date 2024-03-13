@@ -36,6 +36,11 @@ signal solved
 var move_stone_guid = FMODGuids.Events.MOVESTONE
 @onready var move_stone_instance: EventInstance = FMODRuntime.create_instance_id(move_stone_guid)
 
+# play these as oneshot
+var machine_solved_guid
+var sigil_enter_guid
+var sigil_exit_guid
+
 func _ready() -> void:
 	deactivate(true)
 	sigil_mesh.mesh.material.albedo_texture.viewport_path = sub_viewport.get_path()
