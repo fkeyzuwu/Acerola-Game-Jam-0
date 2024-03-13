@@ -31,8 +31,6 @@ var should_wake_up := false
 func _input(event: InputEvent) -> void:
 	if event.is_action("increase_speed"):
 		speed += 2
-	elif event.is_action("decrease_speed"):
-		speed -= 2
 	
 	if event is InputEventMouseMotion and current_sigil_machine == null:
 		orientation.rotation.y -= (event.relative.x / yaw_sensitivity)

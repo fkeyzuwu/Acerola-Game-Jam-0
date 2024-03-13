@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Acerola Game Jam 0"
-run/main_scene="res://level_0.tscn"
+run/main_scene="res://bedroom_night.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -22,6 +22,8 @@ LevelManager="*res://level_manager.tscn"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 mouse_cursor/custom_image="res://crosshair001.png"
 mouse_cursor/custom_image_hotspot=Vector2(64, 64)
 
