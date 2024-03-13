@@ -60,3 +60,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("CompressedTexture2D_t2bso")
+
+[node name="FootstepTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="FootstepTimer" to="." method="_on_footstep_timer_timeout"]

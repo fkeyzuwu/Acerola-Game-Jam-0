@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://ci73we12ov5wl"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/KrakenThrowReal"
+guid = "{09ce7f94-be39-4844-90a0-7e3bcebeb73e}"
+name = "KrakenThrowReal"

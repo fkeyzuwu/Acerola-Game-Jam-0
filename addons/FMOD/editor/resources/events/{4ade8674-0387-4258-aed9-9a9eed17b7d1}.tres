@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://ddmtlqcpc0bjj"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Footsteps"
+guid = "{4ade8674-0387-4258-aed9-9a9eed17b7d1}"
+name = "Footsteps"

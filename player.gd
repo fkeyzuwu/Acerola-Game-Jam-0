@@ -3,6 +3,12 @@ class_name Player extends CharacterBody3D
 @export var base_speed := 8.0
 @onready var speed := base_speed
 @onready var sprint_speed := base_speed * 1.5
+@onready var footstep_timer: Timer = $FootstepTimer
+var footstep_guid := FMODGuids.Events.FOOTSTEPS
+
+@export var walk_footstep_time := 0.55
+@export var run_footstep_time := 0.35
+
 var jump_velocity := 4.5
 var mobile := true
 var mobilizing := true
@@ -28,12 +34,17 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var should_wake_up := false
 
+func _ready() -> void:
+	footstep_timer.wait_time = walk_footstep_time
+
 func _input(event: InputEvent) -> void:
 	if mobile and mobilizing:
 		if event.is_action_pressed("sprint"):
 			speed = sprint_speed
+			footstep_timer.wait_time = run_footstep_time
 		elif event.is_action_released("sprint"):
 			speed = base_speed
+			footstep_timer.wait_time = walk_footstep_time
 	
 	if event is InputEventMouseMotion and current_sigil_machine == null:
 		orientation.rotation.y -= (event.relative.x / mouse_sensitivity)
@@ -102,6 +113,9 @@ func move(delta: float) -> void:
 	var input_dir := Input.get_vector("left", "right", "forwards", "backwards")
 	var direction := (orientation.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction and current_sigil_machine == null:
+		if footstep_timer.is_stopped(): 
+			play_footstep()
+			footstep_timer.start()
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
 	else:
@@ -159,3 +173,12 @@ func set_safe(seconds: float) -> void:
 	safe = true
 	await get_tree().create_timer(seconds).timeout
 	safe = false
+
+func _on_footstep_timer_timeout() -> void:
+	if velocity != Vector3.ZERO:
+		play_footstep()
+	else:
+		footstep_timer.stop()
+
+func play_footstep() -> void:
+	FMODRuntime.play_one_shot_id(footstep_guid)
