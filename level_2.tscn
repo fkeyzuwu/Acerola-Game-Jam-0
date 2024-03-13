@@ -180,7 +180,7 @@ height = 0.2
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1kyg4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v0i51"]
 resource_local_to_scene = true
 shader = ExtResource("3_uy2gn")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -361,9 +361,6 @@ material = SubResource("ShaderMaterial_4566b")
 [node name="Player" parent="." instance=ExtResource("4_lonth")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.41191, 2.07513, 514.161)
 
-[node name="Orientation" parent="Player" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
 [node name="Label" type="Label" parent="."]
 offset_right = 93.0
 offset_bottom = 36.0
@@ -493,7 +490,7 @@ size_2d_override = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_w2qiy")]
-material = SubResource("ShaderMaterial_1kyg4")
+material = SubResource("ShaderMaterial_v0i51")
 mouse_filter = 2
 premade_sigil = {
 "m0": 5,

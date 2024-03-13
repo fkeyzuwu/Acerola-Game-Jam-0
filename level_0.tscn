@@ -170,7 +170,7 @@ outer_radius = 0.489
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ne3ru"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_muv6f"]
 resource_local_to_scene = true
 shader = ExtResource("3_1iw13")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -253,7 +253,7 @@ theme_override_font_sizes/font_size = 16
 script = ExtResource("4_lxawv")
 
 [node name="ShorePosition" type="Marker3D" parent="."]
-transform = Transform3D(-0.367589, 0, -0.929988, 0, 1, 0, 0.929988, 0, -0.367589, -36.0092, 1, 158.312)
+transform = Transform3D(-0.367589, 0, -0.929988, 0, 1, 0, 0.929988, 0, -0.367589, -85.0247, 1, 171.773)
 
 [node name="ThrowWallPosition" type="Marker3D" parent="."]
 transform = Transform3D(-0.367589, 0, -0.929988, 0, 1, 0, 0.929988, 0, -0.367589, -128.912, 125, 184.348)
@@ -356,7 +356,7 @@ size_2d_override = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_gmlvi")]
-material = SubResource("ShaderMaterial_ne3ru")
+material = SubResource("ShaderMaterial_muv6f")
 mouse_filter = 2
 starting_permutation = {
 "m0": 1,

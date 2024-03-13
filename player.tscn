@@ -28,6 +28,8 @@ shape = SubResource("CapsuleShape3D_giq2a")
 
 [node name="Orientation" type="Node3D" parent="."]
 
+[node name="StudioListener3D" type="StudioListener3D" parent="Orientation"]
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 

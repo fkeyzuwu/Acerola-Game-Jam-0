@@ -130,8 +130,8 @@ func enter_state(_state: SquidState) -> void:
 				var direction_to_shore = player.global_position.direction_to(shore_pos)
 				var distance_to_shore = player.global_position.distance_to(shore_pos)
 				var peak_distance = distance_to_shore / 2
-				var peak_position = direction_to_shore * peak_distance
-				peak_position.y += player.global_position.y + 50
+				var peak_position = global_position + direction_to_shore * peak_distance
+				peak_position.y += player.global_position.y + 20
 				
 				var first_tween = create_tween().set_parallel()
 				first_tween.tween_property(player, "global_position:x", peak_position.x, 1.5).set_trans(Tween.TRANS_LINEAR)
