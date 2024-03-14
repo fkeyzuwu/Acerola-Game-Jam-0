@@ -117,4 +117,4 @@ libraries = {
 play_event = 1
 stop_event = 3
 event = SubResource("EventAsset_n14ub")
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0883, 2.8632, -0.552297)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0883, 1.12144, -1.9433)

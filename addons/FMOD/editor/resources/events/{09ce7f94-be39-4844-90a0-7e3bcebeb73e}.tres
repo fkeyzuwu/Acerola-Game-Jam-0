@@ -4,6 +4,6 @@
 is_oneshot = true
 min_distance = 1.0
 max_distance = 20.0
-path = "event:/KrakenThrowReal"
+path = "event:/FallingToDeath"
 guid = "{09ce7f94-be39-4844-90a0-7e3bcebeb73e}"
-name = "KrakenThrowReal"
+name = "FallingToDeath"

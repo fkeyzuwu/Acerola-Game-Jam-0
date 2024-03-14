@@ -35,6 +35,8 @@ func wake_up(success: bool) -> void:
 	else:
 		var play = func(): get_tree().current_scene.animation_player.play("wake_up")
 		play.call_deferred()
+		animation_player.play("RESET")
+		FMODRuntime.play_one_shot_id(FMODGuids.Events.HEAVYBREATHING)
 	
 	await get_tree().create_timer(5.0).timeout
 	
@@ -57,6 +59,9 @@ func go_to_sleep() -> void:
 func fade_to_white() -> void:
 	animation_player.play("fade_out_white")
 	await animation_player.animation_finished
+
+func fade_to_black() -> void:
+	animation_player.play("fade_out_black")
 
 func deferred_goto_scene(path: String):
 	# Immediately free the current scene. There is no risk here because the

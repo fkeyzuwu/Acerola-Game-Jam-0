@@ -37,6 +37,8 @@ var submerge_guid := FMODGuids.Events.KRAKENSUBMERGE
 var submerge_instance: EventInstance
 var throw_guid := FMODGuids.Events.KRAKENTHROW
 
+var falling_instance: EventInstance
+
 @onready var sigils: Array[ColorRect] = [%Sigil1, %Sigil2, %Sigil3]
 @onready var sigil_meshes: Array[MeshInstance3D] = [%SigilMesh1, %SigilMesh2, %SigilMesh3]
 @onready var sub_viewports: Array[SubViewport] = [%SubViewport1, %SubViewport2, %SubViewport3]
@@ -87,6 +89,8 @@ func _notification(what: int) -> void:
 		idle_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
 		idle_instance.release()
 		submerge_instance.release()
+		falling_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
+		falling_instance.release()
 
 func start_bobbing() -> void:
 	bobbing_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_loops()
@@ -109,7 +113,7 @@ func enter_state(_state: SquidState) -> void:
 			stop_bobbing()
 			
 			submerge_instance = FMODRuntime.create_instance_id(submerge_guid)
-			get_tree().create_timer(1.7).timeout.connect(func(): submerge_instance.start())
+			get_tree().create_timer(1.8).timeout.connect(func(): submerge_instance.start())
 			await get_tree().create_timer(2.0).timeout
 			
 			var submerge_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
@@ -173,6 +177,9 @@ func enter_state(_state: SquidState) -> void:
 				throw_tween.tween_property(player, "global_position", throw_wall_pos, 1.0).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUART)
 				await throw_tween.finished
 				player.should_wake_up = true
+				falling_instance = FMODRuntime.create_instance_id(FMODGuids.Events.FALLINGTODEATH)
+				falling_instance.start()
+				LevelManager.fade_to_black()
 				# play aya sound and then player should fall to ground
 
 func _process(delta: float) -> void:
