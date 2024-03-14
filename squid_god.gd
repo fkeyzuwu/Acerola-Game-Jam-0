@@ -28,6 +28,7 @@ var bobbing_tween: Tween
 var state := SquidState.Idle
 
 @export var real := false
+var super_real := false
 
 @export_category("Audio")
 @export var idle_event: EventAsset
@@ -123,6 +124,8 @@ func enter_state(_state: SquidState) -> void:
 			enter_state(SquidState.Emerge)
 		SquidState.Emerge:
 			player.stop_mobility()
+			if super_real:
+				start_interacting.emit()
 			var emerge_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 			global_position = player.global_position - (player.orientation.basis.z * emerge_distance_to_player)
 			global_position.y = submerged_y_value
@@ -130,6 +133,11 @@ func enter_state(_state: SquidState) -> void:
 			await emerge_tween.finished
 			if !real:
 				enter_state(SquidState.Messaging)
+			elif super_real:
+				LevelManager.fade_to_black()
+				await LevelManager.animation_player.animation_finished
+				FMODRuntime.play_one_shot_id(FMODGuids.Events.KRAKENKILL)
+				LevelManager.you_didnt_get_out_of_my_dream()
 			else:
 				await get_tree().create_timer(1.0).timeout
 				enter_state(SquidState.ThorwingPlayer)

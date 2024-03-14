@@ -233,6 +233,12 @@ material = SubResource("StandardMaterial3D_csk7k")
 
 [node name="SquidGod" parent="." instance=ExtResource("2_ug27n")]
 transform = Transform3D(-0.83527, 0, 0.549839, 0, 1, 0, -0.549839, 0, -0.83527, 181.127, 125, 58.6313)
+submerged_y_value = null
+idle_speed = null
+rotate_lerp_speed = null
+float_freq = null
+float_amp = null
+real = null
 idle_event = SubResource("EventAsset_674ms")
 
 [node name="SquidMesh" parent="SquidGod/SquidModel" index="0"]

@@ -13,6 +13,7 @@ class Events:
 	const HEAVYBREATHING = "{5b89c058-4016-4c58-8308-000de0980b0a}"
 	const HITGROUNDTHUD = "{557b166d-7dc0-4bac-96c0-a66edc3a8e3b}"
 	const KRAKENIDLE = "{017f1844-7eb5-4907-a44e-68360d0d295b}"
+	const KRAKENKILL = "{d6a19f96-f043-4d19-a04c-9ca505cb4e1d}"
 	const KRAKENSUBMERGE = "{0039acc3-a7c5-471a-88ce-ea09cdb642a0}"
 	const KRAKENTHROW = "{13754b03-eb66-423f-aa66-8620ea05299f}"
 	const MORNINGAMB = "{ed02b679-ee84-497b-8739-73ac11d22702}"

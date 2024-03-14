@@ -192,7 +192,13 @@ collision_mask = 0
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_tjxct")
+submerged_y_value = null
+idle_speed = null
+rotate_lerp_speed = null
 distance_to_patrol_spot_threshold = 15.0
+float_freq = null
+float_amp = null
+real = null
 idle_event = ExtResource("2_rnalg")
 
 [node name="RotationNode" type="Node3D" parent="."]

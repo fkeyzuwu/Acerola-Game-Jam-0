@@ -50,6 +50,10 @@ settings/encryption_key=""
 settings/distance_scale_2d=1.0
 settings/init_with_3d_righthanded=true
 
+[gui]
+
+theme/custom_font="res://font/LosmentHunter-1G1ve.ttf"
+
 [input]
 
 forwards={

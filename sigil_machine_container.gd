@@ -15,4 +15,13 @@ func _on_machine_solved() -> void:
 		tween.tween_property(omni_light_spread, "light_energy", 16.0, 3.0)
 		tween.tween_property(omni_light_spot, "light_energy", 16.0, 3.0)
 		await LevelManager.fade_to_white()
-		LevelManager.wake_up(true)
+		if LevelManager.current_level == 2:
+			LevelManager.animation_player.play("RESET")
+			omni_light_spread.light_energy = 0.872
+			omni_light_spot.light_energy = 0.872
+			var squid_god = get_tree().current_scene.find_child("SquidGod") as SquidGod
+			await get_tree().create_timer(1.0).timeout
+			squid_god.super_real = true
+			squid_god.enter_state(SquidGod.SquidState.Emerge)
+		else:
+			LevelManager.wake_up(true)

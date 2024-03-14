@@ -5,11 +5,14 @@ var levels := ["res://level_0.tscn", "res://level_1.tscn", "res://level_2.tscn",
 var can_go_to_sleep := false
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var options_menu: Control = $CanvasLayer/OptionsMenu
+@onready var game_over_label: Label = $CanvasLayer/CenterContainer/GameOverLabel
 
 var mouse_sensitivity := 600.0
 var brightness: float
 
 var is_options_open := false
+
+var game_over := false
 
 func _ready() -> void:
 	options_menu.visible = false
@@ -19,7 +22,9 @@ func _ready() -> void:
 		can_go_to_sleep = true
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("mouse_left") and can_go_to_sleep:
+	if event.is_action_pressed("mouse_left") and game_over:
+		get_tree().quit()
+	elif event.is_action_pressed("mouse_left") and can_go_to_sleep:
 		go_to_sleep()
 	elif event.is_action_pressed("quit"):
 		if !is_options_open:
@@ -98,3 +103,11 @@ func _on_resume_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit.call_deferred()
+
+func you_didnt_get_out_of_my_dream() -> void:
+	var text = "you didn't get out of my dream..."
+	for i in range(text.length()):
+		game_over_label.text += text[i]
+		await get_tree().create_timer(0.1)
+		
+	game_over = true
