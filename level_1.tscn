@@ -181,7 +181,7 @@ height = 0.6
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wokh5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yb1ug"]
 resource_local_to_scene = true
 shader = ExtResource("3_04ala")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -233,12 +233,6 @@ material = SubResource("StandardMaterial3D_csk7k")
 
 [node name="SquidGod" parent="." instance=ExtResource("2_ug27n")]
 transform = Transform3D(-0.83527, 0, 0.549839, 0, 1, 0, -0.549839, 0, -0.83527, 181.127, 125, 58.6313)
-submerged_y_value = null
-idle_speed = null
-rotate_lerp_speed = null
-float_freq = null
-float_amp = null
-real = null
 idle_event = SubResource("EventAsset_674ms")
 
 [node name="SquidMesh" parent="SquidGod/SquidModel" index="0"]
@@ -392,7 +386,7 @@ size_2d_override = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_xejg1")]
-material = SubResource("ShaderMaterial_wokh5")
+material = SubResource("ShaderMaterial_yb1ug")
 mouse_filter = 2
 premade_sigil = {
 "m0": 2,

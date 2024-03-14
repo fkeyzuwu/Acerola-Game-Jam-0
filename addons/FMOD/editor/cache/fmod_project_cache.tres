@@ -1,4 +1,4 @@
-[gd_resource type="ProjectCache" load_steps=18 format=3 uid="uid://d0couftk3xr8f"]
+[gd_resource type="ProjectCache" load_steps=20 format=3 uid="uid://d0couftk3xr8f"]
 
 [ext_resource type="BankAsset" uid="uid://bdot80p0k7825" path="res://addons/FMOD/editor/resources/banks/{81406378-8e91-4085-b1e1-5d919f1355aa}.tres" id="1_ser08"]
 [ext_resource type="BankAsset" uid="uid://c8muixodvbg6y" path="res://addons/FMOD/editor/resources/banks/{195d43ac-ffea-0cc7-37a8-d76f6ee05332}.tres" id="2_7dsj6"]
@@ -8,22 +8,17 @@
 [ext_resource type="EventAsset" uid="uid://ddmtlqcpc0bjj" path="res://addons/FMOD/editor/resources/events/{4ade8674-0387-4258-aed9-9a9eed17b7d1}.tres" id="5_webn8"]
 [ext_resource type="EventAsset" uid="uid://ydk37tspj1fg" path="res://addons/FMOD/editor/resources/events/{017f1844-7eb5-4907-a44e-68360d0d295b}.tres" id="6_6lt6a"]
 [ext_resource type="EventAsset" uid="uid://dgssxyqg7sd7e" path="res://addons/FMOD/editor/resources/events/{ed02b679-ee84-497b-8739-73ac11d22702}.tres" id="7_43f3v"]
-[ext_resource type="EventAsset" uid="uid://bscw7a46kyj3k" path="res://addons/FMOD/editor/resources/events/{557b166d-7dc0-4bac-96c0-a66edc3a8e3b}.tres" id="7_68sfq"]
 [ext_resource type="EventAsset" uid="uid://4wh2csvrhdcq" path="res://addons/FMOD/editor/resources/events/{0039acc3-a7c5-471a-88ce-ea09cdb642a0}.tres" id="7_xco7v"]
 [ext_resource type="EventAsset" uid="uid://cor34fuxfodhn" path="res://addons/FMOD/editor/resources/events/{c7bd3007-b6c3-4bfa-95c6-7e6eceb34850}.tres" id="8_4hoo2"]
 [ext_resource type="EventAsset" uid="uid://dd6us7fqiek72" path="res://addons/FMOD/editor/resources/events/{5b89c058-4016-4c58-8308-000de0980b0a}.tres" id="8_76pc2"]
 [ext_resource type="EventAsset" uid="uid://bhvxsv1mo2uff" path="res://addons/FMOD/editor/resources/events/{13754b03-eb66-423f-aa66-8620ea05299f}.tres" id="8_308kv"]
 [ext_resource type="EventAsset" uid="uid://difkqko4qmbvi" path="res://addons/FMOD/editor/resources/events/{780a19bf-edb9-439b-82dc-04fcc3c59555}.tres" id="9_gd7l1"]
+[ext_resource type="EventAsset" uid="uid://vshou8mxmeam" path="res://addons/FMOD/editor/resources/events/{d83e50ee-28ce-4ba1-bd6d-d4cde51caad4}.tres" id="9_yqm2y"]
 [ext_resource type="EventAsset" uid="uid://ci73we12ov5wl" path="res://addons/FMOD/editor/resources/events/{09ce7f94-be39-4844-90a0-7e3bcebeb73e}.tres" id="11_12mfc"]
+[ext_resource type="EventAsset" uid="uid://kk7cinyw62y3" path="res://addons/FMOD/editor/resources/events/{d6a19f96-f043-4d19-a04c-9ca505cb4e1d}.tres" id="11_n1ygw"]
+[ext_resource type="EventAsset" uid="uid://jnwqq2ux3dft" path="res://addons/FMOD/editor/resources/events/{18797c8f-4b1a-4647-a850-f269a805e8d3}.tres" id="11_pc6yx"]
 [ext_resource type="EventAsset" uid="uid://f8rwtmw884bj" path="res://addons/FMOD/editor/resources/events/{92f66865-c164-4b81-b546-e065aca3525c}.tres" id="14_w5u5p"]
-
-[sub_resource type="EventAsset" id="EventAsset_dmjyv"]
-is_oneshot = true
-min_distance = 1.0
-max_distance = 20.0
-path = "event:/KrakenKill"
-guid = "{d6a19f96-f043-4d19-a04c-9ca505cb4e1d}"
-name = "KrakenKill"
+[ext_resource type="EventAsset" uid="uid://bsmo6feonfwhr" path="res://addons/FMOD/editor/resources/events/{b5fe0e4a-d61f-457f-8334-9c89861b34fc}.tres" id="20_qvlu4"]
 
 [resource]
 banks = {
@@ -35,14 +30,16 @@ events = {
 "{017f1844-7eb5-4907-a44e-68360d0d295b}": ExtResource("6_6lt6a"),
 "{09ce7f94-be39-4844-90a0-7e3bcebeb73e}": ExtResource("11_12mfc"),
 "{13754b03-eb66-423f-aa66-8620ea05299f}": ExtResource("8_308kv"),
+"{18797c8f-4b1a-4647-a850-f269a805e8d3}": ExtResource("11_pc6yx"),
 "{341b30d9-4f4f-4228-9a27-41489095e54a}": ExtResource("5_mw3vr"),
 "{4ade8674-0387-4258-aed9-9a9eed17b7d1}": ExtResource("5_webn8"),
-"{557b166d-7dc0-4bac-96c0-a66edc3a8e3b}": ExtResource("7_68sfq"),
 "{5b89c058-4016-4c58-8308-000de0980b0a}": ExtResource("8_76pc2"),
 "{780a19bf-edb9-439b-82dc-04fcc3c59555}": ExtResource("9_gd7l1"),
 "{92f66865-c164-4b81-b546-e065aca3525c}": ExtResource("14_w5u5p"),
+"{b5fe0e4a-d61f-457f-8334-9c89861b34fc}": ExtResource("20_qvlu4"),
 "{c7bd3007-b6c3-4bfa-95c6-7e6eceb34850}": ExtResource("8_4hoo2"),
-"{d6a19f96-f043-4d19-a04c-9ca505cb4e1d}": SubResource("EventAsset_dmjyv"),
+"{d6a19f96-f043-4d19-a04c-9ca505cb4e1d}": ExtResource("11_n1ygw"),
+"{d83e50ee-28ce-4ba1-bd6d-d4cde51caad4}": ExtResource("9_yqm2y"),
 "{ed02b679-ee84-497b-8739-73ac11d22702}": ExtResource("7_43f3v")
 }
 busses = {
@@ -89,9 +86,15 @@ event_tree = [{
 }, {
 "children": [],
 "item_type": 1,
-"node_name": "HitGroundThud",
-"path": "event:/HitGroundThud",
-"resource": ExtResource("7_68sfq")
+"node_name": "HitGround",
+"path": "event:/HitGround",
+"resource": ExtResource("9_yqm2y")
+}, {
+"children": [],
+"item_type": 1,
+"node_name": "HitWall",
+"path": "event:/HitWall",
+"resource": ExtResource("11_pc6yx")
 }, {
 "children": [],
 "item_type": 1,
@@ -103,7 +106,7 @@ event_tree = [{
 "item_type": 1,
 "node_name": "KrakenKill",
 "path": "event:/KrakenKill",
-"resource": SubResource("EventAsset_dmjyv")
+"resource": ExtResource("11_n1ygw")
 }, {
 "children": [],
 "item_type": 1,
@@ -140,6 +143,12 @@ event_tree = [{
 "node_name": "NightAmbience",
 "path": "event:/NightAmbience",
 "resource": ExtResource("9_gd7l1")
+}, {
+"children": [],
+"item_type": 1,
+"node_name": "SigilMachineSolved",
+"path": "event:/SigilMachineSolved",
+"resource": ExtResource("20_qvlu4")
 }]
 bus_tree = [{
 "children": [{

@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://vshou8mxmeam"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/HitGround"
+guid = "{d83e50ee-28ce-4ba1-bd6d-d4cde51caad4}"
+name = "HitGround"

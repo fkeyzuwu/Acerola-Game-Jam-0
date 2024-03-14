@@ -106,8 +106,10 @@ func _on_quit_button_pressed() -> void:
 
 func you_didnt_get_out_of_my_dream() -> void:
 	var text = "you didn't get out of my dream..."
+	game_over_label.visible = true
+	await get_tree().create_timer(2.0).timeout
 	for i in range(text.length()):
 		game_over_label.text += text[i]
-		await get_tree().create_timer(0.1)
-		
+		await get_tree().create_timer(0.27).timeout
+	
 	game_over = true

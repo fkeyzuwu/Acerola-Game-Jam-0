@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://jnwqq2ux3dft"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/HitWall"
+guid = "{18797c8f-4b1a-4647-a850-f269a805e8d3}"
+name = "HitWall"

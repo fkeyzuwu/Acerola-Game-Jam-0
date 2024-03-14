@@ -87,11 +87,16 @@ func _ready() -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_PREDELETE:
-		idle_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
-		idle_instance.release()
-		submerge_instance.release()
-		falling_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
-		falling_instance.release()
+		if idle_instance:
+			idle_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
+			idle_instance.release()
+		
+		if submerge_instance:
+			submerge_instance.release()
+		
+		if falling_instance:
+			falling_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
+			falling_instance.release()
 
 func start_bobbing() -> void:
 	bobbing_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_loops()
@@ -126,6 +131,7 @@ func enter_state(_state: SquidState) -> void:
 			player.stop_mobility()
 			if super_real:
 				start_interacting.emit()
+				stop_bobbing()
 			var emerge_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 			global_position = player.global_position - (player.orientation.basis.z * emerge_distance_to_player)
 			global_position.y = submerged_y_value
@@ -166,12 +172,14 @@ func enter_state(_state: SquidState) -> void:
 				second_tween.tween_property(player, "global_position:z", shore_pos.z, 1.5).set_trans(Tween.TRANS_LINEAR)
 				second_tween.tween_property(player, "global_position:y", shore_pos.y, 1.5).set_trans(Tween.TRANS_SINE)
 				await second_tween.finished
+				FMODRuntime.play_one_shot_id(FMODGuids.Events.HITGROUND)
 				await get_tree().create_timer(2.0).timeout
 				real = true
 				player.set_safe(3.0)
 				stop_interacting.emit()
 				enter_state(SquidState.Idle)
 			else:
+				FMODRuntime.play_one_shot_id(throw_guid)
 				player.resume_mobility()
 				var throw_wall_pos = throw_wall_position.global_position
 				var direction_to_throw = player.global_position.direction_to(throw_wall_pos)
@@ -186,6 +194,7 @@ func enter_state(_state: SquidState) -> void:
 				await throw_tween.finished
 				player.should_wake_up = true
 				falling_instance = FMODRuntime.create_instance_id(FMODGuids.Events.FALLINGTODEATH)
+				FMODRuntime.play_one_shot_id(FMODGuids.Events.HITWALL)
 				falling_instance.start()
 				LevelManager.fade_to_black()
 				# play aya sound and then player should fall to ground

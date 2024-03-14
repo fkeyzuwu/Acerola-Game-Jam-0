@@ -7,6 +7,7 @@ var music_guid = FMODGuids.Events.MUSIC
 var music_instance: EventInstance
 
 @onready var squid_god: SquidGod = $SquidGod
+@onready var sigil_machine_container: SigilMachineContainer = $SigilMachineRoom/SigilMachines
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -19,6 +20,8 @@ func _ready() -> void:
 	
 	squid_god.start_interacting.connect(stop_ambience)
 	squid_god.stop_interacting.connect(start_ambience)
+	
+	sigil_machine_container.all_solved.connect(stop_ambience)
 
 func stop_ambience() -> void:
 	ambience_instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)

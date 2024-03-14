@@ -170,7 +170,7 @@ outer_radius = 0.489
 [sub_resource type="SphereShape3D" id="SphereShape3D_qkmt8"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x7grr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jka6y"]
 resource_local_to_scene = true
 shader = ExtResource("3_1iw13")
 shader_parameter/color = Color(0.968627, 0.972549, 0.764706, 1)
@@ -216,12 +216,6 @@ material = SubResource("StandardMaterial3D_csk7k")
 
 [node name="SquidGod" parent="." instance=ExtResource("2_d3t13")]
 transform = Transform3D(0.367589, 0, 0.929988, 0, 1, 0, -0.929988, 0, 0.367589, 209.011, 125, 157.424)
-submerged_y_value = -200.0
-idle_speed = 20.0
-rotate_lerp_speed = 1
-float_freq = 50.0
-float_amp = 50.0
-real = false
 
 [node name="OmniLight3D" parent="SquidGod/SquidModel/SquidMesh/Eye/EyeBall" index="0"]
 light_energy = 3.285
@@ -366,7 +360,7 @@ size_2d_override = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Sigil" parent="SigilMachineRoom/SigilMachines/SigilMachine/SubViewportContainer/SubViewport" instance=ExtResource("10_gmlvi")]
-material = SubResource("ShaderMaterial_x7grr")
+material = SubResource("ShaderMaterial_jka6y")
 mouse_filter = 2
 starting_permutation = {
 "m0": 1,

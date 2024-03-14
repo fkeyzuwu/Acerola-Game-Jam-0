@@ -11,7 +11,8 @@ class Events:
 	const FOOTSTEPS = "{4ade8674-0387-4258-aed9-9a9eed17b7d1}"
 	const GAMEAMBIENCE = "{341b30d9-4f4f-4228-9a27-41489095e54a}"
 	const HEAVYBREATHING = "{5b89c058-4016-4c58-8308-000de0980b0a}"
-	const HITGROUNDTHUD = "{557b166d-7dc0-4bac-96c0-a66edc3a8e3b}"
+	const HITGROUND = "{d83e50ee-28ce-4ba1-bd6d-d4cde51caad4}"
+	const HITWALL = "{18797c8f-4b1a-4647-a850-f269a805e8d3}"
 	const KRAKENIDLE = "{017f1844-7eb5-4907-a44e-68360d0d295b}"
 	const KRAKENKILL = "{d6a19f96-f043-4d19-a04c-9ca505cb4e1d}"
 	const KRAKENSUBMERGE = "{0039acc3-a7c5-471a-88ce-ea09cdb642a0}"
@@ -20,6 +21,7 @@ class Events:
 	const MOVESTONE = "{c7bd3007-b6c3-4bfa-95c6-7e6eceb34850}"
 	const MUSIC = "{92f66865-c164-4b81-b546-e065aca3525c}"
 	const NIGHTAMBIENCE = "{780a19bf-edb9-439b-82dc-04fcc3c59555}"
+	const SIGILMACHINESOLVED = "{b5fe0e4a-d61f-457f-8334-9c89861b34fc}"
 
 class Busses:
 	const MASTER_BUS = "{accecd80-e757-446e-9a58-677fe87215e2}"
